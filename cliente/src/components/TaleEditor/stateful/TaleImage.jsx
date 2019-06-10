@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import { Image } from 'react-konva';
 import Konva from 'konva'
 
-// the first very simple and recommended way:
-// export const LionImage = () => {
-//   const [image] = useImage('https://konvajs.org/assets/lion.png');
-//   return <Image image={image} />;
-// };
-
-
 
 // custom component that will handle loading image from url
 // you may add more logic here to handle "loading" state
@@ -22,8 +15,8 @@ export class TaleImage extends Component {
 
     this.state = {
       image: null,
-      positionX: '',
-      positionY:''
+      positionX: 50,
+      positionY:50
       
     };
 
@@ -35,6 +28,7 @@ export class TaleImage extends Component {
     if (oldProps.src !== this.props.src) {
       this.loadImage();
     }
+    
 
   }
   componentWillUnmount() {
@@ -49,6 +43,7 @@ export class TaleImage extends Component {
   handleLoad = () => {
     // after setState react-konva will update canvas and redraw the layer
     // because "image" property is changed
+    console.log(this.image)
     this.setState({
       image: this.image
     });
@@ -67,6 +62,7 @@ export class TaleImage extends Component {
     });
   };
   handleDragEnd = e => {
+    
     e.target.to({
       duration: 0.5,
       easing: Konva.Easings.ElasticEaseOut,
@@ -75,6 +71,15 @@ export class TaleImage extends Component {
       shadowOffsetX: 5,
       shadowOffsetY: 5
     });
+    this.setState({
+      positionX: e.target.attrs.x,
+      positionY: e.target.attrs.y
+
+    })
+
+    console.log(e.target.attrs.x + ' pos X')
+    console.log(e.target.attrs.y + ' pos Y')
+
   };
 
   
@@ -82,17 +87,13 @@ export class TaleImage extends Component {
   render() {
     return (
       <Image
-        key={3}
-        x={10}
-        y={10}
-        // numPoints={5}
-        // innerRadius={20}
-        // outerRadius={40}
-        //fill="#89b717"
-        //Para nover la imagen
+        // key={image._id}
+        x={this.state.positionX}
+        y={this.state.positionY}
+        
+        //Para mover la imagen
         draggable
         
-        // shadowColor="black"
         shadowBlur={10}
         shadowOpacity={0.6}
         onDragStart={this.handleDragStart}
