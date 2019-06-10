@@ -19,7 +19,7 @@ import Konva from 'konva'
 export class TaleImage extends Component {
   constructor(){
     super()
-    
+
     this.state = {
       image: null,
       positionX: '',
@@ -88,7 +88,7 @@ export class TaleImage extends Component {
         // numPoints={5}
         // innerRadius={20}
         // outerRadius={40}
-        fill="#89b717"
+        //fill="#89b717"
         //Para nover la imagen
         draggable
         
@@ -97,13 +97,13 @@ export class TaleImage extends Component {
         shadowOpacity={0.6}
         onDragStart={this.handleDragStart}
         onDragEnd={this.handleDragEnd}
-  
+
         image={this.state.image}
         ref={node => {
           this.imageNode = node;
         }
-        
-      }
+
+        }
       />
     );
   }
