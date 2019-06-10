@@ -18,9 +18,9 @@ import Konva from 'konva'
 // at first we will set image state to null
 // and then we will set it to native image instance when it is loaded
 export class URLImage extends Component {
-  constructor(){
+  constructor() {
     super()
-    
+
     this.state = {
       image: null
     };
@@ -94,22 +94,22 @@ export class URLImage extends Component {
         numPoints={5}
         innerRadius={20}
         outerRadius={40}
-        fill="#89b717"
+        /* fill="#89b717" */
         // opacity={0.8}
         draggable
-        
+
         shadowColor="black"
         shadowBlur={10}
         shadowOpacity={0.6}
         onDragStart={this.handleDragStart}
         onDragEnd={this.handleDragEnd}
-  
+
         image={this.state.image}
         ref={node => {
           this.imageNode = node;
         }
-        
-      }
+
+        }
       />
     );
   }
