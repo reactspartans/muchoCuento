@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { Stage, Layer, Image } from 'react-konva';
+import { Image } from 'react-konva';
 import Konva from 'konva'
 
 // the first very simple and recommended way:
@@ -17,12 +16,15 @@ import Konva from 'konva'
 // VERY IMPORTANT NOTES:
 // at first we will set image state to null
 // and then we will set it to native image instance when it is loaded
-export class URLImage extends Component {
+export class TaleImage extends Component {
   constructor(){
     super()
     
     this.state = {
-      image: null
+      image: null,
+      positionX: '',
+      positionY:''
+      
     };
 
   }
@@ -33,6 +35,7 @@ export class URLImage extends Component {
     if (oldProps.src !== this.props.src) {
       this.loadImage();
     }
+
   }
   componentWillUnmount() {
     this.image.removeEventListener('load', this.handleLoad);
@@ -74,16 +77,7 @@ export class URLImage extends Component {
     });
   };
 
-  // const [rectangles, setRectangles] = React.useState(initialRectangles);
-  // const [selectedId, selectShape] = React.useState(null);
-
-  // useEffect = () => {React.useEffect(() => {
-  //   if (isSelected) {
-  //     // we need to attach transformer manually
-  //     trRef.current.setNode(shapeRef.current);
-  //     trRef.current.getLayer().batchDraw();
-  //   }
-  // }, [isSelected]);
+  
 
   render() {
     return (
@@ -91,14 +85,14 @@ export class URLImage extends Component {
         key={3}
         x={10}
         y={10}
-        numPoints={5}
-        innerRadius={20}
-        outerRadius={40}
+        // numPoints={5}
+        // innerRadius={20}
+        // outerRadius={40}
         fill="#89b717"
-        // opacity={0.8}
+        //Para nover la imagen
         draggable
         
-        shadowColor="black"
+        // shadowColor="black"
         shadowBlur={10}
         shadowOpacity={0.6}
         onDragStart={this.handleDragStart}

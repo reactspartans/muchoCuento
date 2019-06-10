@@ -1,5 +1,7 @@
 import React from "react";
 import { Stage, Layer, Rect, Transformer } from "react-konva";
+import konva from 'react-konva'
+
 
 const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
   const shapeRef = React.useRef();
@@ -69,7 +71,7 @@ const initialRectangles = [
   }
 ];
 
-const App = () => {
+export const Rectangulo = () => {
   const [rectangles, setRectangles] = React.useState(initialRectangles);
   const [selectedId, selectShape] = React.useState(null);
 
