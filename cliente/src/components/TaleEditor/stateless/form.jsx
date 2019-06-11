@@ -27,8 +27,9 @@ export class Form extends Component{
     render(){
         return(
             <form onSubmit={this.handleSubmit}>
-                <input type="text" name="imageURL" id="imageURL" value={this.state.imageURL} onChange={this.handleChange}/>
-                <button>Súbeme</button>
+                <input type="text" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} onChange={this.handleChange}/>
+                
+                <button>{this.props.buttonText}</button>
             </form>
         )
     }

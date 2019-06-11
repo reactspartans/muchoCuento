@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import foto from '../../../images/Emilia-Dziubak-4.jpg'
 import {TaleImage} from './TaleImage'
 import { Stage, Layer } from 'react-konva';
 import Book from '../../../book.json'
@@ -15,7 +14,7 @@ export class TalesEditor extends Component {
     addNewImg=image=>{
         const _page={...this.state.page}
         console.log(_page)
-        _page.imageURL.push(image)
+        _page.backImageURL.push(image)
         this.setState({
             page:_page,
         })
@@ -26,10 +25,14 @@ export class TalesEditor extends Component {
       return (
         <div>
             {console.log(this.state.page)}
-            <Form nuevaImg={this.addNewImg}/>
+            <Form nuevaImg={this.addNewImg} buttonText={'Sube un fondo'}/>
+            <Form nuevaImg={this.addNewImg} buttonText={'Sube un personaje'}/>
+            
             <Stage width={window.innerWidth} height={window.innerHeight}>
-              <Layer>
-                <TaleImage src={this.state.page.imageURL[0]} />
+              <Layer >
+                <TaleImage src={this.state.page.backImageURL[0]} />
+                <TaleImage src={this.state.page.backImageURL[1]} />
+
               </Layer>
             </Stage>
 
