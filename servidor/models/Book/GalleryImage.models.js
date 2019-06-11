@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const imageSchema = new Schema({
+const galleryImageSchema = new Schema({
   name: String,
   tags: Array,
   status: {
@@ -9,8 +9,11 @@ const imageSchema = new Schema({
     enum: ["background", "character"]
   },
   imageURL: String
-})
+}, {
+    timestamps: true
+  })
 
-const Image = mongoose.model('Image', imageSchema)
-module.exports = Image
+const GalleryImage = mongoose.model('GalleryImage', galleryImageSchema)
+module.exports = GalleryImage
+
 

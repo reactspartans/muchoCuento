@@ -13,6 +13,7 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require("connect-flash");
 const cors = require("cors")
 const mongoose = require("mongoose")
+
 require("./configs/mongoose.config")
 
 
@@ -80,10 +81,16 @@ app.use(flash());
 require('./passport')(app);
 
 
-const index = require('./routes/index');
-app.use('/', index);
+const bookRoutes = require('./routes/book.routes')
+app.use('/api/cuentos', bookRoutes)
 
-const authRoutes = require('./routes/auth');
+const galleryRoutes = require('./routes/gallery.routes')
+app.use('/api/galeria', galleryRoutes)
+
+
+
+
+const authRoutes = require('./routes/auth.routes');
 app.use('/auth', authRoutes);
 
 

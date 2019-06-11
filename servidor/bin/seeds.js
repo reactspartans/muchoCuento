@@ -2,7 +2,7 @@
 // $ node bin/seeds.js
 
 const mongoose = require("mongoose");
-const Image = require("../models/image.models");
+const GalleryImage = require("../models/Book/GalleryImage.models");
 require("dotenv").config()
 
 
@@ -11,9 +11,9 @@ mongoose
   .connect(`mongodb://localhost/${process.env.DB}`, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-    Image.collection.drop()
+    GalleryImage.deleteMany()
       .then(() => {
-        return Image.create(images)
+        return GalleryImage.create(images)
       })
       .then(usersCreated => {
         console.log(`${usersCreated.length} users created with the following id:`);
