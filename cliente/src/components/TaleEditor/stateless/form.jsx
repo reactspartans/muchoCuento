@@ -49,11 +49,20 @@ export class Form extends Component{
             <form onSubmit={this.handleSubmit}>
 
                 <input type="text" name="backImageURL" id="backImageURL" placeholder='Pega la URL' value={this.state.page.backImageURL} onChange={this.handleChange}/> <br/>
-                <input type="text" name="characterImageURL" id="characterImageURL" placeholder='Pega la URL' value={this.state.page.characterImageURL} onChange={this.handleChange}/><br/>
-                <input type="text" name="taleText" id="taleText" placeholder='Escribe tu cuento' value={this.state.page.taleText} onChange={this.handleChange}/><br/>
-                <input type="color" name="taleTextColor" id="taleTextColor" value={this.state.page.taleTextColor} onChange={this.handleChange}/><br/>
                 
-                <button>{this.props.buttonText}</button>
+                <button>{this.props.buttonText}</button><br/>
+                
+                
+                <input type="text" name="characterImageURL" id="characterImageURL" placeholder='Pega la URL' value={this.state.page.characterImageURL} onChange={this.handleChange}/><br/>
+                <button>{this.props.buttonText}</button><br/>
+                
+                <input type="text" name="taleText" id="taleText" placeholder='Escribe tu cuento' value={this.state.page.taleText} onChange={this.handleChange}/><br/>
+                <button>{this.props.buttonText}</button><br/>
+                
+                
+                <input type="color" name="taleTextColor" id="taleTextColor" value={this.state.page.taleTextColor} onChange={this.handleChange}/><br/>
+                <button>{this.props.buttonText}</button><br/>
+
             </form>
         )
     }

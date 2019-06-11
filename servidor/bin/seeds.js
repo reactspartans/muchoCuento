@@ -11,10 +11,11 @@ mongoose
   .connect(`mongodb://localhost/${process.env.DB}`, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-    Image.collection.drop()
-      .then(() => {
-        return Image.create(images)
-      })
+    // Image.collection.drop()
+    //   .then(() => {
+    //     return 
+      Image.create(images)
+      // })
       .then(usersCreated => {
         console.log(`${usersCreated.length} users created with the following id:`);
         console.log(usersCreated.map(u => u._id));
