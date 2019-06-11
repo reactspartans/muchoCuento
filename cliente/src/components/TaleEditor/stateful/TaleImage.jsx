@@ -74,12 +74,12 @@ export class TaleImage extends Component {
     this.setState({
       positionX: e.target.attrs.x,
       positionY: e.target.attrs.y
-
+      
     })
 
     
 
-
+    console.log(e.target)
     console.log(e.target.attrs.x + ' pos X')
     console.log(e.target.attrs.y + ' pos Y')
 
@@ -97,6 +97,7 @@ export class TaleImage extends Component {
         //Para mover la imagen
         draggable
         rotation={this.state.rotation}
+
         shadowBlur={10}
         shadowOpacity={0.6}
         onDragStart={this.handleDragStart}
