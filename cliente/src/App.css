@@ -26,6 +26,9 @@ nav ul{
    justify-content: center;
    align-items: center;
 }
+.flex-editor{
+    display: flex;
+}
 
 
 
