@@ -20,7 +20,11 @@ router.get('/:_id', (req, res) => {
 })
 
 router.get('/addImageGallery', (req, res) => {
+<<<<<<< HEAD
   GalleryImage.create(req.params)
+=======
+  GalleryImage.create(req.body)
+>>>>>>> 4ceb3c2108332523ea74c05d6f7588304210cfcd
     .then(data => res.json(data))
     .catch(err => console.log('Error:', err))
 })
