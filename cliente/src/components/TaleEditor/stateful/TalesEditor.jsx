@@ -56,7 +56,7 @@ export class TalesEditor extends Component {
 
         <Stage width={window.innerWidth} height={window.innerHeight}>
           <Layer >
-            <TaleImage src={this.state.page.backImageURL} go={this.state.go} funcion={this.funcion} status={"background"} />
+            <TaleImage src={this.state.page.imageURL} go={this.state.go} funcion={this.funcion} status={"background"} />
             <TaleImage src={this.state.page.characterImageURL} go={this.state.go} funcion={this.funcion} status={"character"} />
             <TaleText text={this.state.page.taleText} color={this.state.page.taleTextColor} go={this.state.go} funcion={this.funcion} />
           </Layer>

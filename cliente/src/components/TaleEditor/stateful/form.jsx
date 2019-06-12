@@ -11,7 +11,7 @@ export class FormDesign extends Component {
                   type: String,
                   enum: ["background", "character"]
               }, */
-            imageURL: String
+            imageURL: ''
         }
 
         this.services = new GalleryServices()
@@ -34,12 +34,12 @@ export class FormDesign extends Component {
         console.log(e.target.files[0])
         this.services.handleUpload(uploadData)
             .then(response => {
-                console.log(response.data)
+                console.log(response.data[0].imageURL)
                 this.setState({
-                    imageURLBack: response.data.imageURL
+                    imageURLBack: response.data[0].imageURL
 
                 })
-                console.log(response.data.imageURL)
+                console.log(this.state.imageURLBack)
             })
             .catch(err => console.log(err))
     }
@@ -51,7 +51,7 @@ export class FormDesign extends Component {
         console.log(this.state + '    vengo del handleSubmit')
         console.log(this.state, this.state.imageURLBack, "soy el de teo")
 
-        this.props.nuevaImg(this.state[type], type)
+        this.props.nuevaImg(this.state.imageURLBack, type)
 
     }
 
