@@ -1,0 +1,39 @@
+/* LI LISTAS */
+.lis{
+    list-style: none;
+}
+.links{
+    color: black;
+}
+
+
+/* NAVBAR */
+nav{
+    background-color: rgba(226, 110, 43, 0.479);
+    padding: 10px 10px;
+}
+nav ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+
+/* INDEX */
+.explain-book{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+
+
+/* TALES EDITOR */
+
+.toolbar{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    padding: 22px;
+}

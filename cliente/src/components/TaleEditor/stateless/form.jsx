@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 
+
 export class Form extends Component{
     constructor(props){
         super(props)
@@ -8,7 +9,7 @@ export class Form extends Component{
                 backImageURL: "",
                 characterImageURL: "",
                 taleText: "",
-                taleTextColor: ""
+                taleTextColor: "#000"
 
             }
         }
@@ -46,10 +47,9 @@ export class Form extends Component{
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className='toolbar'>
 
-                <input type="text" name="backImageURL" id="backImageURL" placeholder='Pega la URL' value={this.state.page.backImageURL} onChange={this.handleChange}/> <br/>
-                
+                <input type="text" name="backImageURL" id="backImageURL" placeholder='Pega la URL' value={this.state.page.backImageURL} onChange={this.handleChange}/> <br/>  
                 <button>{this.props.buttonText}</button><br/>
                 
                 

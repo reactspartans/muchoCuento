@@ -7,14 +7,14 @@ export  const NavBar =()=>{
     return(
     
         <nav>
-            <h3>MuchoCuento</h3>
             <ul>
-                <li><Link to='/'>Home</Link></li>
-                <li><Link to='/tales-editor'>Create tale</Link></li>
-                <li><SingUp/></li>
-                <li><Login/></li>
+                <li className='lis'><Link className='links' to='/'><h3>MuchoCuento</h3></Link></li>
+                <li className='lis' ><Link className='links' to='/'>Home</Link></li>
+                <li className='lis'><Link className='links' to='/tales-editor'>Create tale</Link></li>
+                <li className='lis'><SingUp/></li>
+                <li className='lis'><Login/></li>
 
-                <li><Link to='/auth/login'>Logout</Link></li>
+                <li className='lis'><Link className='links' to='/auth/login'>Logout</Link></li>
 
             </ul>
         </nav>
