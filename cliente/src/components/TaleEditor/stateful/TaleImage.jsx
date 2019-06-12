@@ -88,22 +88,29 @@ export class TaleImage extends Component {
   
 
   render() {
+
+    const {positionX, positionY, rotation, image} = this.state
+
+    if(this.props.go){
+      this.props.saveImageToGalley(this.state, this.props.status)
+    }
+
     return (
       <Image
         // key={image._id}
-        x={this.state.positionX}
-        y={this.state.positionY}
+        x={positionX}
+        y={positionY}
         
         //Para mover la imagen
         draggable
-        rotation={this.state.rotation}
+        rotation={rotation}
 
         shadowBlur={10}
         shadowOpacity={0.6}
         onDragStart={this.handleDragStart}
         onDragEnd={this.handleDragEnd}
 
-        image={this.state.image}
+        image={image}
         ref={node => {
           this.imageNode = node;
         }
