@@ -34,11 +34,12 @@ export class FormDesign extends Component {
         console.log(e.target.files[0])
         this.services.handleUpload(uploadData)
             .then(response => {
-                console.log(response)
+                console.log(response.data)
                 this.setState({
-                    imageURLBack: response.secure_url
+                    imageURLBack: response.data.imageURL
 
                 })
+                console.log(response.data.imageURL)
             })
             .catch(err => console.log(err))
     }
