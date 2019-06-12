@@ -10,13 +10,13 @@ import Konva from 'konva'
 // at first we will set image state to null
 // and then we will set it to native image instance when it is loaded
 export class TaleImage extends Component {
-  constructor(){
+  constructor() {
     super()
 
     this.state = {
       image: null,
       positionX: 100,
-      positionY:100,
+      positionY: 100,
       rotation: 0
     };
 
@@ -28,7 +28,7 @@ export class TaleImage extends Component {
     if (oldProps.src !== this.props.src) {
       this.loadImage();
     }
-    
+
 
   }
   componentWillUnmount() {
@@ -62,7 +62,7 @@ export class TaleImage extends Component {
     });
   };
   handleDragEnd = e => {
-    
+
     e.target.to({
       duration: 0.5,
       easing: Konva.Easings.ElasticEaseOut,
@@ -74,10 +74,10 @@ export class TaleImage extends Component {
     this.setState({
       positionX: e.target.attrs.x,
       positionY: e.target.attrs.y
-      
+
     })
 
-    
+
 
     console.log(e.target)
     console.log(e.target.attrs.x + ' pos X')
@@ -85,14 +85,14 @@ export class TaleImage extends Component {
 
   };
 
-  
+
 
   render() {
 
-    const {positionX, positionY, rotation, image} = this.state
+    const { positionX, positionY, rotation, image } = this.state
 
-    if(this.props.go){
-      this.props.saveImageToGalley(this.state, this.props.status)
+    if (this.props.go) {
+      this.props.saveImageToGallery(this.state, this.props.status)
     }
 
     return (
@@ -100,7 +100,7 @@ export class TaleImage extends Component {
         // key={image._id}
         x={positionX}
         y={positionY}
-        
+
         //Para mover la imagen
         draggable
         rotation={rotation}

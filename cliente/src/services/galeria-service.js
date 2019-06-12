@@ -5,7 +5,8 @@ export default class services {
   constructor() {
 
     this.service = axios.create({
-      baseURL: 'http://localhost:3000/api/galeria'
+      baseURL: 'http://localhost:3000/api/galeria',
+      withCredentials: true
     })
   }
 
@@ -23,15 +24,22 @@ export default class services {
       .catch(err => console.log('Error', err))
   }
 
-  postCoaster = image => {
+
+  postImageGallery = image => {
+    return this.service.post('/addImage/', image)
+      .then(res => res.data)
+      .catch(err => console.log(err))
+  }
+
+  postImagePage = image => {
     return this.service.post('/addImagePage', image)
       .then(res => res.data)
       .catch(err => console.log(err))
   }
 
-  postImageGallery = image => {
-    return this.service.post('/addImage/:_id', image)
+  handleUpload = theFile => {
+    return this.service.post('/upload', theFile)
       .then(res => res.data)
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 }
