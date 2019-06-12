@@ -48,7 +48,7 @@ export class FormDesign extends Component {
 
         e.preventDefault()
         console.log(this.state + '    vengo del handleSubmit')
-        console.log(this.state, this.state.imageURL, "soy el de teo")
+        console.log(this.state, this.state.imageURLBack, "soy el de teo")
 
         this.props.nuevaImg(this.state[type], type)
 
