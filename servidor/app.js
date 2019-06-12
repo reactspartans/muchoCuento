@@ -22,14 +22,14 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express();
 
-
-//configuracion middleware CORS
+//middleware cors
 const whitelist = ['http://localhost:5000']
 const corsOptions = {
   origin: (origin, cb) => {
     const originIsWhitelisted = whitelist.includes(origin);
     cb(null, originIsWhitelisted)
-  }
+  },
+  credentials: true
 }
 
 
@@ -81,11 +81,17 @@ app.use(flash());
 require('./passport')(app);
 
 
+
+
+
 const bookRoutes = require('./routes/book.routes')
 app.use('/api/cuentos', bookRoutes)
 
 const galleryRoutes = require('./routes/gallery.routes')
 app.use('/api/galeria', galleryRoutes)
+
+const fileRoutes = require('./routes/file-upload.routes')
+app.use('/api/galeria', fileRoutes);
 
 
 
