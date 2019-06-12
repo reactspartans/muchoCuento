@@ -19,7 +19,13 @@ router.get('/:_id', (req, res) => {
     .catch(err => console.log('Error:', err))
 })
 
-router.post('/addImage/:_id', (req, res) => {
+router.get('/addImageGallery', (req, res => {
+  GalleryImage.create(req.params)
+    .then(data => res.json(data))
+    .catch(err => console.log('Error:', err))
+}))
+
+router.post('/addImagePage', (req, res) => {
   const { _id } = req.params;
   const newImage = { positionX, positionY } = req.body;
   newImage.name = _id;

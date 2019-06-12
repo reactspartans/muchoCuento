@@ -36,7 +36,7 @@ router.post('/addPage/:id', (req, res) => {  //id del book al que pertenece
   newPage.book = id;   //le guardamos el id del book al que pertenece
 })
 
-router.post('/addText/:i')
+router.post('/addText/:id')
 
 
 module.exports = router;
