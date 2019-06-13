@@ -43,7 +43,7 @@ export class TaleImage extends Component {
   handleLoad = () => {
     // after setState react-konva will update canvas and redraw the layer
     // because "image" property is changed
-    console.log(this.image)
+    console.log(this.image, this.state.image + 'soy yo')
     this.setState({
       image: this.image
     });

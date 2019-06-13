@@ -5,13 +5,7 @@ export class FormDesign extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            /*   name: String,
-              tags: Array,
-              status: {
-                  type: String,
-                  enum: ["background", "character"]
-              }, */
-            imageURL: ''
+            imageURL: ''            
         }
 
         this.services = new GalleryServices()
@@ -24,34 +18,62 @@ export class FormDesign extends Component {
             [name]: value
 
         }, () => console.log(this.state + 'soy handleChange'))
-        console.log(this.state + 'ikjnmln')
+        console.log(this.state + 'sigo siendo handleChange')
     }
 
     handleFileUpload = e => {
 
         const uploadData = new FormData();
         uploadData.append("imageUrl", e.target.files[0]);
-        console.log(e.target.files[0])
-        this.services.handleUpload(uploadData)
-            .then(response => {
-                console.log(response.data[0].imageURL)
-                this.setState({
-                    imageURLBack: response.data[0].imageURL
 
-                })
-                console.log(this.state.imageURLBack)
-            })
-            .catch(err => console.log(err))
+        console.log(this.state + 'soy el tardet e')
+
+        this.setState({
+            data: uploadData
+        })
+        
+        console.log(this.state)
+        
     }
 
 
-    handleSubmit = (e, type) => {
+    // handleFileCharacterUpload = e => {
 
+    //     const uploadData = new FormData();
+    //     uploadData.append("imageUrl", e.target.files[0]);
+    //     console.log(e.target.files[0])
+    //     this.services.handleUpload(uploadData)
+    //         .then(response => {
+    //             console.log(response.data[0].imageURL)
+    //             this.setState({
+    //                 characterImageURLBack: response.data[0].imageURL
+
+    //             })
+    //             console.log(this.state.imageURLBack)
+    //         })
+    //         .catch(err => console.log(err))
+    // }
+
+
+    handleSubmit = (e, type) => {
+        console.log('yo soy el primero de handleSubmit  ' + this.state.data[0] + 'en medio data')
         e.preventDefault()
+
+        this.services.handleUpload(this.state.data)
+            .then(response => {
+                console.log(response.data[0].imageURL, 'estoy en el then de services')
+                this.setState({
+                    imageURLBack: response.data[0].imageURL
+                    
+                })
+                this.props.nuevaImg(this.state.imageURLBack, type)
+                console.log(this.state.imageURLBack, 'yo tb estoy en el then, pero despues')
+            })
+            .catch(err => console.log(err))
+
         console.log(this.state + '    vengo del handleSubmit')
         console.log(this.state, this.state.imageURLBack, "soy el de teo")
 
-        this.props.nuevaImg(this.state.imageURLBack, type)
 
     }
 
@@ -72,9 +94,9 @@ export class FormDesign extends Component {
 
                     <input type="file" name="characterImageURL" id="characterImageURL" placeholder='Pega la URL' value={this.state.characterImageURL} onChange={this.handleChange} /><br />
                     <button>Añadir personaje</button><br />
-                </form>
+                </form> */}
 
-                <form onSubmit={(e) => this.handleSubmit(e, "taleText")} className='toolbar'>
+                {/* <form onSubmit={(e) => this.handleSubmit(e, "taleText")} className='toolbar'>
 
                     <input type="text" name="taleText" id="taleText" placeholder='Escribe tu cuento' value={this.state.page.taleText} onChange={this.handleChange} /><br />
                     <button>Escribe tu cuento</button><br />
@@ -86,7 +108,7 @@ export class FormDesign extends Component {
 
                     <input type="color" name="taleTextColor" id="taleTextColor" value={this.state.page.taleTextColor} onChange={this.handleChange} /><br />
                     <button>Elige color del texto</button><br />
-                </form> */}
+                </form>  */}
 
             </div>
         )
