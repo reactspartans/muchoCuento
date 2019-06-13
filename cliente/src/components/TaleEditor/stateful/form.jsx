@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import GalleryServices from '../../../services/galeria-service'
+import { ModalGallery } from './gallerySelect'
 
 export class FormDesign extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            imageURL: ''            
+            imageURL: ''
         }
 
         this.services = new GalleryServices()
@@ -29,9 +30,9 @@ export class FormDesign extends Component {
         this.setState({
             data: uploadData
         })
-        
+
         console.log(this.state)
-        
+
     }
 
 
@@ -88,6 +89,8 @@ export class FormDesign extends Component {
                     <button>Añadir fondo</button><br />
 
                 </form>
+
+                <ModalGallery />
 
                 {/* <form onSubmit={(e) => this.handleSubmit(e, "characterImageURL")} className='toolbar'>
 
