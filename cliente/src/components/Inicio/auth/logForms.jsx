@@ -3,6 +3,9 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
+import AuthServices from './../../../services/auth-services'
+
+
 
 export class SingUp extends Component{
     constructor(props, context) {
@@ -12,8 +15,15 @@ export class SingUp extends Component{
         this.handleClose = this.handleClose.bind(this);
     
         this.state = {
-          show: false,
-        };
+          user: {
+            username: '',
+            email: '',
+            password: '',
+          },
+          show: false
+          
+        }
+        this.services = new AuthServices()
       }
     
       handleClose() {
@@ -22,6 +32,30 @@ export class SingUp extends Component{
     
       handleShow() {
         this.setState({ show: true });
+      }
+
+      
+    
+
+      handleChange = e => {
+        const { name, value } = e.target;
+        this.setState({ 
+          user:{
+            [name]: value 
+          }
+        })
+      }
+
+      handleSubmit = e => {
+
+          e.preventDefault()
+          const { username, email,  password } = this.state
+          this.services.signup(username, email, password)
+              .then(response => {
+                  this.setState({ username: '', email: '', password: '' })
+                  this.props.setTheUser(response)
+              })
+              .catch(error => console.log(error.response.data.message))
       }
     
       render() {
@@ -42,6 +76,10 @@ export class SingUp extends Component{
                               <InputGroup.Text id="basic-addon1">☺</InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl
+                              as='input'
+                              type='text'
+                              onChange={this.handleChange}
+                              value={this.state.username}
                               placeholder="Username"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
@@ -52,6 +90,9 @@ export class SingUp extends Component{
                               <InputGroup.Text id="basic-addon1">✉</InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl
+                              onChange={this.handleChange}
+                              value={this.state.email}
+                              type='text'
                               placeholder="example@example.com"
                               aria-label="email"
                               aria-describedby="basic-addon1"
@@ -62,6 +103,8 @@ export class SingUp extends Component{
                               <InputGroup.Text id="basic-addon1">✎</InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl
+                              onChange={this.handleChange}
+                              value={this.state.password}
                               type='password'
                               placeholder="******"
                               aria-label="Password"
@@ -71,7 +114,7 @@ export class SingUp extends Component{
                     </form>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="info" onClick={this.handleClose}>
+                <Button variant="info" onClick={this.handleClose} onSubmit={this.handleSubmit}>
                   Unirse
                 </Button>
                 <Button variant="danger " onClick={this.handleClose}>

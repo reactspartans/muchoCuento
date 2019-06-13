@@ -26,8 +26,6 @@ export class FormDesign extends Component {
         const uploadData = new FormData();
         uploadData.append("imageUrl", e.target.files[0]);
 
-        console.log(this.state + 'soy el tardet e')
-
         this.setState({
             data: uploadData
         })
@@ -61,13 +59,14 @@ export class FormDesign extends Component {
 
         this.services.handleUpload(this.state.data)
             .then(response => {
-                console.log(response.data[0].imageURL, 'estoy en el then de services')
+                console.log(response, 'estoy en el then de services')
+
+                this.props.nuevaImg(response.imageURL, type)
+
+                console.log(response.imageURL, 'yo tb estoy en el then, pero despues')
                 this.setState({
-                    imageURLBack: response.data[0].imageURL
-                    
+                    imageURLBack: response.imageURL
                 })
-                this.props.nuevaImg(this.state.imageURLBack, type)
-                console.log(this.state.imageURLBack, 'yo tb estoy en el then, pero despues')
             })
             .catch(err => console.log(err))
 

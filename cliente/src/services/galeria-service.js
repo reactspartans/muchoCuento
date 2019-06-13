@@ -38,8 +38,9 @@ export default class services {
   }
 
   handleUpload = theFile => {
+
     return this.service.post('/upload', theFile)
-      .then(res => res)
+      .then(res => res.data)
       .catch(err => console.log(err));
   }
 }
