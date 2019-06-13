@@ -10,8 +10,8 @@ import Konva from 'konva'
 // at first we will set image state to null
 // and then we will set it to native image instance when it is loaded
 export class TaleImage extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       image: null,
@@ -43,11 +43,13 @@ export class TaleImage extends Component {
   handleLoad = () => {
     // after setState react-konva will update canvas and redraw the layer
     // because "image" property is changed
-    console.log(this.image, this.state.image + 'soy yo')
+    console.log(this.image, 'soy yo')
     this.setState({
+      ...this.state,
       image: this.image
     });
     // if you keep same image object during source updates
+    console.log(this.state)
     // you will have to update layer manually:
     // this.imageNode.getLayer().batchDraw();
   };
@@ -84,16 +86,17 @@ export class TaleImage extends Component {
     console.log(e.target.attrs.y + ' pos Y')
 
   };
-
-
-
+  
+  
+  
   render() {
-
+    console.log(this.state)
+    if (this.props.go) {
+      this.props.salvarImagen(this.state)
+      this.props.goFunction(false)
+    }
     const { positionX, positionY, rotation, image } = this.state
 
-    if (this.props.go) {
-      this.props.saveImageToGallery(this.state, this.props.status)
-    }
 
     return (
       <Image

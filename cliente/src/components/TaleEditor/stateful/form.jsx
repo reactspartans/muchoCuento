@@ -129,9 +129,14 @@ export class FormSave extends Component {
         this.services = new GalleryServices()
 
     }
-    handleSubmit = (e) => {
+
+
+    
+    handleSubmit = e => {
         e.preventDefault()
-        this.props.go()
+        console.log('llega a submit form')
+        this.props.go(true)
+        console.log('ejecuto go')
     }
 
 

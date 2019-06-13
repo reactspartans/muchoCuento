@@ -35,12 +35,13 @@ export class TalesEditor extends Component {
     })
   }
 
-  /* saveImageToGallery = (ImageState, status) => {
-    this.services.postImagePage[status](ImageState)
-  } */
+  saveImageToPage = (ImageState) => {
+    this.services.postImagePage(ImageState)
+  }
 
-  go = () => {
-    this.setState({ go: true })
+  go = res => {
+    console.log('me ejecuto')
+    this.setState({ go: res })
   }
 
 
@@ -52,12 +53,12 @@ export class TalesEditor extends Component {
       <div className="flex-editor">
         {console.log(this.state.page, "hello")}
         <FormDesign nuevaImg={this.addNewImg} />
-        <FormSave />
+        <FormSave go={this.go}/>
 
         <Stage width={window.innerWidth} height={window.innerHeight}>
           <Layer >
-            <TaleImage src={this.state.page.imageURL} go={this.state.go} funcion={this.funcion} status={"background"} />
-            <TaleImage src={this.state.page.characterImageURL} go={this.state.go} funcion={this.funcion} status={"character"} />
+            <TaleImage src={this.state.page.imageURL} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
+            <TaleImage src={this.state.page.characterImageURL} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} funcion={this.funcion} status={"character"} />
             <TaleText text={this.state.page.taleText} color={this.state.page.taleTextColor} go={this.state.go} funcion={this.funcion} />
           </Layer>
         </Stage>

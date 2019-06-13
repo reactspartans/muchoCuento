@@ -33,7 +33,7 @@ export default class services {
 
   postImagePage = image => {
     return this.service.post('/addImagePage', image)
-      .then(res => res.data)
+      .then(res => console.log(res.data, image))
       .catch(err => console.log(err))
   }
 
