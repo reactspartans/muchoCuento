@@ -78,19 +78,20 @@ export class FormDesign extends Component {
     }
 
 
+
+
+
     render() {
         return (
 
             <div>
 
                 <form onSubmit={(e) => this.handleSubmit(e, "imageURL")} className='toolbar'>
-                    {/* <input onChange={this.handleFileUpload} type="file" className="form-control" id="imageUrl" name="imageUrl" /> */}
                     <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} /> <br />
                     <button>Añadir fondo</button><br />
 
                 </form>
 
-                <ModalGallery nuevaImg={this.props.nuevaImg} />
 
                 {/* <form onSubmit={(e) => this.handleSubmit(e, "characterImageURL")} className='toolbar'>
 
@@ -100,18 +101,19 @@ export class FormDesign extends Component {
 
                 {/* <form onSubmit={(e) => this.handleSubmit(e, "taleText")} className='toolbar'>
 
-                    <input type="text" name="taleText" id="taleText" placeholder='Escribe tu cuento' value={this.state.page.taleText} onChange={this.handleChange} /><br />
-                    <button>Escribe tu cuento</button><br />
+<input type="text" name="taleText" id="taleText" placeholder='Escribe tu cuento' value={this.state.page.taleText} onChange={this.handleChange} /><br />
+<button>Escribe tu cuento</button><br />
 
-                </form>
+</form>
 
-                <form onSubmit={(e) => this.handleSubmit(e, "taleTextColor")} className='toolbar'>
+<form onSubmit={(e) => this.handleSubmit(e, "taleTextColor")} className='toolbar'>
 
 
-                    <input type="color" name="taleTextColor" id="taleTextColor" value={this.state.page.taleTextColor} onChange={this.handleChange} /><br />
-                    <button>Elige color del texto</button><br />
-                </form>  */}
+<input type="color" name="taleTextColor" id="taleTextColor" value={this.state.page.taleTextColor} onChange={this.handleChange} /><br />
+<button>Elige color del texto</button><br />
+</form>  */}
 
+                <ModalGallery nuevaImg={this.props.nuevaImg} />
             </div>
         )
     }

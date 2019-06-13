@@ -51,7 +51,7 @@ export class TalesEditor extends Component {
   render() {
     return (
       <div className="flex-editor">
-        {console.log(this.state.page, "hello")}
+        {console.log(this.state.page, "statepage")}
         <FormDesign nuevaImg={this.addNewImg} />
         <FormSave go={this.go}/>
 
