@@ -35,9 +35,9 @@ export class TalesEditor extends Component {
     })
   }
 
-  saveImageToGallery = (ImageState, status) => {
+  /* saveImageToGallery = (ImageState, status) => {
     this.services.postImagePage[status](ImageState)
-  }
+  } */
 
   go = () => {
     this.setState({ go: true })
