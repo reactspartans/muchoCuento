@@ -67,6 +67,7 @@ const bcrypt = require("bcrypt");
 
 authRoutes.post('/signup', (req, res, next) => {
   const username = req.body.username;
+  const email = req.body.email
   const password = req.body.password;
 
   if (!username || !password) {
@@ -96,6 +97,7 @@ authRoutes.post('/signup', (req, res, next) => {
 
       const aNewUser = new User({
           username: username,
+          email: email,
           password: hashPass
       });
 

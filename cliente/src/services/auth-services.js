@@ -5,13 +5,13 @@ export default class services {
     constructor() {
 
         this.service = axios.create({
-            baseURL: 'http://localhost:3000/api/',
+            baseURL: 'http://localhost:3000/auth',
             withCredentials: true
         })
     }
 
-    signup = (username, password) => {
-        return this.service.post('/signup', { username, password })
+    signup = (username, email, password) => {
+        return this.service.post('/signup', { username, email, password })
             .then(response => response.data)
     }
 

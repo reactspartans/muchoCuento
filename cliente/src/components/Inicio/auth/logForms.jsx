@@ -41,21 +41,25 @@ export class SingUp extends Component{
         const { name, value } = e.target;
         this.setState({ 
           user:{
+            ...this.state.user,
             [name]: value 
           }
         })
       }
 
-      handleSubmit = e => {
+      
 
+      handleSubmit = e => {
+          console.log(this.state.user)
           e.preventDefault()
-          const { username, email,  password } = this.state
+          const { username, email,  password } = this.state.user
           this.services.signup(username, email, password)
               .then(response => {
-                  this.setState({ username: '', email: '', password: '' })
+                  this.setState({ user:{username: '', email: '', password: ''}})
                   this.props.setTheUser(response)
+                  console.log(this.state.user)
               })
-              .catch(error => console.log(error.response.data.message))
+              .catch(error => console.log(error))
       }
     
       render() {
@@ -70,7 +74,8 @@ export class SingUp extends Component{
                 <Modal.Title>Nuevo usuario</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                    <form>
+                
+                    <form   onSubmit={this.handleSubmit}  >
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
                               <InputGroup.Text id="basic-addon1">☺</InputGroup.Text>
@@ -79,7 +84,8 @@ export class SingUp extends Component{
                               as='input'
                               type='text'
                               onChange={this.handleChange}
-                              value={this.state.username}
+                              value={this.state.user.username}
+                              name='username'
                               placeholder="Username"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
@@ -90,9 +96,11 @@ export class SingUp extends Component{
                               <InputGroup.Text id="basic-addon1">✉</InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl
-                              onChange={this.handleChange}
-                              value={this.state.email}
+                              as='input'
                               type='text'
+                              onChange={this.handleChange}
+                              value={this.state.user.email}
+                              name='email'
                               placeholder="example@example.com"
                               aria-label="email"
                               aria-describedby="basic-addon1"
@@ -103,30 +111,43 @@ export class SingUp extends Component{
                               <InputGroup.Text id="basic-addon1">✎</InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl
+                              as='input'
+                              type='password'                              
                               onChange={this.handleChange}
-                              value={this.state.password}
-                              type='password'
+                              value={this.state.user.password}
+                              name='password'
                               placeholder="******"
                               aria-label="Password"
                               aria-describedby="basic-addon1"
                             />
                         </InputGroup>
+                        <Button 
+                        type='submit'
+                        variant="info" 
+                        onClick={this.handleClose} >
+                          Unirse
+                        </Button>
                     </form>
               </Modal.Body>
-              <Modal.Footer>
-                <Button variant="info" onClick={this.handleClose} onSubmit={this.handleSubmit}>
-                  Unirse
-                </Button>
-            <Button variant="danger " onClick={this.handleClose}>
+            <Button variant="danger " size='sm' onClick={this.handleClose}>
               Cerrar
-                </Button>
-          </Modal.Footer>
+            </Button>
         </Modal>
       </>
     );
   }
 
 }
+
+
+
+
+
+
+
+
+
+
 
 export class Login extends Component {
   constructor(props, context) {
@@ -198,6 +219,14 @@ export class Login extends Component {
     );
   }
 }
+
+
+
+
+
+
+
+
 
 export class Logout extends Component {
   constructor() {
