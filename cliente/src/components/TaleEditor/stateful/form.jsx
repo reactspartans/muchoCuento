@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import GalleryServices from '../../../services/galeria-service'
+import { ModalGallery } from './gallerySelect'
 
 export class FormDesign extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            imageURL: ''            
+            imageURL: ''
         }
 
         this.services = new GalleryServices()
@@ -31,9 +32,9 @@ export class FormDesign extends Component {
         this.setState({
             data: uploadData
         })
-        
+
         console.log(this.state)
-        
+
     }
 
 
@@ -64,7 +65,7 @@ export class FormDesign extends Component {
                 console.log(response.data[0].imageURL, 'estoy en el then de services')
                 this.setState({
                     imageURLBack: response.data[0].imageURL
-                    
+
                 })
                 this.props.nuevaImg(this.state.imageURLBack, type)
                 console.log(this.state.imageURLBack, 'yo tb estoy en el then, pero despues')
@@ -89,6 +90,8 @@ export class FormDesign extends Component {
                     <button>Añadir fondo</button><br />
 
                 </form>
+
+                <ModalGallery />
 
                 {/* <form onSubmit={(e) => this.handleSubmit(e, "characterImageURL")} className='toolbar'>
 
