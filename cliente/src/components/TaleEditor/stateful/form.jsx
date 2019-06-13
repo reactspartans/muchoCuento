@@ -90,7 +90,7 @@ export class FormDesign extends Component {
 
                 </form>
 
-                <ModalGallery />
+                <ModalGallery nuevaImg={this.props.nuevaImg} />
 
                 {/* <form onSubmit={(e) => this.handleSubmit(e, "characterImageURL")} className='toolbar'>
 

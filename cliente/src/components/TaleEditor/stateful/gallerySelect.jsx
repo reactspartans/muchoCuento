@@ -12,13 +12,16 @@ export class ModalGallery extends Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.searchImage = this.searchImage.bind(this);
+
 
     this.state = {
       gallery: [],
-
+      filtered: [],
       search: "",
 
       show: false,
+      query: "",
     }
     this.services = new GalleryServices()
   }
@@ -27,6 +30,15 @@ export class ModalGallery extends Component {
     this.services.getGallery()
       .then(allImages => this.setState({ gallery: allImages }))
   }
+
+  searchImage(e) {
+    console.log(this.state.gallery)
+    this.setState({ query: e.target.value })
+    let filtered = this.state.gallery.filter(img => img.name.includes(e.target.value))
+    console.log(filtered)
+    this.setState({ filtered })
+  }
+
 
   handleClose() {
     this.setState({ show: false });
@@ -58,22 +70,26 @@ export class ModalGallery extends Component {
                   placeholder="busca una imagen"
                   aria-label="gallery"
                   aria-describedby="basic-addon1"
+                  value={this.state.query}
+                  onChange={this.searchImage}
                 />
               </InputGroup>
             </form>
             <div>
-              {this.state.gallery.map((theImage, idx) => <ImageCard key={idx} {...theImage} />)}
+
+              {this.state.query.length ?
+
+                this.state.filtered.map((theImage, idx) => <ImageCard key={idx} nuevaImg={this.props.nuevaImg} {...theImage} />)
+
+                :
+
+                this.state.gallery.map((theImage, idx) => <ImageCard key={idx} nuevaImg={this.props.nuevaImg} {...theImage} />)
+
+              }
 
             </div>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="info" onClick={this.handleClose}>
-              Unirse
-                </Button>
-            <Button variant="danger " onClick={this.handleClose}>
-              Cerrar
-                </Button>
-          </Modal.Footer>
+
         </Modal>
       </>
     );
