@@ -8,7 +8,9 @@ const imagePageSchema = new Schema({
   scaleX: Number,
   scaleY: Number,
   rotation: Number,
-  status: String
+  status: String,
+  imageURL: String,
+
 },
   {
     timestamps: true
