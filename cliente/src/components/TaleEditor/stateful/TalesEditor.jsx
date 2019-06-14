@@ -5,6 +5,7 @@ import { Stage, Layer } from 'react-konva';
 import { FormDesign, FormSave } from '../stateful/form'
 import TaleText from './TaleText'
 import GalleryServices from '../../../services/galeria-service'
+import BookServices from '../../../services/book-service'
 
 
 
@@ -29,16 +30,16 @@ export class TalesEditor extends Component {
 
 
   addNewImg = (image, status) => {
-    let _page = {...this.state.page} 
-    if(status=='background'){
+    let _page = { ...this.state.page }
+    if (status === 'background') {
       _page.imageBackground = image
-    }else if(status=='character'){
+    } else if (status === 'character') {
       _page.imageCharacter.push(image)
-    }else{
+    } else {
       _page.texts.push(image)
     }
-  
-    
+
+
     console.log(image, _page, "he llegado al back!")
 
     this.setState({
@@ -49,6 +50,14 @@ export class TalesEditor extends Component {
   saveImageToPage = (ImageState, status) => {
     this.services.postImagePage(ImageState)
     console.log(ImageState, 'estoy gurdando esto')
+  }
+
+  saveTextToPage = TextState => {
+    console.log('entro en services')
+    this.servicesBook.postNewText(TextState)
+
+    console.log(TextState, 'estoy guardando el texto')
+
   }
 
   go = res => {
@@ -65,10 +74,10 @@ export class TalesEditor extends Component {
       <div className="flex-editor">
         {console.log(this.state.page, "statepage")}
         <FormDesign nuevaImg={this.addNewImg} />
-        <FormSave go={this.go}/>
+        <FormSave go={this.go} />
 
         <Stage width={window.innerWidth} height={window.innerHeight}>
-        {/* <Layer >
+          {/* <Layer >
         
          <TaleImage key={i} src={elm} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
           
@@ -76,8 +85,15 @@ export class TalesEditor extends Component {
         </Layer> */}
           <Layer >
             <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
-            <TaleImage src={this.state.page.imageCharacter[0]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-            <TaleText text={this.state.page.taleText} color={this.state.page.taleTextColor} go={this.state.go} funcion={this.funcion} />
+
+            {this.state.page.imageCharacter.map((img, idx) => {
+              return <TaleImage key={idx} src={img} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+            })}
+
+            {this.state.page.texts.map((text, i) => {
+
+              return <TaleText key={i} text={text} color={this.state.page.taleTextColor} goFunction={this.state.go} saveText={this.saveTextToPage} />
+            })}
           </Layer>
         </Stage>
 

@@ -22,7 +22,17 @@ export default class services {
       .then(res => res.data)
       .catch(err => console.log(err))
   }
+
+  postNewText = (text) => {
+    return this.service.post('/addText', text)
+      .then(res => res.data)
+      .catch(err => console.log(err))
+  }
+
 }
+
+
+
 
 
 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const textPageSchema = new Schema({
-
+  content: String,
   positionX: Number,
   positionY: Number,
   scaleX: Number,

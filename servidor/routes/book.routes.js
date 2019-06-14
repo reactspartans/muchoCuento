@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
+const TextPage = require('../models/Book/Page.models')
 const Book = require('../models/Book/Book.model')
 
 
@@ -30,13 +30,21 @@ router.get('/:id', (req, res) => {
 
 
 //añadir una pagina al cuento
-router.post('/addPage/:id', (req, res) => {  //id del book al que pertenece
+/* router.post('/addPage/:id', (req, res) => {  //id del book al que pertenece
   const { id } = req.params;
   const newPage = { positionX, positionY } = req.body;
   newPage.book = id;   //le guardamos el id del book al que pertenece
-})
+}) */
 
-router.post('/addText/:id')
+
+//añadir un texto al modelo texto
+router.post('/addText', (req, res) => {
+  const newText = { content, positionX, positionY } = req.body;
+
+  TextPage.create(newText)
+    .then(data => res.json(data))
+    .catch(err => console.log('Error:', err))
+})
 
 
 module.exports = router;

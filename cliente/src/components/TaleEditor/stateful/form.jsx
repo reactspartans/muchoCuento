@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import GalleryServices from '../../../services/galeria-service'
 import { ModalGallery } from './gallerySelect'
+import BookServices from '../../../services/book-service'
 
 export class FormDesign extends Component {
     constructor(props) {
         super(props)
         this.state = {
             imageURL: '',
-            imageURLChar:''
+            imageURLChar: '',
+            taleText: "",
+            taleTextColor: ""
         }
 
         this.services = new GalleryServices()
+        this.servicesBook = new BookServices()
     }
 
     handleChange = e => {
@@ -64,7 +68,7 @@ export class FormDesign extends Component {
                 // console.log(response, 'estoy en el then de services')
 
                 this.props.nuevaImg(response.imageURL, 'background')
-                
+
                 // console.log(status, 'soy el status')
                 this.setState({
                     imageURLBack: response.imageURL
@@ -81,11 +85,11 @@ export class FormDesign extends Component {
         // console.log('yo soy el primero de handleSubmitCHAR  ' + this.state.data + 'en medio data')
         e.preventDefault()
 
-        this.services.handleUpload(this.state.data, )
+        this.services.handleUpload(this.state.data)
             .then(response => {
                 console.log(response, 'estoy en el then de services')
 
-                this.props.nuevaImg( response.imageURL, 'character')
+                this.props.nuevaImg(response.imageURL, 'character')
 
                 console.log(response.imageURL, 'yo tb estoy en el then, pero despues')
                 this.setState({
@@ -94,9 +98,32 @@ export class FormDesign extends Component {
             })
             .catch(err => console.log(err))
 
-        console.log(this.state, this.state.imageURLCharDos , "soy el de teo 2")
+        console.log(this.state, this.state.imageURLCharDos, "soy el de teo 2")
 
     }
+
+
+    handleSubmitText = (e) => {
+        console.log('yo soy el primero de handleSubmitText  ' + this.state.data + 'en medio data')
+        e.preventDefault()
+
+        // this.servicesBook.postNewText(this.state.taleText)
+        //     .then(response => {
+        //         console.log(response, 'estoy en el then de services')
+
+        this.props.nuevaImg(this.state.taleText)
+
+        // console.log(status, 'soy el status')
+        this.setState({
+            taleText: this.state.taleText
+        })
+        // })
+        // .catch(err => console.log(err))
+    }
+
+
+
+
 
 
 
@@ -106,7 +133,7 @@ export class FormDesign extends Component {
             <div>
 
                 <form onSubmit={(e) => this.handleSubmit(e, "imageURL", 'background')} className='toolbar'>
-                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} status='background'/> <br />
+                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} status='background' /> <br />
                     <button>Añadir fondo</button><br />
 
                 </form>
@@ -114,23 +141,22 @@ export class FormDesign extends Component {
 
                 <form onSubmit={(e) => this.handleSubmitChar(e, "imageURL")} className='toolbar'>
 
-                    <input type="file" name="imageURLChar" id="imageURLChar" placeholder='Pega la URL' value={this.state.imageURLChar} onChange={this.handleFileUpload} status='character'/><br />
+                    <input type="file" name="imageURLChar" id="imageURLChar" placeholder='Pega la URL' value={this.state.imageURLChar} onChange={this.handleFileUpload} status='character' /><br />
                     <button>Añadir personaje</button><br />
                 </form>
 
-                {/* <form onSubmit={(e) => this.handleSubmit(e, "taleText")} className='toolbar'>
+                <form onSubmit={(e) => this.handleSubmitText(e, "taleText")} className='toolbar'>
 
-<input type="text" name="taleText" id="taleText" placeholder='Escribe tu cuento' value={this.state.page.taleText} onChange={this.handleChange} /><br />
-<button>Escribe tu cuento</button><br />
+                    <input type="text" name="taleText" id="taleText" placeholder='Escribe tu cuento' value={this.state.taleText} onChange={this.handleChange} /><br />
+                    <button>Escribe tu cuento</button><br />
 
-</form>
+                </form>
 
-<form onSubmit={(e) => this.handleSubmit(e, "taleTextColor")} className='toolbar'>
+                <form className='toolbar'>
 
-
-<input type="color" name="taleTextColor" id="taleTextColor" value={this.state.page.taleTextColor} onChange={this.handleChange} /><br />
-<button>Elige color del texto</button><br />
-</form>  */}
+                    <input type="color" name="taleTextColor" id="taleTextColor" value={this.state.taleTextColor} onChange={this.handleChange} /><br />
+                    <button>Elige color del texto</button><br />
+                </form>
 
                 <ModalGallery nuevaImg={this.props.nuevaImg} />
             </div>
@@ -152,7 +178,7 @@ export class FormSave extends Component {
     }
 
 
-    
+
     handleSubmit = e => {
         e.preventDefault()
         console.log('llega a submit form')
