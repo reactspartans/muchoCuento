@@ -14,7 +14,13 @@ export class TalesEditor extends Component {
   constructor() {
     super()
     this.state = {
-      page: [],
+      page: {
+        book: '',
+        texts: [],
+        imageBackground: '',
+        imageCharacter: [],
+        pageNumber: ''
+      },
       go: false,
 
     }
@@ -22,13 +28,12 @@ export class TalesEditor extends Component {
   }
 
 
-  addNewImg = (image, type) => {
-    let _page = { ...this.state.page }
-    _page[type] = image
-    // _page.characterImageURL = image.characterImageURL
-    // _page.taleText = image.taleText
-    // _page.taleTextColor=image.taleTextColor
-    console.log(image, "he llegado al back!")
+  addNewImg = (image) => {
+    let _page = {...this.state.page} 
+    _page.imageBackground = image
+  
+    
+    console.log(image, _page, "he llegado al back!")
 
     this.setState({
       page: _page
@@ -37,6 +42,7 @@ export class TalesEditor extends Component {
 
   saveImageToPage = (ImageState) => {
     this.services.postImagePage(ImageState)
+    console.log(ImageState, 'estoy gurdando esto')
   }
 
   go = res => {
@@ -56,9 +62,15 @@ export class TalesEditor extends Component {
         <FormSave go={this.go}/>
 
         <Stage width={window.innerWidth} height={window.innerHeight}>
+        {/* <Layer >
+        
+         <TaleImage key={i} src={elm} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
+          
+       
+        </Layer> */}
           <Layer >
-            <TaleImage src={this.state.page.imageURL} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
-            <TaleImage src={this.state.page.characterImageURL} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} funcion={this.funcion} status={"character"} />
+            <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
+            <TaleImage src={this.state.page.imageURLChar} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
             <TaleText text={this.state.page.taleText} color={this.state.page.taleTextColor} go={this.state.go} funcion={this.funcion} />
           </Layer>
         </Stage>

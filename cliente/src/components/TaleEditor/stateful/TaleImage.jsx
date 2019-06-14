@@ -92,7 +92,6 @@ export class TaleImage extends Component {
   
   
   render() {
-    console.log(this.state)
     if (this.props.go) {
       this.props.salvarImagen(this.state)
       this.props.goFunction(false)

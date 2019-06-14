@@ -6,7 +6,8 @@ export class FormDesign extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            imageURL: ''
+            imageURL: '',
+            imageURLChar:''
         }
 
         this.services = new GalleryServices()
@@ -54,30 +55,48 @@ export class FormDesign extends Component {
     // }
 
 
-    handleSubmit = (e, type) => {
-        console.log('yo soy el primero de handleSubmit  ' + this.state.data[0] + 'en medio data')
+    handleSubmit = (e) => {
+        // console.log('yo soy el primero de handleSubmit  ' + this.state.data[0] + 'en medio data')
+        e.preventDefault()
+
+        this.services.handleUpload(this.state.data)
+            .then(response => {
+                // console.log(response, 'estoy en el then de services')
+
+                this.props.nuevaImg(response.imageURL)
+
+                // console.log(response.imageURL, 'yo tb estoy en el then, pero despues')
+                this.setState({
+                    imageURLBack: response.imageURL
+                })
+            })
+            .catch(err => console.log(err))
+    }
+
+
+
+
+
+    handleSubmitChar = (e) => {
+        console.log('yo soy el primero de handleSubmitCHAR  ' + this.state.data + 'en medio data')
         e.preventDefault()
 
         this.services.handleUpload(this.state.data)
             .then(response => {
                 console.log(response, 'estoy en el then de services')
 
-                this.props.nuevaImg(response.imageURL, type)
+                this.props.nuevaImg( response.imageURL)
 
                 console.log(response.imageURL, 'yo tb estoy en el then, pero despues')
                 this.setState({
-                    imageURLBack: response.imageURL
+                    imageURLCharDos: response.imageURL
                 })
             })
             .catch(err => console.log(err))
 
-        console.log(this.state + '    vengo del handleSubmit')
-        console.log(this.state, this.state.imageURLBack, "soy el de teo")
-
+        console.log(this.state, this.state.imageURLCharDos , "soy el de teo 2")
 
     }
-
-
 
 
 
@@ -93,11 +112,11 @@ export class FormDesign extends Component {
                 </form>
 
 
-                {/* <form onSubmit={(e) => this.handleSubmit(e, "characterImageURL")} className='toolbar'>
+                <form onSubmit={(e) => this.handleSubmitChar(e, "imageURL")} className='toolbar'>
 
-                    <input type="file" name="characterImageURL" id="characterImageURL" placeholder='Pega la URL' value={this.state.characterImageURL} onChange={this.handleChange} /><br />
+                    <input type="file" name="imageURLChar" id="imageURLChar" placeholder='Pega la URL' value={this.state.imageURLChar} onChange={this.handleFileUpload} /><br />
                     <button>Añadir personaje</button><br />
-                </form> */}
+                </form>
 
                 {/* <form onSubmit={(e) => this.handleSubmit(e, "taleText")} className='toolbar'>
 
