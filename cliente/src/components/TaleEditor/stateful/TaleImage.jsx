@@ -18,7 +18,8 @@ export class TaleImage extends Component {
       imageURL: '',
       positionX: 100,
       positionY: 100,
-      rotation: 0
+      rotation: 0,
+      status: ''
     };
 
   }
@@ -48,7 +49,8 @@ export class TaleImage extends Component {
     this.setState({
       // ...this.state,
       image: this.image,
-      imageURL: this.image.src
+      imageURL: this.image.src,
+      status: this.props.status
     });
     // if you keep same image object during source updates
     console.log(this.state)
@@ -93,7 +95,7 @@ export class TaleImage extends Component {
   
   render() {
     if (this.props.go) {
-      this.props.salvarImagen(this.state)
+      this.props.salvarImagen(this.state, this.props.status)
       this.props.goFunction(false)
     }
     const { positionX, positionY, rotation, image } = this.state

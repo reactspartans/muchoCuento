@@ -56,16 +56,16 @@ export class FormDesign extends Component {
 
 
     handleSubmit = (e) => {
-        // console.log('yo soy el primero de handleSubmit  ' + this.state.data[0] + 'en medio data')
+        console.log('yo soy el primero de handleSubmit  ' + this.state.data[0] + 'en medio data')
         e.preventDefault()
 
         this.services.handleUpload(this.state.data)
             .then(response => {
                 // console.log(response, 'estoy en el then de services')
 
-                this.props.nuevaImg(response.imageURL)
-
-                // console.log(response.imageURL, 'yo tb estoy en el then, pero despues')
+                this.props.nuevaImg(response.imageURL, 'background')
+                
+                // console.log(status, 'soy el status')
                 this.setState({
                     imageURLBack: response.imageURL
                 })
@@ -78,14 +78,14 @@ export class FormDesign extends Component {
 
 
     handleSubmitChar = (e) => {
-        console.log('yo soy el primero de handleSubmitCHAR  ' + this.state.data + 'en medio data')
+        // console.log('yo soy el primero de handleSubmitCHAR  ' + this.state.data + 'en medio data')
         e.preventDefault()
 
-        this.services.handleUpload(this.state.data)
+        this.services.handleUpload(this.state.data, )
             .then(response => {
                 console.log(response, 'estoy en el then de services')
 
-                this.props.nuevaImg( response.imageURL)
+                this.props.nuevaImg( response.imageURL, 'character')
 
                 console.log(response.imageURL, 'yo tb estoy en el then, pero despues')
                 this.setState({
@@ -105,8 +105,8 @@ export class FormDesign extends Component {
 
             <div>
 
-                <form onSubmit={(e) => this.handleSubmit(e, "imageURL")} className='toolbar'>
-                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} /> <br />
+                <form onSubmit={(e) => this.handleSubmit(e, "imageURL", 'background')} className='toolbar'>
+                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} status='background'/> <br />
                     <button>Añadir fondo</button><br />
 
                 </form>
@@ -114,7 +114,7 @@ export class FormDesign extends Component {
 
                 <form onSubmit={(e) => this.handleSubmitChar(e, "imageURL")} className='toolbar'>
 
-                    <input type="file" name="imageURLChar" id="imageURLChar" placeholder='Pega la URL' value={this.state.imageURLChar} onChange={this.handleFileUpload} /><br />
+                    <input type="file" name="imageURLChar" id="imageURLChar" placeholder='Pega la URL' value={this.state.imageURLChar} onChange={this.handleFileUpload} status='character'/><br />
                     <button>Añadir personaje</button><br />
                 </form>
 

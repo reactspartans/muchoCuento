@@ -28,9 +28,15 @@ export class TalesEditor extends Component {
   }
 
 
-  addNewImg = (image) => {
+  addNewImg = (image, status) => {
     let _page = {...this.state.page} 
-    _page.imageBackground = image
+    if(status=='background'){
+      _page.imageBackground = image
+    }else if(status=='character'){
+      _page.imageCharacter.push(image)
+    }else{
+      _page.texts.push(image)
+    }
   
     
     console.log(image, _page, "he llegado al back!")
@@ -40,7 +46,7 @@ export class TalesEditor extends Component {
     })
   }
 
-  saveImageToPage = (ImageState) => {
+  saveImageToPage = (ImageState, status) => {
     this.services.postImagePage(ImageState)
     console.log(ImageState, 'estoy gurdando esto')
   }
@@ -70,7 +76,7 @@ export class TalesEditor extends Component {
         </Layer> */}
           <Layer >
             <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
-            <TaleImage src={this.state.page.imageURLChar} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+            <TaleImage src={this.state.page.imageCharacter[0]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
             <TaleText text={this.state.page.taleText} color={this.state.page.taleTextColor} go={this.state.go} funcion={this.funcion} />
           </Layer>
         </Stage>
