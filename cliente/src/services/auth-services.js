@@ -13,9 +13,11 @@ export default class services {
     signup = (username, email, password) => {
         return this.service.post('/signup', { username, email, password })
             .then(response => response.data)
+            .catch(err=> console.log(err))
     }
 
     login = (username, password) => {
+        console.log(username, password)
         return this.service.post('/login', { username, password })
             .then(response => response.data)
     }

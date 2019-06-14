@@ -2,65 +2,8 @@ const express = require("express");
 const passport = require('passport');
 const authRoutes = express.Router();
 const User = require("../models/User");
-
-// Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
-// const bcryptSalt = 10;
 
-
-// router.get("/login", (req, res, next) => {
-//   res.render("auth/login", { "message": req.flash("error") });
-// });
-
-// router.post("/login", passport.authenticate("local", {
-//   successRedirect: "/",
-//   failureRedirect: "/auth/login",
-//   failureFlash: true,
-//   passReqToCallback: true
-// }));
-
-// router.get("/signup", (req, res, next) => {
-//   res.render("auth/signup");
-// });
-
-// router.post("/signup", (req, res, next) => {
-//   const username = req.body.username;
-//   const password = req.body.password;
-//   if (username === "" || password === "") {
-//     res.render("auth/signup", { message: "Indicate username and password" });
-//     return;
-//   }
-
-//   User.findOne({ username }, "username", (err, user) => {
-//     if (user !== null) {
-//       res.render("auth/signup", { message: "The username already exists" });
-//       return;
-//     }
-
-//     const salt = bcrypt.genSaltSync(bcryptSalt);
-//     const hashPass = bcrypt.hashSync(password, salt);
-
-//     const newUser = new User({
-//       username,
-//       password: hashPass
-//     });
-
-//     newUser.save()
-//     .then(() => {
-//       res.redirect("/");
-//     })
-//     .catch(err => {
-//       res.render("auth/signup", { message: "Something went wrong" });
-//     })
-//   });
-// });
-
-// router.get("/logout", (req, res) => {
-//   req.logout();
-//   res.redirect("/");
-// });
-
-// module.exports = router;
 
 
 
@@ -70,7 +13,7 @@ authRoutes.post('/signup', (req, res, next) => {
   const email = req.body.email
   const password = req.body.password;
 
-  if (!username || !password) {
+  if (!username || !password || !email) {
       res.status(400).json({ message: 'Provide username and password' });
       return;
   }
@@ -80,7 +23,7 @@ authRoutes.post('/signup', (req, res, next) => {
       return;
   }
 
-  User.findOne({ username }, (err, foundUser) => {
+  User.findOne({$or: [{username}, {email}]  }, (err, foundUser, foundEmail) => {
 
       if (err) {
           res.status(500).json({ message: "Username check went bad." });
@@ -91,6 +34,12 @@ authRoutes.post('/signup', (req, res, next) => {
           res.status(400).json({ message: 'Username taken. Choose another one.' });
           return;
       }
+
+      if (foundEmail) {
+        res.status(400).json({ message: 'Email taken. Choose another one.' });
+        return;
+    }
+
 
       const salt = bcrypt.genSaltSync(10);
       const hashPass = bcrypt.hashSync(password, salt);
@@ -126,6 +75,10 @@ authRoutes.post('/signup', (req, res, next) => {
 
 
 
+
+
+
+
 authRoutes.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, theUser, failureDetails) => {
       if (err) {
@@ -154,10 +107,16 @@ authRoutes.post('/login', (req, res, next) => {
 });
 
 
+
+
+
 authRoutes.post('/logout', (req, res, next) => {
   req.logout();
   res.status(200).json({ message: 'Log out success!' });
 });
+
+
+
 
 
 authRoutes.get('/loggedin', (req, res, next) => {

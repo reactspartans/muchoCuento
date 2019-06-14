@@ -157,8 +157,13 @@ export class Login extends Component {
     this.handleClose = this.handleClose.bind(this);
 
     this.state = {
-      show: false,
-    };
+      user:{
+        username: '',
+        password: ''
+      },
+      show: false
+    }
+    this.services = new AuthServices()
   }
 
   handleClose() {
@@ -169,25 +174,58 @@ export class Login extends Component {
     this.setState({ show: true });
   }
 
+
+
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({ 
+      user:{
+        ...this.state.user,
+        [name]: value 
+      }
+    })
+  }
+
+
+  handleSubmit = e => {
+
+      e.preventDefault()
+      const { username, password } = this.state.user
+      console.log(username, password)
+      this.services.login(username, password)
+          .then(response => {
+              this.setState({ username: '', password: '' })
+              
+              this.props.setTheUser(response)
+          })
+          .catch(error => console.log(error))
+  }
+
+
   render() {
     return (
       <>
         <Button variant="light" onClick={this.handleShow}>
           Login
-            </Button>
+        </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Tus datos</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <InputGroup className="mb-3">
                 <InputGroup.Prepend>
                   <InputGroup.Text id="basic-addon1">☺</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
-                  placeholder="Username"
+                  as='input'
+                  type='text'                              
+                  onChange={this.handleChange}
+                  value={this.state.user.username}
+                  name='username'
+                  placeholder="Usuario"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                 />
@@ -198,20 +236,24 @@ export class Login extends Component {
                   <InputGroup.Text id="basic-addon1">✎</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
+                  as='input'
+                  onChange={this.handleChange}
+                  value={this.state.user.password}
+                  name='password'
                   type='password'
                   placeholder="******"
                   aria-label="Password"
                   aria-describedby="basic-addon1"
                 />
               </InputGroup>
+            <Button type='submit' variant="primary" onClick={this.handleClose}>
+              Entrar
+            </Button>
             </form>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Cerrar
-                </Button>
-            <Button variant="primary" onClick={this.handleClose}>
-              Login
                 </Button>
           </Modal.Footer>
         </Modal>
@@ -227,15 +269,3 @@ export class Login extends Component {
 
 
 
-
-export class Logout extends Component {
-  constructor() {
-    super()
-    this.state = {}
-  }
-  render() {
-    return (
-      <h1>hey</h1>
-    )
-  }
-}

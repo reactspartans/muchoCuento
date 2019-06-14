@@ -30,9 +30,9 @@ export class TalesEditor extends Component {
 
   addNewImg = (image, status) => {
     let _page = {...this.state.page} 
-    if(status=='background'){
+    if(status==='background'){
       _page.imageBackground = image
-    }else if(status=='character'){
+    }else if(status==='character'){
       _page.imageCharacter.push(image)
     }else{
       _page.texts.push(image)

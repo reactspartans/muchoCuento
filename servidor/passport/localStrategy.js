@@ -8,6 +8,7 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
   }, 
   (username, password, done) => {
+    console.log(username, password)
     User.findOne({ username })
     .then(foundUser => {
       if (!foundUser) {
@@ -22,6 +23,8 @@ passport.use(new LocalStrategy({
 
       done(null, foundUser);
     })
-    .catch(err => done(err));
+    .catch(err => {
+      console.log(err)
+      done(err)});
   }
 ));

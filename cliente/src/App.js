@@ -4,9 +4,9 @@ import { TalesEditor } from './components/TaleEditor/stateful/TalesEditor';
 import { Switch, Route } from 'react-router-dom'
 import { Index } from './components/Inicio/Index';
 import { NavBar } from './components/NavBar';
-import {Login, SingUp, Logout} from './components/Inicio/auth/logForms'
 import AuthServices from './services/auth-services'
-
+import { Profile } from './components/Profile';
+import ProtectedRoute from './components/protected-route'
 
 
 export default class App extends Component {
@@ -29,14 +29,19 @@ export default class App extends Component {
 
 
     render() {
+
+      this.fetchUser()
+      console.log(this.state.loggedInUser, 'logged user')
+      
       return (
         <main>
 
-          <NavBar setTheUser={this.setUser}/>
+          <NavBar setTheUser={this.setUser} user={this.state.loggedInUser}/>
 
           <Switch>
             <Route path="/" exact component={Index} />
-            <Route path="/tales-editor" exact component={TalesEditor} />
+            <Route path="/tales-editor" exact component={TalesEditor}  user={this.state.loggedInUser} />
+            <ProtectedRoute path='/private/profile' exact component={Profile} user={this.state.loggedInUser} setTheUser={this.setUser}/>
           </Switch>
         
 
