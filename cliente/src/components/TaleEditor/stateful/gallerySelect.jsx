@@ -49,6 +49,7 @@ export class ModalGallery extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <>
         <Button variant="light" onClick={this.handleShow}>
