@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const GalleryImage = require('../models/Book/GalleryImage.models')
-
+// const User = require ('../models/User')
 const uploader = require('../configs/cloudinary.configs');
 
-router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
+router.post('/uploadprofile', uploader.single("imageUrl"), (req, res, next) => {
 
   console.log(req.file)
 
@@ -30,5 +30,6 @@ router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
   })
   
 })
+
 
 module.exports = router;

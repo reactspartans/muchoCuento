@@ -87,12 +87,15 @@ require('./passport')(app);
 const bookRoutes = require('./routes/book.routes')
 app.use('/api/cuentos', bookRoutes)
 
+
+
 const galleryRoutes = require('./routes/gallery.routes')
 app.use('/api/galeria', galleryRoutes)
 
+
+
 const fileRoutes = require('./routes/file-upload.routes')
 app.use('/api/galeria', fileRoutes);
-
 
 
 

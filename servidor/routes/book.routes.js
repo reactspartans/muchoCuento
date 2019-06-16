@@ -7,7 +7,7 @@ const Book = require('../models/Book/Book.model')
 //Crear un cuento nuevo
 router.post('/newBook', (req, res) => {
   Book.create(req.body)
-    .then(data => res.json(data))
+    .then(data=>res.json(data))
     .catch(err => console.log('Error:', err))
 })
 
