@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const TextPage = require('../models/Book/Page.models')
+const TextPage = require('../models/Book/TextPage.models')
 const Book = require('../models/Book/Book.model')
 
 
@@ -39,10 +39,14 @@ router.get('/:id', (req, res) => {
 
 //añadir un texto al modelo texto
 router.post('/addText', (req, res) => {
+  console.log('entro en la ruta de addText')
   const newText = { content, positionX, positionY } = req.body;
-
+  console.log(req.body, 'ruta addText')
   TextPage.create(newText)
-    .then(data => res.json(data))
+    .then(data => {
+      console.log(newText, 'creado base datos text')
+      res.json(data)
+    })
     .catch(err => console.log('Error:', err))
 })
 

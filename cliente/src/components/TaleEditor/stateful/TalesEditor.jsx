@@ -26,6 +26,7 @@ export class TalesEditor extends Component {
 
     }
     this.services = new GalleryServices()
+    this.servicesBook = new BookServices()
   }
 
 
@@ -48,12 +49,13 @@ export class TalesEditor extends Component {
   }
 
   saveImageToPage = (ImageState, status) => {
+    console.log(ImageState, 'guardando imagen de la pagina con su posicion')
     this.services.postImagePage(ImageState)
-    console.log(ImageState, 'estoy gurdando esto')
+    console.log(ImageState, 'estoy guardando esto')
   }
 
   saveTextToPage = TextState => {
-    console.log('entro en services')
+    console.log(TextState, 'entro en services')
     this.servicesBook.postNewText(TextState)
 
     console.log(TextState, 'estoy guardando el texto')
@@ -92,7 +94,7 @@ export class TalesEditor extends Component {
 
             {this.state.page.texts.map((text, i) => {
 
-              return <TaleText key={i} text={text} color={this.state.page.taleTextColor} goFunction={this.state.go} saveText={this.saveTextToPage} />
+              return <TaleText key={i} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
             })}
           </Layer>
         </Stage>
