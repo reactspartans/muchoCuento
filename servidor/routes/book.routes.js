@@ -8,7 +8,7 @@ const Book = require('../models/Book/Book.model')
 router.post('/newBook', (req, res) => {
   console.log(req.body, 'back')
   Book.create(req.body)
-    .then(data=>res.json(data))
+    .then(data => res.json(data))
     .catch(err => console.log('Error:', err))
 })
 
@@ -31,11 +31,11 @@ router.get('/:id', (req, res) => {
 
 
 //añadir una pagina al cuento
-/* router.post('/addPage/:id', (req, res) => {  //id del book al que pertenece
+router.post('/addPage', (req, res) => {  //id del book al que pertenece
   const { id } = req.params;
-  const newPage = { positionX, positionY } = req.body;
-  newPage.book = id;   //le guardamos el id del book al que pertenece
-}) */
+  const newPage = { book_id, pageNumber } = req.body;
+  newPage.book = id;   //guardamos el id del book al que pertenece
+})
 
 
 //añadir un texto al modelo texto
