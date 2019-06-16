@@ -7,9 +7,9 @@ class TaleText extends Component {
     super(props);
 
     this.state = {
-      content: "",
-      textX: 100,
-      textY: 100,
+      content: this.props.text,
+      positionX: 100,
+      positionY: 100,
     };
 
   }
@@ -53,15 +53,15 @@ class TaleText extends Component {
       console.log(this.state)
       this.props.goFunction(false)
     }
-    const { textX, textY } = this.state
+    const { content, positionX, positionY } = this.state
 
     return (
       <React.Fragment>
 
         <Text
-          text={this.props.text}
-          x={textX}
-          y={textY}
+          text={content}
+          x={positionX}
+          y={positionY}
           fontSize={20}
           onDragStart={this.handleDragStart}
           onDragEnd={this.handleDragEnd}

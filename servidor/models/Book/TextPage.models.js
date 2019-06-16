@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const textPageSchema = new Schema({
+  name: { type: Schema.Types.ObjectId, ref: 'GalleryImage' },
   content: String,
   positionX: Number,
   positionY: Number,
