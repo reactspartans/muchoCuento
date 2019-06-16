@@ -10,6 +10,7 @@ class TaleText extends Component {
       content: this.props.text,
       positionX: 100,
       positionY: 100,
+      text_id: this.props._id
     };
 
   }
@@ -35,12 +36,12 @@ class TaleText extends Component {
       shadowOffsetY: 0
     });
     this.setState({
-      textX: e.target.attrs.x,
-      textY: e.target.attrs.y
+      positionX: e.target.attrs.x,
+      positionY: e.target.attrs.y
 
     })
-    console.log(e.target.attrs.x, this.state.textX)
-    console.log(e.target.attrs.y, this.state.textY)
+    console.log(e.target.attrs.x, this.state.positionX)
+    console.log(e.target.attrs.y, this.state.positionY)
 
   }
 

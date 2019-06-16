@@ -28,28 +28,28 @@ export default class App extends Component {
 
 
 
-    render() {
+  render() {
 
-      this.fetchUser()
-      console.log(this.state.loggedInUser, 'logged user')
-      
-      return (
-        <main>
+    this.fetchUser()
+    console.log(this.state.loggedInUser, 'logged user')
 
-          <NavBar setTheUser={this.setUser} user={this.state.loggedInUser}/>
+    return (
+      <main>
 
-          <Switch>
-            <Route path="/" exact component={Index} />
-            <Route path="/tales-editor" exact component={TalesEditor}  user={this.state.loggedInUser} />
-            <ProtectedRoute path='/private/profile' exact component={Profile} user={this.state.loggedInUser} setTheUser={this.setUser}/>
-          </Switch>
-        
+        <NavBar setTheUser={this.setUser} user={this.state.loggedInUser} />
 
-          
-        </main>
-        
-      );
-    }
+        <Switch>
+          <Route path="/" exact component={Index} />
+          <Route path="/tales-editor" exact component={TalesEditor} user={this.state.loggedInUser} />
+          <ProtectedRoute path='/private/profile' exact component={Profile} user={this.state.loggedInUser} setTheUser={this.setUser} />
+        </Switch>
+
+
+
+      </main>
+
+    );
+  }
 }
 
 

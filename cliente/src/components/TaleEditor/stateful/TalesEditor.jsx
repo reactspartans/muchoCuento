@@ -35,11 +35,11 @@ export class TalesEditor extends Component {
     if (status === 'background') {
       _page.imageBackground = image
     } else if (status === 'character') {
+      console.log(image)
       _page.imageCharacter.push(image)
     } else {
       _page.texts.push(image)
     }
-
 
     console.log(image, _page, "he llegado al back!")
 
@@ -48,24 +48,50 @@ export class TalesEditor extends Component {
     })
   }
 
+
+
+  //asignar el id del libro a la pagina
+
+  /* addBookId = book_id => {
+
+    let _page = { ...this.state.page }
+    _page.book = book_id
+    this.setState({
+      page: _page
+    })
+  } */
+
+
   saveImageToPage = (ImageState, status) => {
     console.log(ImageState, 'guardando imagen de la pagina con su posicion')
     this.services.postImagePage(ImageState)
+
     console.log(ImageState, 'estoy guardando esto')
   }
 
+
   saveTextToPage = TextState => {
     console.log(TextState, 'entro en services')
+
     this.servicesBook.postNewText(TextState)
 
     console.log(TextState, 'estoy guardando el texto')
 
   }
 
+  savePage = page => {
+    console.log(page)
+    this.servicesBook.postNewPage(page)
+
+  }
+
+
+
   go = res => {
     console.log('me ejecuto')
     this.setState({ go: res })
   }
+
 
 
 
@@ -92,10 +118,7 @@ export class TalesEditor extends Component {
               return <TaleImage key={idx} src={img} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
             })}
 
-            {this.state.page.texts.map((text, i) => {
-
-              return <TaleText key={i} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
-            })}
+            {this.state.page.texts.map((text, i) => <TaleText key={i} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)}
           </Layer>
         </Stage>
 

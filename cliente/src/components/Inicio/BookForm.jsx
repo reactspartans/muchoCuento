@@ -7,91 +7,91 @@ import BookServices from '../../services/book-service'
 
 
 export default class BookForm extends Component {
-    constructor(props, context) {
-      super(props, context);
-  
-      this.handleShow = this.handleShow.bind(this);
-      this.handleClose = this.handleClose.bind(this);
-  
-      this.state = {
-        name:'',
-        show: false,
-      };
-      this.services= new BookServices()
-    }
-  
-    handleClose() {
-      this.setState({ show: false });
-    }
-  
-    handleShow() {
-      this.setState({ show: true });
-    }
+  constructor(props, context) {
+    super(props, context);
 
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
 
-    handleChange = e => {
-        const { name, value } = e.target;
-        this.setState({ 
-            [name]: value 
-          
-        })
-      }
-
-    
-  
-
-    handleSubmit=e=>{
-      console.log('submit')
-      e.preventDefault()
-      this.services.postNewBook(this.state.name)
-        .then(response=> {
-          console.log(response, 'newBook')
-      })
-        // .catch(err=>console.log(err))
-    }
-
-  
-    render() {
-      return (
-        <>
-          <Button variant="light" onClick={this.handleShow}>
-            Crear cuento
-          </Button>
-  
-          <Modal show={this.state.show} onHide={this.handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Tu cuento</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form onSubmit={this.handleSubmit}>
-                <InputGroup className="mb-3">
-                  <InputGroup.Prepend>
-                    <InputGroup.Text id="basic-addon1">✎</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <FormControl
-                    as='input'
-                    type='text'
-                    onChange={this.handleChange}
-                    value={this.state.name}
-                    name='name'
-                    placeholder="Las aventuras de unos patos bien locos"
-                    aria-label="name"
-                    aria-describedby="basic-addon1"
-                  />
-                </InputGroup>
-                <Button type='submit' variant="primary" onClick={this.handleClose}>
-                    Crear
-                </Button>
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose}>
-                Cerrar
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
-      );
-    }
+    this.state = {
+      name: '',
+      show: false,
+    };
+    this.services = new BookServices()
   }
-  
+
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
+
+
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value
+
+    })
+  }
+
+
+
+
+  handleSubmit = e => {
+    console.log('submit')
+    e.preventDefault()
+    this.services.postNewBook(this.state.name)
+      .then(response => {
+        console.log(response, 'newBook')
+
+      })
+    // .catch(err=>console.log(err))
+  }
+
+
+  render() {
+    return (
+      <>
+        <Button variant="light" onClick={this.handleShow}>
+          Crear cuento
+          </Button>
+
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Tu cuento</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form onSubmit={this.handleSubmit}>
+              <InputGroup className="mb-3">
+                <InputGroup.Prepend>
+                  <InputGroup.Text id="basic-addon1">✎</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  as='input'
+                  type='text'
+                  onChange={this.handleChange}
+                  value={this.state.name}
+                  name='name'
+                  placeholder="Las aventuras de unos patos bien locos"
+                  aria-label="name"
+                  aria-describedby="basic-addon1"
+                />
+              </InputGroup>
+              <Button type='submit' variant="primary" onClick={this.handleClose}>
+                Crear
+                </Button>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Cerrar
+              </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+}

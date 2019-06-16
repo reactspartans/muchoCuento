@@ -19,7 +19,8 @@ export class TaleImage extends Component {
       positionX: 100,
       positionY: 100,
       rotation: 0,
-      status: ''
+      status: '',
+      image_id: ''
     };
 
   }
@@ -96,7 +97,7 @@ export class TaleImage extends Component {
   render() {
     if (this.props.go) {
       this.props.salvarImagen(this.state, this.props.status)
-      console.log(this.state, 'estoy en taleImage mandando state')
+      // console.log(this.state, 'estoy en taleImage mandando state')
       this.props.goFunction(false)
     }
     const { positionX, positionY, rotation, image } = this.state
