@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
-import GalleryServices from '../services/galeria-service'
+import GalleryServices from '../../services/profile-services'
+import { SearchBooks } from '../BookSearch';
 
 
 export class Profile extends Component{
     constructor(props){
         super(props)
         this.state={
-            profilePhoto: '',
+            user_id:  this.props.loggedInUser._id,
+            profilePhoto: this.props.loggedInUser.profilePhoto,
             username: this.props.loggedInUser.username,
             email: this.props.loggedInUser.email,
             password: this.props.loggedInUser.password,
@@ -41,23 +43,24 @@ export class Profile extends Component{
     handleSubmit=(e)=>{
         e.preventDefault()
         console.log('handleSubmit', e.target)
- 
-    
+        
+        
         this.services.uploadProfile(this.state.data)
-            .then(response => {
+        .then(response => {
+            console.log(response.imageURL)    
                 this.setState({
-                    profilePhoto: response.secure_url
-                    
+                    profilePhoto: response.imageURL
                 })
+                this.services.updatePhoto(this.state.profilePhoto, this.state.user_id)
+                    .then(res=>console.log(res))
             })
-            .catch(err => console.log(err))
     }
     
 
 
 
     render(){
-        console.log(this.props.loggedInUser.username)
+        // console.log(this.props.loggedInUser.profilePhoto)
         return(
             <div>
                 <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
@@ -67,7 +70,7 @@ export class Profile extends Component{
 
 
                 <form onSubmit={(e) => this.handleSubmit(e, "imageURL")} className='toolbar'>
-                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.profilePhoto}  /> <br />
+                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL'   /> <br />
                     {this.state.data && <button>Añadir fondo</button>}<br />
                 </form>
 
@@ -84,6 +87,7 @@ export class Profile extends Component{
                     </label>
                     <button>Guardar cambios</button>
                 </form>
+                <SearchBooks/>
             </div>
 
             

@@ -82,6 +82,8 @@ require('./passport')(app);
 
 
 
+const profileImgRoute = require('./routes/file-user-upload.routes')
+app.use('/prof', profileImgRoute)
 
 
 const bookRoutes = require('./routes/book.routes')
@@ -103,7 +105,5 @@ const authRoutes = require('./routes/auth.routes');
 app.use('/auth', authRoutes);
 
 
-const profileImgRoute = require('./routes/file-user-upload.routes')
-app.use('/', profileImgRoute)
 
 module.exports = app;

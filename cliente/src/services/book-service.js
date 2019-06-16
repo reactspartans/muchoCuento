@@ -12,7 +12,7 @@ export default class services {
 
   postNewBook = book => {
     return this.service.post('/newBook', book)
-      .then(res => res.data)
+      .then(res => res.data, console.log('service book', book))
       .catch(err => console.log(err))
   }
 
@@ -29,6 +29,11 @@ export default class services {
       .catch(err => console.log(err))
   }
 
+  booksList = book =>{
+    return this.service.get('/', book)
+      .then(res => res.data)
+      .catch(err => console.log('Error', err))
+  }
 }
 
 

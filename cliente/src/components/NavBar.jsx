@@ -28,7 +28,7 @@ export  class NavBar extends Component{
         <nav>
             <ul>
                 <li className='lis'><Link className='links' to='/'><h3>MuchoCuento</h3></Link></li>
-                <li className='lis' ><Link className='links' to='/'>Home</Link></li>
+                <li className='lis' ><Link className='links' to='/'><Button>Home</Button></Link></li>
                 <li className='lis'><BookForm/></li>
                 
               
@@ -38,7 +38,7 @@ export  class NavBar extends Component{
                 <li className='lis'><SingUp setTheUser={this.props.setTheUser}/> <Login setTheUser={this.props.setTheUser} /> </li>
                 }
 
-                {this.props.user? <li> <Link to='/private/profile' className='links'>Perfil</Link> </li> : null}
+                {this.props.user? <li> <Link to={`/private/profile/${this.props.user._id}`} className='links'> <Button>Perfil</Button> </Link> </li> : null}
 
                
                    
