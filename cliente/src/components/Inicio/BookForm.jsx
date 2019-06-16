@@ -15,6 +15,7 @@ export default class BookForm extends Component {
 
     this.state = {
       name: '',
+      book_id: '',
       show: false,
     };
     this.services = new BookServices()
@@ -42,13 +43,18 @@ export default class BookForm extends Component {
 
   handleSubmit = e => {
     console.log('submit')
+    const theName = this.state.name
     e.preventDefault()
-    this.services.postNewBook(this.state.name)
-      .then(response => {
-        console.log(response, 'newBook')
-
-      })
-    // .catch(err=>console.log(err))
+    this.services.postNewBook({ name: theName })
+      // .then(res=>console.log(res))
+      .then(res => {
+        console.log(res._id)
+        this.setState({
+          book_id: res._id
+        })
+        //Función desde tales editor para liftUp state
+        window.location.href = '/tales-editor'
+      }) //RECARGA LA PÁGINA!!!!  
   }
 
 
