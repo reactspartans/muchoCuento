@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
-
+import BookServices from '../../services/book-service'
 
 
 export default class BookForm extends Component {
@@ -17,6 +17,7 @@ export default class BookForm extends Component {
         name:'',
         show: false,
       };
+      this.services= new BookServices()
     }
   
     handleClose() {
@@ -31,26 +32,22 @@ export default class BookForm extends Component {
     handleChange = e => {
         const { name, value } = e.target;
         this.setState({ 
-          user:{
-            ...this.state,
             [name]: value 
-          }
+          
         })
       }
 
-      
+    
+  
 
-    handleSubmit = e => {
-        console.log(this.state.user)
-        e.preventDefault()
-        const { name } = this.state
-        this.services.signup(name)
-            .then(response => {
-                this.setState({ user:{username: '', email: '', password: ''}})
-                this.props.setTheUser(response)
-                console.log(this.state.user)
-            })
-            .catch(error => console.log(error))
+    handleSubmit=e=>{
+      console.log('submit')
+      e.preventDefault()
+      this.services.postNewBook(this.state.name)
+        .then(response=> {
+          console.log(response, 'newBook')
+      })
+        // .catch(err=>console.log(err))
     }
 
   
@@ -63,10 +60,10 @@ export default class BookForm extends Component {
   
           <Modal show={this.state.show} onHide={this.handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Tus datos</Modal.Title>
+              <Modal.Title>Tu cuento</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <InputGroup className="mb-3">
                   <InputGroup.Prepend>
                     <InputGroup.Text id="basic-addon1">✎</InputGroup.Text>
@@ -76,16 +73,13 @@ export default class BookForm extends Component {
                     type='text'
                     onChange={this.handleChange}
                     value={this.state.name}
-                    name='email'
+                    name='name'
                     placeholder="Las aventuras de unos patos bien locos"
                     aria-label="name"
                     aria-describedby="basic-addon1"
                   />
                 </InputGroup>
-                <Button 
-                    type='submit'
-                    variant="info" 
-                    onClick={this.handleClose} >
+                <Button type='submit' variant="primary" onClick={this.handleClose}>
                     Crear
                 </Button>
               </form>

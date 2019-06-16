@@ -31,4 +31,9 @@ export default class services {
         return this.service.get('/loggedin')
             .then(response => response.data)
     }
+
 }
+
+
+
+      

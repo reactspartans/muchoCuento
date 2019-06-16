@@ -1,15 +1,18 @@
 import React, {Component} from 'react'
+import GalleryServices from '../services/galeria-service'
+
 
 export class Profile extends Component{
     constructor(props){
         super(props)
         this.state={
-            profilePhoto: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/eb4e52bd-fc99-4db9-8d65-eadf01fdabbf/d38o83n-fe2ac891-3022-40d9-88fd-338c3e13d3fc.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2ViNGU1MmJkLWZjOTktNGRiOS04ZDY1LWVhZGYwMWZkYWJiZlwvZDM4bzgzbi1mZTJhYzg5MS0zMDIyLTQwZDktODhmZC0zMzhjM2UxM2QzZmMuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.FwzSQx6QReO5lD2K5Ec8AHS6VKr0zOyabBvMUc_6czM',
+            profilePhoto: '',
             username: this.props.loggedInUser.username,
             email: this.props.loggedInUser.email,
             password: this.props.loggedInUser.password,
 
         }
+        this.services = new GalleryServices()
     }
     
 
@@ -21,10 +24,37 @@ export class Profile extends Component{
         })
     }
 
+    handleFileUpload = e => {
+
+        const uploadData = new FormData();
+        uploadData.append("imageUrl", e.target.files[0]);
+
+        this.setState({
+            data: uploadData
+        })
+
+        console.log(this.state)
+
+    }
+
+
     handleSubmit=(e)=>{
         e.preventDefault()
-        
+        console.log('handleSubmit', e.target)
+ 
+    
+        this.services.uploadProfile(this.state.data)
+            .then(response => {
+                this.setState({
+                    profilePhoto: response.secure_url
+                    
+                })
+            })
+            .catch(err => console.log(err))
     }
+    
+
+
 
     render(){
         console.log(this.props.loggedInUser.username)
@@ -34,6 +64,14 @@ export class Profile extends Component{
                 <figure>
                     <img src={this.state.profilePhoto} alt="profile-images"/>
                 </figure>
+
+
+                <form onSubmit={(e) => this.handleSubmit(e, "imageURL")} className='toolbar'>
+                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.profilePhoto}  /> <br />
+                    {this.state.data && <button>Añadir fondo</button>}<br />
+                </form>
+
+
                 <form onSubmit={this.handleSubmit}>
                     <label> Cambiar nombre de usuario <br/>
                         <input type="text" name='username' value={this.state.username} placeholder={this.state.username} onChange={this.handleChange}/>

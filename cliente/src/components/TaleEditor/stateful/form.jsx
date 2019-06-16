@@ -7,7 +7,7 @@ export class FormDesign extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            imageURL: '',
+            imageURL: "",
             imageURLChar: '',
             taleText: "",
             taleTextColor: ""

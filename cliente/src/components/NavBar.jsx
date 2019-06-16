@@ -29,11 +29,9 @@ export  class NavBar extends Component{
             <ul>
                 <li className='lis'><Link className='links' to='/'><h3>MuchoCuento</h3></Link></li>
                 <li className='lis' ><Link className='links' to='/'>Home</Link></li>
-                <li className='lis'>
-                <Link className='links' to='/tales-editor'>
-                <BookForm/>
-                </Link></li>
-
+                <li className='lis'><BookForm/></li>
+                
+              
 
                 {this.props.user?  <li className='lis'><Button onClick={this.logout}>Logout </Button></li> : 
 
