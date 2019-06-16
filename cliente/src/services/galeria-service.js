@@ -46,9 +46,8 @@ export default class services {
 
   uploadProfile = theFile => {
     return this.service.post('/uploadprofile', theFile)
-        .then(response => response.data)
-        .catch(err => console.log(err));
+      .then(response => response.data)
+      .catch(err => console.log(err))
 
-}
-
+  }
 }
