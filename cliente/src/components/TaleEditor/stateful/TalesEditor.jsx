@@ -149,29 +149,6 @@ export class TalesEditor extends Component {
     this.setState({ go: res })
   }
 
-<<<<<<< HEAD
-  
-  
-  // meteLaimg=(elm) =>{
-  //   this.setState({
-  //     ...this.state.book.pagesToView.push(elm),
-      
-  //   })
-  //   console.log(elm, this.state.book)
-  // }
-  
-  saveImagesToBook =()=>{
-    Group.toImage({
-      meteLaimg(elm){
-        this.setState({
-          ...this.state.book.pagesToView.push(elm),
-          
-        })
-        console.log(elm, this.state.book)
-      }
-    })  
-  }
-=======
   meteLaimg = (img) => {
     this.setState({
       ...this.state.book.pagesToView.push(img),
@@ -191,7 +168,6 @@ export class TalesEditor extends Component {
   /*   savePageImage() {
   
       let image = Stage.toImage((img) => {
->>>>>>> 4996f82ca9cd108fb7f17ddf3b2bb8ee6e76fb93
   
         const newArr = [...this.state.book.pagesToView]
         newArr.push(img)
