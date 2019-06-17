@@ -48,12 +48,13 @@ export default class BookForm extends Component {
     this.services.postNewBook({ name: theName })
       // .then(res=>console.log(res))
       .then(res => {
-        console.log(res._id)
+        console.log(res)
+        this.props.setTheBookId(res._id)
         this.setState({
           book_id: res._id
         })
         //Función desde tales editor para liftUp state
-        window.location.href = '/tales-editor'
+        // window.location.href = '/tales-editor'
       }) //RECARGA LA PÁGINA!!!!  
   }
 

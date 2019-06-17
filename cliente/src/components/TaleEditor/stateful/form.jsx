@@ -182,6 +182,7 @@ export class FormSave extends Component {
     handleSubmit = e => {
         e.preventDefault()
         console.log('llega a submit form')
+        this.props.savePage()
         this.props.go(true)
         console.log('ejecuto go')
     }

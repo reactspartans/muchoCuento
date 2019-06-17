@@ -12,7 +12,10 @@ export default class services {
 
   postNewBook = book => {
     return this.service.post('/newBook', book)
-      .then(res => res.data, console.log('service book', book))
+      .then(res => {
+        console.log(res.data)
+        return res.data
+      })
       .catch(err => console.log(err))
   }
 
@@ -25,11 +28,14 @@ export default class services {
 
   postNewText = (text) => {
     return this.service.post('/addText', text)
-      .then(res => res.data)
+      .then(res => {
+        console.log("el texto que vuelve de la BBDD", res.data)
+        return res.data
+      })
       .catch(err => console.log(err))
   }
 
-  booksList = book =>{
+  booksList = book => {
     return this.service.get('/', book)
       .then(res => res.data)
       .catch(err => console.log('Error', err))

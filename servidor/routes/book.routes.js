@@ -8,7 +8,11 @@ const Book = require('../models/Book/Book.model')
 router.post('/newBook', (req, res) => {
   console.log(req.body, 'back')
   Book.create(req.body)
-    .then(data => res.json(data))
+    .then(data => {
+      console.log(data)
+      res.json(data)
+    }
+    )
     .catch(err => console.log('Error:', err))
 })
 
@@ -25,7 +29,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const id = req.params.id
   Book.findById(id)
-    .then(data => res.jason(data))
+    .then(data => res.json(data))
     .catch(err => console.log('Error:', err))
 })
 

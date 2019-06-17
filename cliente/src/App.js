@@ -12,7 +12,7 @@ import ProtectedRoute from './components/protected-route'
 export default class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { loggedInUser: null }
+    this.state = { loggedInUser: null, bookId: undefined }
     this.services = new AuthServices()
   }
 
@@ -26,6 +26,14 @@ export default class App extends Component {
     }
   }
 
+  setTheBookId = bookId => {
+    console.log(bookId)
+    this.setState({ bookId })
+  }
+  getTheBookId = () => {
+    console.log(this.state.bookId)
+    return this.state.bookId
+  }
 
 
   render() {
@@ -39,11 +47,11 @@ export default class App extends Component {
     return (
       <main>
 
-        <NavBar setTheUser={this.setUser} user={this.state.loggedInUser} />
+        <NavBar setTheBookId={this.setTheBookId} setTheUser={this.setUser} user={this.state.loggedInUser} />
 
         <Switch>
           <Route path="/" exact component={Index} />
-          <Route path="/tales-editor" exact component={TalesEditor} user={this.state.loggedInUser} />
+          <Route path="/tales-editor" exact render={() => <TalesEditor user={this.state.loggedInUser} getTheBookId={this.getTheBookId} />} />
           <ProtectedRoute path={`/private/profile/:_id`} exact component={Profile} user={this.state.loggedInUser} setTheUser={this.setUser} />
         </Switch>
 
