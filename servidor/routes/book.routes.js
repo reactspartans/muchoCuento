@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const TextPage = require('../models/Book/TextPage.models')
 const Book = require('../models/Book/Book.model')
-
+const Page = require('../models/Book/Page.models')
 
 //Crear un cuento nuevo
 router.post('/newBook', (req, res) => {
@@ -35,11 +35,42 @@ router.get('/:id', (req, res) => {
 
 
 //añadir una pagina al cuento
-router.post('/addPage', (req, res) => {  //id del book al que pertenece
-  const { id } = req.params;
-  const newPage = { book_id, pageNumber } = req.body;
-  newPage.book = id;   //guardamos el id del book al que pertenece
+router.post('/addPage', (req, res) => {
+  console.log('----------entro ruta salvar page------------')
+  const newPage = { book_id, texts, imageBackground, imageCharacters, pageNumber } = req.body;
+  Page.create(newPage)
+    .then(data => {
+      console.log(data)
+      res.jason(data)
+    })
+
+    .catch(err => console.log('Error', err))
 })
+
+
+//editar pagina cuento
+router.get('/edit/:book_id', (req, res) => {
+  Page.find({ book_id: req.params.book_id })
+    .populate('texts')
+    .populate()
+    .then(data => {
+
+      console.log(data)
+      res.json(data)
+    })
+    .catch(error => console.log(error))
+})
+
+
+/* router.post('/edit/:book_id', (req, res) => {
+  const { book_id, texts, imageBackground, imageCharacters, pageNumber } = req.body
+
+  Page.findByIdAndUpdate({ _id: req.params.trip_id }, { $set: { book_id, texts, imageBackground, imageCharacters, pageNumber } })
+    .then(theTrip => res.redirect(`/trip/detail/${theTrip._id}`))
+    .catch(error => console.log(error))
+})
+ */
+
 
 
 //añadir un texto al modelo texto

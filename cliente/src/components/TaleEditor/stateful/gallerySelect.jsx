@@ -80,11 +80,11 @@ export class ModalGallery extends Component {
 
               {this.state.query.length ?
 
-                this.state.filtered.map((theImage, idx) => <ImageCard key={idx} nuevaImg={this.props.nuevaImg} {...theImage} />)
+                this.state.filtered.map((theImage, idx) => <ImageCard key={idx} nuevaImg={this.props.nuevaImg} {...theImage} go={this.state.go} goFunction={this.go} />)
 
                 :
 
-                this.state.gallery.map((theImage, idx) => <ImageCard key={idx} nuevaImg={this.props.nuevaImg} {...theImage} />)
+                this.state.gallery.map((theImage, idx) => <ImageCard key={idx} nuevaImg={this.props.nuevaImg} {...theImage} go={this.state.go} goFunction={this.go} />)
 
               }
 
