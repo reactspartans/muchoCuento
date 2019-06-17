@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Button } from 'react-bootstrap';
-
+import ProfileService from '../../services/profile-services'
 
 
 
@@ -18,7 +18,9 @@ export class UserInfo extends Component{
             password: this.props.user.password,
         }
         console.log(this.props.user.user_id)
+        this.services = new ProfileService()
     }
+      
 
     handleChange=(e)=>{
         const {name, value} = e.target
@@ -27,48 +29,60 @@ export class UserInfo extends Component{
             [name]:value
         })
     }
-
+    
+    
+    
     handleFileUpload = e => {
-
+        
         const uploadData = new FormData();
         uploadData.append("imageUrl", e.target.files[0]);
+        for (let prop of uploadData.entries()){
+            console.log(prop[0])
+            console.log(prop[1])
+        }
 
         this.setState({
-            data: uploadData
-        })
-
-        console.log(this.state)
-
+            data: uploadData,
+        })        
+        
     }
+
 
 
     handleSubmit=(e)=>{
         e.preventDefault()
-        console.log('handleSubmit', e.target)
-        
-        
-        this.services.uploadProfile(this.state.data)
+        this.services.uploadProfile(this.state.data, this.state.user_id)
         .then(response => {
-            console.log(response.imageURL)    
-                this.setState({
-                    profilePhoto: response.imageURL
-                })
-                this.services.updatePhoto(this.state.profilePhoto, this.state.user_id)
-                    .then(res=>console.log(res))
+            console.log(response)
+            this.setState({
+                ...this.state,
+                profilePhoto: response.profilePhoto
             })
+        })
     }
+    
+
+    handleUser=e=>{
+        e.preventDefault()
+        
+    }
+
 
     render(){
         return(
 
-           <div>    
+           <div>   
+               <figure className='profile-photo'>
+                    <img src={this.state.profilePhoto} alt="profile-images"/>
+                </figure> 
+
                 <form onSubmit={(e) => this.handleSubmit(e, "imageURL")} className='toolbar'>
-                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Elige imagen'   /> <br />
-                    {this.state.data && <Button>Cambiar imagen de perfil</Button>}<br />
+                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Elige imagen' /> <br />
+                    {this.state.data && <Button type='submit'>Cambiar imagen de perfil</Button>}<br />
                 </form>
 
 
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleUser}>
                     <label> Cambiar nombre de usuario <br/>
                         <input type="text" name='username' value={this.state.username} placeholder={this.state.username} onChange={this.handleChange}/>
                     </label><br/>

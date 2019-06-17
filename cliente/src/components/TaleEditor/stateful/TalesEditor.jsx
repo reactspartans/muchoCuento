@@ -6,6 +6,7 @@ import { FormDesign, FormSave } from '../stateful/form'
 import TaleText from './TaleText'
 import GalleryServices from '../../../services/galeria-service'
 import BookServices from '../../../services/book-service'
+import Konva from 'konva';
 
 
 
@@ -36,7 +37,7 @@ export class TalesEditor extends Component {
     }
     this.services = new GalleryServices()
     this.servicesBook = new BookServices()
-    
+    this.node=new Konva.Node()
   }
 
 
@@ -130,20 +131,26 @@ export class TalesEditor extends Component {
     this.setState({ go: res })
   }
 
-  meteLaimg=(img) =>{
-    this.setState({
-      ...this.state.book.pagesToView.push(img),
-     
-    })
-    console.log(img, this.state.book)
-  }
-
-
+  
+  
+  // meteLaimg=(elm) =>{
+  //   this.setState({
+  //     ...this.state.book.pagesToView.push(elm),
+      
+  //   })
+  //   console.log(elm, this.state.book)
+  // }
+  
   saveImagesToBook =()=>{
-    this.group.toImage=(img)=>{
-     this.meteLaimg(img)
-    }
-
+    Group.toImage({
+      meteLaimg(elm){
+        this.setState({
+          ...this.state.book.pagesToView.push(elm),
+          
+        })
+        console.log(elm, this.state.book)
+      }
+    })  
   }
   
 
@@ -158,7 +165,7 @@ export class TalesEditor extends Component {
 
         <Stage width={window.innerWidth/1.2} height={window.innerHeight/1.2}  ref={node =>this.stage = node}>
           <Layer  >
-          <Group ref={node => this.group = node} >
+          <Group  >
 
               <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
 
@@ -170,7 +177,7 @@ export class TalesEditor extends Component {
           </Group>  
             </Layer>
         </Stage>
-
+              <button type='submit' onClick={this.saveImagesToBook}>Push img</button>
       </div>
 
     );

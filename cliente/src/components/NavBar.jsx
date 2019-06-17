@@ -38,7 +38,7 @@ export class NavBar extends Component {
                         <li className='lis'><SingUp setTheUser={this.props.setTheUser} /> <Login setTheUser={this.props.setTheUser} /> </li>
                     }
 
-                    {this.props.user ? <li> <Link to={`/private/profile/${this.props.user._id}`} className='links'> <Button>Perfil</Button> </Link> </li> : null}
+                    {this.props.user ? <li> <Link to={`/prof/private/profile/${this.props.user._id}`} className='links'> Perfil</Link> </li> : null}
 
 
 

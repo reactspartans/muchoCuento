@@ -11,17 +11,10 @@ export default class services {
   }
 
 
-    uploadProfile = theFile => {
-        return this.service.post('/uploadprofile', theFile)
+    uploadProfile = (theFile, id) => {
+      console.log("Services, mira a ver el id", id)
+        return this.service.post(`/private/profile/${id}`, theFile)
           .then(response => response.data)
           .catch(err => console.log(err))
-
-    }
-
-    updatePhoto = (thePhoto, _id)=>{
-
-      return this.service.post(`/private/profile/${_id}`, thePhoto)
-        .then(res=>res.data)
-        .catch(err=>console.log(err))
     }
 }

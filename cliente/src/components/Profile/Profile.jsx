@@ -76,9 +76,7 @@ export class Profile extends Component{
             <div>
             <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
             <div className='user-info'>
-                <figure className='profile-photo'>
-                    <img src={this.state.profilePhoto} alt="profile-images"/>
-                </figure>
+                
                 <Button className='horror-button'onClick={this.handleShow}>Información de usuario</Button>
                 {this.state.show ? <UserInfo user={this.state} close={this.handleClose}/> : null}
               
