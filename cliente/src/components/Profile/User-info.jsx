@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Button } from 'react-bootstrap';
 import ProfileService from '../../services/profile-services'
 
@@ -6,12 +6,12 @@ import ProfileService from '../../services/profile-services'
 
 
 
-export class UserInfo extends Component{
+export class UserInfo extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-            user_id:  this.props.user.user_id,
+        this.state = {
+            user_id: this.props.user.user_id,
             profilePhoto: this.props.user.profilePhoto,
             username: this.props.user.username,
             email: this.props.user.email,
@@ -22,11 +22,11 @@ export class UserInfo extends Component{
     }
       
 
-    handleChange=(e)=>{
-        const {name, value} = e.target
+    handleChange = (e) => {
+        const { name, value } = e.target
 
         this.setState({
-            [name]:value
+            [name]: value
         })
     }
     
@@ -68,8 +68,8 @@ export class UserInfo extends Component{
     }
 
 
-    render(){
-        return(
+    render() {
+        return (
 
            <div>   
                <figure className='profile-photo'>
@@ -95,15 +95,14 @@ export class UserInfo extends Component{
                     <button>Guardar cambios</button>
                 </form>
                 <Button onClick={this.props.close}>Cerrar</Button>
-            </div>    
+            </div>
         )
     }
 }
-           
-           
-           
-           
-           
-           
-           
-           
+
+
+
+
+
+
+

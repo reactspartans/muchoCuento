@@ -21,6 +21,7 @@ export default class services {
 
 
   postNewPage = (page) => {
+    //console.log(page)
     return this.service.post(`/addPage`, page)
       .then(res => res.data)
       .catch(err => console.log(err))
@@ -29,7 +30,7 @@ export default class services {
   postNewText = (text) => {
     return this.service.post('/addText', text)
       .then(res => {
-        console.log("el texto que vuelve de la BBDD", res.data)
+        // console.log("el texto que vuelve de la BBDD", res.data)
         return res.data
       })
       .catch(err => console.log(err))

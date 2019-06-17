@@ -17,7 +17,7 @@ export class NavBar extends Component {
     logout = () => {
         this.service.logout()
             .then(x => {
-                console.log('logged out')
+                // console.log('logged out')
                 this.props.setTheUser(null)
             })
     }

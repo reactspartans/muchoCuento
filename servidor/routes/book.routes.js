@@ -6,10 +6,10 @@ const Page = require('../models/Book/Page.models')
 
 //Crear un cuento nuevo
 router.post('/newBook', (req, res) => {
-  console.log(req.body, 'back')
+  // console.log(req.body, 'back')
   Book.create(req.body)
     .then(data => {
-      console.log(data)
+      // console.log(data)
       res.json(data)
     }
     )
@@ -36,13 +36,20 @@ router.get('/:id', (req, res) => {
 
 //añadir una pagina al cuento
 router.post('/addPage', (req, res) => {
-  console.log('----------entro ruta salvar page------------')
-  const newPage = { book_id, texts, imageBackground, imageCharacters, pageNumber } = req.body;
-  Page.create(newPage)
-    .then(data => {
-      console.log(data)
-      res.jason(data)
+  // console.log('----------entro ruta salvar page------------', req.body)
+  const newPage = { bookId, texts, imageBackground, imageCharacters } = req.body;
+  newPage.pageNumber = 0
+  Page.find({ bookId })
+    .then(cosa => {
+      console.log(cosa)
+      newPage.pageNumber = cosa.length + 1
+      Page.create(newPage)
+        .then(data => {
+          // console.log(data)
+          res.json(data)
+        })
     })
+
 
     .catch(err => console.log('Error', err))
 })
@@ -50,9 +57,11 @@ router.post('/addPage', (req, res) => {
 
 //editar pagina cuento
 router.get('/edit/:book_id', (req, res) => {
-  Page.find({ book_id: req.params.book_id })
+  const bookId = req.params.book_id
+  // console.log(bookId)
+  Page.find({ book_id: bookId })
     .populate('texts')
-    .populate()
+    .populate('ImageCharPage')
     .then(data => {
 
       console.log(data)
@@ -75,12 +84,12 @@ router.get('/edit/:book_id', (req, res) => {
 
 //añadir un texto al modelo texto
 router.post('/addText', (req, res) => {
-  console.log('entro en la ruta de addText')
+  // console.log('entro en la ruta de addText')
   const newText = { content, positionX, positionY } = req.body;
-  console.log(req.body, 'ruta addText')
+  // console.log(req.body, 'ruta addText')
   TextPage.create(newText)
     .then(data => {
-      console.log(newText, 'creado base datos text')
+      // console.log(newText, 'creado base datos text')
       res.json(data)
     })
     .catch(err => console.log('Error:', err))

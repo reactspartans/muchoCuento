@@ -58,8 +58,8 @@ class TaleText extends Component {
       positionY: e.target.attrs.y
 
     })
-    console.log(e.target.attrs.x, this.state.positionX)
-    console.log(e.target.attrs.y, this.state.positionY)
+    // console.log(e.target.attrs.x, this.state.positionX)
+    // console.log(e.target.attrs.y, this.state.positionY)
 
   }
 
@@ -67,9 +67,9 @@ class TaleText extends Component {
   render() {
 
     if (this.props.go) {
-      console.log('entro en taleText para salvar texto')
+      // console.log('entro en taleText para salvar texto')
       this.props.saveText(this.state)
-      console.log(this.state)
+      // console.log(this.state)
       this.props.goFunction(false)
     }
     const { content, positionX, positionY } = this.state

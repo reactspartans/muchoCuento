@@ -27,11 +27,11 @@ export default class App extends Component {
   }
 
   setTheBookId = bookId => {
-    console.log(bookId)
+    // console.log(bookId)
     this.setState({ bookId })
   }
   getTheBookId = () => {
-    console.log(this.state.bookId)
+    // console.log(this.state.bookId)
     return this.state.bookId
   }
 

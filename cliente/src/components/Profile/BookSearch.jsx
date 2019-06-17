@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import BookServices from '../../services/book-service'
-import {BookCard} from './Book-card'
+import { BookCard } from './Book-card'
 
 
 export class SearchBooks extends Component {
@@ -33,10 +33,10 @@ export class SearchBooks extends Component {
   }
 
   searchBook(e) {
-    console.log(this.state.books)
+    // console.log(this.state.books)
     this.setState({ query: e.target.value })
     let searchBook = this.state.books.filter(book => book.name.includes(e.target.value))
-    console.log(searchBook)
+    // console.log(searchBook)
     this.setState({ searchBook })
   }
 
@@ -50,10 +50,10 @@ export class SearchBooks extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <>
-        <Button className='horror-button'variant="light" onClick={this.handleShow}>
+        <Button className='horror-button' variant="light" onClick={this.handleShow}>
           Buscar cuentos
         </Button>
 
@@ -63,18 +63,18 @@ export class SearchBooks extends Component {
             <Modal.Title>Todos los cuentos</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-              <InputGroup className="mb-3">
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="basic-addon1">⌨</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  placeholder="Buscar cuentos"
-                  aria-label="books"
-                  aria-describedby="basic-addon1"
-                  value={this.state.query}
-                  onChange={this.searchBook}
-                />
-              </InputGroup>
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="basic-addon1">⌨</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                placeholder="Buscar cuentos"
+                aria-label="books"
+                aria-describedby="basic-addon1"
+                value={this.state.query}
+                onChange={this.searchBook}
+              />
+            </InputGroup>
             <div>
 
               {this.state.query.length ?
