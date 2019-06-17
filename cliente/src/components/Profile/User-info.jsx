@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Button } from 'react-bootstrap';
 
 
@@ -6,12 +6,12 @@ import { Button } from 'react-bootstrap';
 
 
 
-export class UserInfo extends Component{
+export class UserInfo extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-            user_id:  this.props.user.user_id,
+        this.state = {
+            user_id: this.props.user.user_id,
             profilePhoto: this.props.user.profilePhoto,
             username: this.props.user.username,
             email: this.props.user.email,
@@ -20,11 +20,11 @@ export class UserInfo extends Component{
         console.log(this.props.user.user_id)
     }
 
-    handleChange=(e)=>{
-        const {name, value} = e.target
+    handleChange = (e) => {
+        const { name, value } = e.target
 
         this.setState({
-            [name]:value
+            [name]: value
         })
     }
 
@@ -37,59 +37,58 @@ export class UserInfo extends Component{
             data: uploadData
         })
 
-        console.log(this.state)
+        // console.log(this.state)
 
     }
 
 
-    handleSubmit=(e)=>{
+    handleSubmit = (e) => {
         e.preventDefault()
-        console.log('handleSubmit', e.target)
-        
-        
+        // console.log('handleSubmit', e.target)
+
+
         this.services.uploadProfile(this.state.data)
-        .then(response => {
-            console.log(response.imageURL)    
+            .then(response => {
+                // console.log(response.imageURL)    
                 this.setState({
                     profilePhoto: response.imageURL
                 })
                 this.services.updatePhoto(this.state.profilePhoto, this.state.user_id)
-                    .then(res=>console.log(res))
+                    .then(res => console.log(res))
             })
     }
 
-    render(){
-        return(
+    render() {
+        return (
 
-           <div>    
+            <div>
                 <form onSubmit={(e) => this.handleSubmit(e, "imageURL")} className='toolbar'>
-                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Elige imagen'   /> <br />
+                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Elige imagen' /> <br />
                     {this.state.data && <Button>Cambiar imagen de perfil</Button>}<br />
                 </form>
 
 
                 <form onSubmit={this.handleSubmit}>
-                    <label> Cambiar nombre de usuario <br/>
-                        <input type="text" name='username' value={this.state.username} placeholder={this.state.username} onChange={this.handleChange}/>
-                    </label><br/>
-                    <label> Cambiar email<br/>
-                        <input type="text" name='email' value={this.state.email} placeholder={this.state.email} onChange={this.handleChange}/>
-                    </label><br/>
-                    <label>Cambiar contraseña<br/>
-                        <input type="password" name='password' value={this.state.password} placeholder='******' onChange={this.handleChange}/>
+                    <label> Cambiar nombre de usuario <br />
+                        <input type="text" name='username' value={this.state.username} placeholder={this.state.username} onChange={this.handleChange} />
+                    </label><br />
+                    <label> Cambiar email<br />
+                        <input type="text" name='email' value={this.state.email} placeholder={this.state.email} onChange={this.handleChange} />
+                    </label><br />
+                    <label>Cambiar contraseña<br />
+                        <input type="password" name='password' value={this.state.password} placeholder='******' onChange={this.handleChange} />
                     </label>
                     <button>Guardar cambios</button>
                 </form>
                 <Button onClick={this.props.close}>Cerrar</Button>
-            </div>    
+            </div>
         )
     }
 }
-           
-           
-           
-           
-           
-           
-           
-           
+
+
+
+
+
+
+

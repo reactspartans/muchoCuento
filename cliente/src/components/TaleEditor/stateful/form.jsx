@@ -10,7 +10,8 @@ export class FormDesign extends Component {
             imageURL: "",
             imageURLChar: '',
             taleText: "",
-            taleTextColor: ""
+            taleTextColor: "",
+            status: ""
         }
 
         this.services = new GalleryServices()
@@ -24,19 +25,21 @@ export class FormDesign extends Component {
             [name]: value
 
         }, () => console.log(this.state + 'soy handleChange'))
-        console.log(this.state + 'sigo siendo handleChange')
+        // console.log(this.state + 'sigo siendo handleChange')
     }
 
-    handleFileUpload = e => {
+    handleFileUpload = (e) => {
 
         const uploadData = new FormData();
         uploadData.append("imageUrl", e.target.files[0]);
 
         this.setState({
-            data: uploadData
-        })
+            data: uploadData,
 
-        console.log(this.state)
+        })
+        console.log(this.props.status)
+
+        // console.log(this.state)
 
     }
 
@@ -62,8 +65,8 @@ export class FormDesign extends Component {
     handleSubmit = (e) => {
         console.log('yo soy el primero de handleSubmit  ' + this.state.data[0] + 'en medio data')
         e.preventDefault()
-
-        this.services.handleUpload(this.state.data)
+        console.log("===========================")
+        this.services.handleUpload(this.state.data, "background")
             .then(response => {
                 // console.log(response, 'estoy en el then de services')
 
@@ -85,7 +88,7 @@ export class FormDesign extends Component {
         // console.log('yo soy el primero de handleSubmitCHAR  ' + this.state.data + 'en medio data')
         e.preventDefault()
 
-        this.services.handleUpload(this.state.data)
+        this.services.handleUpload(this.state.data, "character")
             .then(response => {
                 console.log(response, 'estoy en el then de services')
 
@@ -104,7 +107,7 @@ export class FormDesign extends Component {
 
 
     handleSubmitText = (e) => {
-        console.log('yo soy el primero de handleSubmitText  ' + this.state.data + 'en medio data')
+        // console.log('yo soy el primero de handleSubmitText  ' + this.state.data + 'en medio data')
         e.preventDefault()
 
         // this.servicesBook.postNewText(this.state.taleText)
@@ -132,17 +135,19 @@ export class FormDesign extends Component {
 
             <div>
 
-                <form onSubmit={(e) => this.handleSubmit(e, "imageURL", 'background')} className='toolbar'>
+                <form onSubmit={(e) => this.handleSubmit(e)} className='toolbar'>
                     <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} status='background' /> <br />
                     <button>Añadir fondo</button><br />
+                    <ModalGallery nuevaImg={this.props.nuevaImg} status="background" go={this.state.go} goFunction={this.go} />
 
                 </form>
 
 
-                <form onSubmit={(e) => this.handleSubmitChar(e, "imageURL")} className='toolbar'>
+                <form onSubmit={(e) => this.handleSubmitChar(e)} className='toolbar'>
 
                     <input type="file" name="imageURLChar" id="imageURLChar" placeholder='Pega la URL' value={this.state.imageURLChar} onChange={this.handleFileUpload} status='character' /><br />
                     <button>Añadir personaje</button><br />
+                    <ModalGallery nuevaImg={this.props.nuevaImg} go={this.state.go} goFunction={this.go} status='character' />
                 </form>
 
                 <form onSubmit={(e) => this.handleSubmitText(e, "taleText")} className='toolbar'>
@@ -158,7 +163,6 @@ export class FormDesign extends Component {
                     <button>Elige color del texto</button><br />
                 </form>
 
-                <ModalGallery nuevaImg={this.props.nuevaImg} go={this.state.go} goFunction={this.go} />
             </div>
         )
     }
@@ -181,11 +185,11 @@ export class FormSave extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        console.log('llega a submit form')
+        // console.log('llega a submit form')
         this.props.savePage()
         this.props.go(true)
-        console.log('ejecuto go')
-        this.props.saveToBook()
+        // console.log('ejecuto go')
+        // this.props.saveToBook()
     }
 
 
@@ -199,3 +203,4 @@ export class FormSave extends Component {
         )
     }
 }
+

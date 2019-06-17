@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import GalleryServices from '../../services/profile-services'
 import { SearchBooks } from './BookSearch';
-import {UserInfo} from './User-info'
-import {Button} from 'react-bootstrap'
+import { UserInfo } from './User-info'
+import { Button } from 'react-bootstrap'
 
-export class Profile extends Component{
-    constructor(props){
+export class Profile extends Component {
+    constructor(props) {
         super(props)
-        this.state={
-            user_id:  this.props.loggedInUser._id,
+        this.state = {
+            user_id: this.props.loggedInUser._id,
             profilePhoto: this.props.loggedInUser.profilePhoto,
             username: this.props.loggedInUser.username,
             email: this.props.loggedInUser.email,
@@ -17,13 +17,13 @@ export class Profile extends Component{
         }
         this.services = new GalleryServices()
     }
-    
 
-    handleChange=(e)=>{
-        const {name, value} = e.target
+
+    handleChange = (e) => {
+        const { name, value } = e.target
 
         this.setState({
-            [name]:value
+            [name]: value
         })
     }
 
@@ -36,56 +36,56 @@ export class Profile extends Component{
             data: uploadData
         })
 
-        console.log(this.state)
+        // console.log(this.state)
 
     }
 
 
-    handleSubmit=(e)=>{
+    handleSubmit = (e) => {
         e.preventDefault()
-        console.log('handleSubmit', e.target)
-        
-        
+        // console.log('handleSubmit', e.target)
+
+
         this.services.uploadProfile(this.state.data)
-        .then(response => {
-            console.log(response.imageURL)    
+            .then(response => {
+                // console.log(response.imageURL)    
                 this.setState({
                     profilePhoto: response.imageURL
                 })
                 this.services.updatePhoto(this.state.profilePhoto, this.state.user_id)
-                    .then(res=>console.log(res))
+                    .then(res => console.log(res))
             })
     }
-    
-    handleShow=()=>{
+
+    handleShow = () => {
         this.setState({
             show: true
         })
     }
 
 
-    handleClose=()=>{
+    handleClose = () => {
         this.setState({
             show: false
         })
     }
 
-    render(){
+    render() {
         // console.log(this.props.loggedInUser.profilePhoto)
-        return(
+        return (
             <div>
-            <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
-            <div className='user-info'>
-                <figure className='profile-photo'>
-                    <img src={this.state.profilePhoto} alt="profile-images"/>
-                </figure>
-                <Button className='horror-button'onClick={this.handleShow}>Información de usuario</Button>
-                {this.state.show ? <UserInfo user={this.state} close={this.handleClose}/> : null}
-              
-                <SearchBooks />
+                <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
+                <div className='user-info'>
+                    <figure className='profile-photo'>
+                        <img src={this.state.profilePhoto} alt="profile-images" />
+                    </figure>
+                    <Button className='horror-button' onClick={this.handleShow}>Información de usuario</Button>
+                    {this.state.show ? <UserInfo user={this.state} close={this.handleClose} /> : null}
+
+                    <SearchBooks />
+                </div>
             </div>
-            </div>
-            
+
         )
     }
 }

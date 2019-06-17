@@ -14,13 +14,13 @@ router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
   }
 
   const { originalname, secure_url } = {...req.file}
-  
+  console.log(req.body)
   GalleryImage.findOne({name: originalname})
   .then(image => {
     if(image){
       res.json({ imageURL:image.imageURL, name:image.name, id: image._id })
     } else {
-      GalleryImage.create([{ name: originalname, imageURL: secure_url }])
+      GalleryImage.create([{ name: originalname, imageURL: secure_url , status:req.body.status}])
       .then(data => {
         console.log(data)
         res.json({ imageURL:data[0].imageURL, name:data[0].name, id: data[0]._id });

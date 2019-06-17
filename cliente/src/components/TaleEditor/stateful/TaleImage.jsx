@@ -47,7 +47,7 @@ export class TaleImage extends Component {
   handleLoad = () => {
     // after setState react-konva will update canvas and redraw the layer
     // because "image" property is changed
-    console.log(this.image, 'soy this.image')
+    // console.log(this.image, 'soy this.image')
     this.setState({
       // ...this.state,
       image: this.image,
@@ -55,7 +55,7 @@ export class TaleImage extends Component {
       status: this.props.status
     });
     // if you keep same image object during source updates
-    console.log(this.state)
+    // console.log(this.state)
     // you will have to update layer manually:
     // this.imageNode.getLayer().batchDraw();
   };
@@ -87,9 +87,9 @@ export class TaleImage extends Component {
 
 
 
-    console.log(e.target)
-    console.log(e.target.attrs.x + ' pos X')
-    console.log(e.target.attrs.y + ' pos Y')
+    // console.log(e.target)
+    // console.log(e.target.attrs.x + ' pos X')
+    // console.log(e.target.attrs.y + ' pos Y')
 
   };
 
@@ -110,7 +110,7 @@ export class TaleImage extends Component {
         x={positionX}
         y={positionY}
 
-        
+
 
         //Para mover la imagen
         draggable

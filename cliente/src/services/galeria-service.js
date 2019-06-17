@@ -26,6 +26,7 @@ export default class services {
 
 
   postImageGallery = image => {
+    //console.log(image, '----------------------gallery con status--------------')
     return this.service.post('/addImage/', image)
       .then(res => res.data)
       .catch(err => console.log(err))
@@ -37,8 +38,9 @@ export default class services {
       .catch(err => console.log(err))
   }
 
-  handleUpload = theFile => {
-
+  handleUpload = (theFile, status) => {
+    console.log(theFile, '----------------------gallery con status--------------')
+    theFile.append("status", status);
     return this.service.post('/upload', theFile)
       .then(res => res.data)
       .catch(err => console.log(err));

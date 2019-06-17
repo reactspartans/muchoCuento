@@ -28,7 +28,7 @@ export class ImageCard extends Component {
             {/*  <Link className="btn btn-sm btn-outline-dark" to={`/coasters/${theImage._id}`}> Seleccionar </Link> */}
 
 
-            <button onClick={() => this.props.nuevaImg(this.props.imageURL, "imageURL")}>Seleccionar imagen</button>
+            <button onClick={() => this.props.nuevaImg(this.props.imageURL, this.props.status)}>Seleccionar imagen</button>
           </header>
         </article>
       </div>

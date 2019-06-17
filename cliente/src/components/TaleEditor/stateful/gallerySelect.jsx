@@ -32,10 +32,10 @@ export class ModalGallery extends Component {
   }
 
   searchImage(e) {
-    console.log(this.state.gallery)
+    // console.log(this.state.gallery)
     this.setState({ query: e.target.value })
     let filtered = this.state.gallery.filter(img => img.name.includes(e.target.value))
-    console.log(filtered)
+    // console.log(filtered)
     this.setState({ filtered })
   }
 
@@ -49,7 +49,7 @@ export class ModalGallery extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <>
         <Button variant="light" onClick={this.handleShow}>
@@ -80,7 +80,7 @@ export class ModalGallery extends Component {
 
               {this.state.query.length ?
 
-                this.state.filtered.map((theImage, idx) => <ImageCard key={idx} nuevaImg={this.props.nuevaImg} {...theImage} go={this.state.go} goFunction={this.go} />)
+                this.state.filtered.map((theImage, idx) => <ImageCard key={idx} nuevaImg={this.props.nuevaImg} status={this.props.status} {...theImage} go={this.state.go} goFunction={this.go} />)
 
                 :
 
