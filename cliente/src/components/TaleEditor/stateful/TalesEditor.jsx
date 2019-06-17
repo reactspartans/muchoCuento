@@ -12,8 +12,8 @@ import BookServices from '../../../services/book-service'
 
 
 export class TalesEditor extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       page: {
         book: '',
@@ -21,6 +21,12 @@ export class TalesEditor extends Component {
         imageBackground: '',
         imageCharacter: [],
         pageNumber: ''
+      },
+      pageToSave: {
+        bookId: "",
+        texts: [],
+        imageBackground: "",
+        imageCharacters: [],
       },
       go: false,
 
@@ -48,7 +54,8 @@ export class TalesEditor extends Component {
     })
   }
 
-
+  componentDidMount() {
+  }
 
   //asignar el id del libro a la pagina
 
@@ -65,8 +72,18 @@ export class TalesEditor extends Component {
   saveImageToPage = (ImageState, status) => {
     console.log(ImageState, 'guardando imagen de la pagina con su posicion')
     this.services.postImagePage(ImageState)
+      .then(imageCreated => {
+        if (imageCreated.status === "background") {
+          this.setState({ pageToSave: { ...this.state.pageToSave, imageBackground: imageCreated._id } }, console.log("IMAGEN EN PAGETOSAVE", this.state.pageToSave))
+        } else {
+          const newArr = [...this.state.pageToSave.imageCharacters]
+          newArr.push(imageCreated._id)
+          console.log(newArr)
+          this.setState({ pageToSave: { ...this.state.pageToSave, imageCharacters: newArr } }, console.log("IMAGEN EN PAGETOSAVE", this.state.pageToSave))
+        }
+        console.log(imageCreated)
+      })
 
-    console.log(ImageState, 'estoy guardando esto')
   }
 
 
@@ -74,14 +91,23 @@ export class TalesEditor extends Component {
     console.log(TextState, 'entro en services')
 
     this.servicesBook.postNewText(TextState)
+      .then(textCreated => {
+        const newArr = [...this.state.pageToSave.texts]
+        newArr.push(textCreated._id)
+        console.log(newArr)
+        this.setState({ pageToSave: { ...this.state.pageToSave, texts: newArr } }, console.log("TEXTO EN PAGETOSAVE", this.state.pageToSave))
+      })
 
-    console.log(TextState, 'estoy guardando el texto')
 
   }
 
-  savePage = page => {
-    console.log(page)
-    this.servicesBook.postNewPage(page)
+  savePage = () => {
+    this.setState({ pageToSave: { ...this.state.pageToSave, bookId: this.props.getTheBookId() } })
+    setTimeout(() => {
+      console.log("ESTEEEEEEEEEE", this.state.pageToSave)
+    }, 15000)
+    this.servicesBook.postNewPage(this.state.pageToSave)
+      .then(res => console.log(res))
 
   }
 
@@ -102,7 +128,7 @@ export class TalesEditor extends Component {
       <div className="flex-editor">
         {console.log(this.state.page, "statepage")}
         <FormDesign nuevaImg={this.addNewImg} />
-        <FormSave go={this.go} />
+        <FormSave go={this.go} savePage={this.savePage} />
 
         <Stage width={window.innerWidth} height={window.innerHeight}>
           {/* <Layer >
