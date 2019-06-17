@@ -26,6 +26,7 @@ export class TaleImage extends Component {
   }
   componentDidMount() {
     this.loadImage();
+    this.imageNode.getLayer().batchDraw();
   }
   componentDidUpdate(oldProps) {
     if (oldProps.src !== this.props.src) {
@@ -108,6 +109,8 @@ export class TaleImage extends Component {
         // key={image._id}
         x={positionX}
         y={positionY}
+
+        
 
         //Para mover la imagen
         draggable

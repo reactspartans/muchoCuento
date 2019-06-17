@@ -185,6 +185,7 @@ export class FormSave extends Component {
         this.props.savePage()
         this.props.go(true)
         console.log('ejecuto go')
+        this.props.saveToBook()
     }
 
 

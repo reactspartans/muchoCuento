@@ -44,3 +44,17 @@ nav ul{
 .modal {
     width: 1000px
 }
+
+.profile-photo img{
+    width: 25vw;
+    height: 25vh;
+    border-radius: 50%;
+    object-fit: fill; 
+}
+
+.user-info{
+    display: flex;
+}
+ .horror-button{
+     height: 4vh;
+ }

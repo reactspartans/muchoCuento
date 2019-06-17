@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import GalleryServices from '../../services/profile-services'
-import { SearchBooks } from '../BookSearch';
-
+import { SearchBooks } from './BookSearch';
+import {UserInfo} from './User-info'
+import {Button} from 'react-bootstrap'
 
 export class Profile extends Component{
     constructor(props){
@@ -12,7 +13,7 @@ export class Profile extends Component{
             username: this.props.loggedInUser.username,
             email: this.props.loggedInUser.email,
             password: this.props.loggedInUser.password,
-
+            show: false
         }
         this.services = new GalleryServices()
     }
@@ -56,40 +57,34 @@ export class Profile extends Component{
             })
     }
     
+    handleShow=()=>{
+        this.setState({
+            show: true
+        })
+    }
 
 
+    handleClose=()=>{
+        this.setState({
+            show: false
+        })
+    }
 
     render(){
         // console.log(this.props.loggedInUser.profilePhoto)
         return(
             <div>
-                <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
-                <figure>
+            <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
+            <div className='user-info'>
+                <figure className='profile-photo'>
                     <img src={this.state.profilePhoto} alt="profile-images"/>
                 </figure>
-
-
-                <form onSubmit={(e) => this.handleSubmit(e, "imageURL")} className='toolbar'>
-                    <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL'   /> <br />
-                    {this.state.data && <button>Añadir fondo</button>}<br />
-                </form>
-
-
-                <form onSubmit={this.handleSubmit}>
-                    <label> Cambiar nombre de usuario <br/>
-                        <input type="text" name='username' value={this.state.username} placeholder={this.state.username} onChange={this.handleChange}/>
-                    </label><br/>
-                    <label> Cambiar email<br/>
-                        <input type="text" name='email' value={this.state.email} placeholder={this.state.email} onChange={this.handleChange}/>
-                    </label><br/>
-                    <label>Cambiar contraseña<br/>
-                        <input type="password" name='password' value={this.state.password} placeholder='******' onChange={this.handleChange}/>
-                    </label>
-                    <button>Guardar cambios</button>
-                </form>
-                <SearchBooks/>
+                <Button className='horror-button'onClick={this.handleShow}>Información de usuario</Button>
+                {this.state.show ? <UserInfo user={this.state} close={this.handleClose}/> : null}
+              
+                <SearchBooks />
             </div>
-
+            </div>
             
         )
     }

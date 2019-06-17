@@ -3,8 +3,8 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
-import BookServices from '../services/book-service'
-import {BookCard} from '../components/Profile/Book-card'
+import BookServices from '../../services/book-service'
+import {BookCard} from './Book-card'
 
 
 export class SearchBooks extends Component {
@@ -53,7 +53,7 @@ export class SearchBooks extends Component {
     console.log(this.state)
     return (
       <>
-        <Button variant="light" onClick={this.handleShow}>
+        <Button className='horror-button'variant="light" onClick={this.handleShow}>
           Buscar cuentos
         </Button>
 

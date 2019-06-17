@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import BookServices from '../../services/book-service'
+import {Redirect} from 'react-router-dom'
 
 
 export default class BookForm extends Component {
@@ -17,9 +18,26 @@ export default class BookForm extends Component {
       name: '',
       book_id: '',
       show: false,
+      redirect: false,
     };
     this.services = new BookServices()
   }
+
+  
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+    this.handleClose()
+  }
+
+  
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/tales-editor' />
+    }
+  }
+
 
   handleClose() {
     this.setState({ show: false });
@@ -53,6 +71,7 @@ export default class BookForm extends Component {
         this.setState({
           book_id: res._id
         })
+
         //Función desde tales editor para liftUp state
         // window.location.href = '/tales-editor'
       }) //RECARGA LA PÁGINA!!!!  
@@ -87,9 +106,10 @@ export default class BookForm extends Component {
                   aria-describedby="basic-addon1"
                 />
               </InputGroup>
-              <Button type='submit' variant="primary" onClick={this.handleClose}>
+              {this.renderRedirect()}
+              <Button type='submit' variant="primary" onClick={this.setRedirect}>
                 Crear
-                </Button>
+              </Button>
             </form>
           </Modal.Body>
           <Modal.Footer>

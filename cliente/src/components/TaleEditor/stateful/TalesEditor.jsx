@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TaleImage } from './TaleImage'
-import { Stage, Layer } from 'react-konva';
+import { Stage, Layer, Group } from 'react-konva';
 
 import { FormDesign, FormSave } from '../stateful/form'
 import TaleText from './TaleText'
@@ -28,11 +28,15 @@ export class TalesEditor extends Component {
         imageBackground: "",
         imageCharacters: [],
       },
+      book:{
+        pagesToView:[]
+      },
       go: false,
 
     }
     this.services = new GalleryServices()
     this.servicesBook = new BookServices()
+    
   }
 
 
@@ -96,6 +100,7 @@ export class TalesEditor extends Component {
         newArr.push(textCreated._id)
         console.log(newArr)
         this.setState({ pageToSave: { ...this.state.pageToSave, texts: newArr } }, console.log("TEXTO EN PAGETOSAVE", this.state.pageToSave))
+        
       })
 
 
@@ -118,8 +123,22 @@ export class TalesEditor extends Component {
     this.setState({ go: res })
   }
 
+  meteLaimg=(img) =>{
+    this.setState({
+      ...this.state.book.pagesToView.push(img),
+     
+    })
+    console.log(img, this.state.book)
+  }
 
 
+  saveImagesToBook =()=>{
+    this.group.toImage=(img)=>{
+     this.meteLaimg(img)
+    }
+
+  }
+  
 
 
 
@@ -128,24 +147,21 @@ export class TalesEditor extends Component {
       <div className="flex-editor">
         {console.log(this.state.page, "statepage")}
         <FormDesign nuevaImg={this.addNewImg} />
-        <FormSave go={this.go} savePage={this.savePage} />
+        <FormSave go={this.go} savePage={this.savePage} saveToBook={this.saveImagesToBook}/>
 
-        <Stage width={window.innerWidth} height={window.innerHeight}>
-          {/* <Layer >
-        
-         <TaleImage key={i} src={elm} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
-          
-       
-        </Layer> */}
-          <Layer >
-            <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
+        <Stage width={window.innerWidth/1.2} height={window.innerHeight/1.2}  ref={node =>this.stage = node}>
+          <Layer  >
+          <Group ref={node => this.group = node} >
 
-            {this.state.page.imageCharacter.map((img, idx) => {
-              return <TaleImage key={idx} src={img} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-            })}
+              <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
 
-            {this.state.page.texts.map((text, i) => <TaleText key={i} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)}
-          </Layer>
+              {this.state.page.imageCharacter.map((img, idx) => {
+                return <TaleImage key={idx} src={img} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+              })}
+
+              {this.state.page.texts.map((text, i) => <TaleText key={i} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)}
+          </Group>  
+            </Layer>
         </Stage>
 
       </div>
