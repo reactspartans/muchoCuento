@@ -26,6 +26,8 @@ export class ImageCard extends Component {
           <header className="card-body">
             <h5 className="card-title">{this.props.name}</h5>
             {/*  <Link className="btn btn-sm btn-outline-dark" to={`/coasters/${theImage._id}`}> Seleccionar </Link> */}
+
+
             <button onClick={() => this.props.nuevaImg(this.props.imageURL, "imageURL")}>Seleccionar imagen</button>
           </header>
         </article>

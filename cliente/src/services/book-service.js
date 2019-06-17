@@ -20,8 +20,8 @@ export default class services {
   }
 
 
-  postNewPage = (id, page) => {
-    return this.service.post(`/addPage/${id}`, page)
+  postNewPage = (page) => {
+    return this.service.post(`/addPage`, page)
       .then(res => res.data)
       .catch(err => console.log(err))
   }

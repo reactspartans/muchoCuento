@@ -158,7 +158,7 @@ export class FormDesign extends Component {
                     <button>Elige color del texto</button><br />
                 </form>
 
-                <ModalGallery nuevaImg={this.props.nuevaImg} />
+                <ModalGallery nuevaImg={this.props.nuevaImg} go={this.state.go} goFunction={this.go} />
             </div>
         )
     }

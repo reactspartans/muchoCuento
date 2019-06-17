@@ -12,8 +12,26 @@ class TaleText extends Component {
       positionY: 100,
       text_id: this.props._id
     };
-
   }
+  /* this.textNode = new Konva.Text({
+    text: 'Some text here',
+    x: 50,
+    y: 80,
+    fontSize: 20,
+    draggable: true,
+    width: 200
+  });
+
+  this.tr = new Konva.Transformer({
+    node: textNode,
+    enabledAnchors: ['middle-left', 'middle-right'],
+    // set minimum width of text
+    boundBoxFunc: function (oldBox, newBox) {
+      newBox.width = Math.max(30, newBox.width);
+      return newBox;
+    }
+  }) */
+
 
   handleDragStart = e => {
     e.target.setAttrs({

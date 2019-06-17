@@ -102,12 +102,19 @@ export class TalesEditor extends Component {
   }
 
   savePage = () => {
-    this.setState({ pageToSave: { ...this.state.pageToSave, bookId: this.props.getTheBookId() } })
     setTimeout(() => {
-      console.log("ESTEEEEEEEEEE", this.state.pageToSave)
-    }, 15000)
-    this.servicesBook.postNewPage(this.state.pageToSave)
-      .then(res => console.log(res))
+      console.log("salvado de pagina", this.state.pageToSave)
+      const _pageToSave = { ...this.state.pageToSave };
+      _pageToSave.bookId = this.props.getTheBookId
+      console.log(_pageToSave)
+      console.log("===================================================================================")
+      this.servicesBook.postNewPage(_pageToSave)
+        .then(res => {
+          console.log("--------------SAVE PAGE----------------")
+          console.log(res)
+          this.setState({ pageToSave: _pageToSave })
+        })
+    }, 4000)
 
   }
 
@@ -127,7 +134,7 @@ export class TalesEditor extends Component {
     return (
       <div className="flex-editor">
         {console.log(this.state.page, "statepage")}
-        <FormDesign nuevaImg={this.addNewImg} />
+        <FormDesign nuevaImg={this.addNewImg} go={this.state.go} goFunction={this.go} />
         <FormSave go={this.go} savePage={this.savePage} />
 
         <Stage width={window.innerWidth} height={window.innerHeight}>
