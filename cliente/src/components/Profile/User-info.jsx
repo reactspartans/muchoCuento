@@ -15,7 +15,6 @@ export class UserInfo extends Component {
             profilePhoto: this.props.user.profilePhoto,
             username: this.props.user.username,
             email: this.props.user.email,
-            password: this.props.user.password,
         }
         console.log(this.props.user.user_id)
         this.services = new ProfileService()
@@ -89,9 +88,6 @@ export class UserInfo extends Component {
                     <label> Cambiar email<br/>
                         <input type="text" name='email' value={this.state.email} placeholder={this.state.email} onChange={this.handleChange}/>
                     </label><br/>
-                    <label>Cambiar contraseña<br/>
-                        <input type="password" name='password' value={this.state.password} placeholder='******' onChange={this.handleChange}/>
-                    </label>
                     <button>Guardar cambios</button>
                 </form>
                 <Button onClick={this.props.close}>Cerrar</Button>

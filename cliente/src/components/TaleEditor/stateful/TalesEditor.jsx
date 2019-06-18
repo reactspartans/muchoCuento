@@ -187,13 +187,7 @@ export class TalesEditor extends Component {
 
         <Stage width={window.innerWidth / 1.2} height={window.innerHeight / 1.2} ref={node => this.stage = node}>
           <Layer  >
-<<<<<<< HEAD
-          <Group  >
-
-              <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
-=======
             <Group ref={node => this.group = node} >
->>>>>>> 4996f82ca9cd108fb7f17ddf3b2bb8ee6e76fb93
 
               {this.state.page.imageBackground ?
                 <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />

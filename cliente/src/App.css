@@ -46,8 +46,8 @@ nav ul{
 }
 
 .profile-photo img{
-    width: 25vw;
-    height: 25vh;
+    width: 50%;
+    height: 85%;
     border-radius: 50%;
     object-fit: fill; 
 }
