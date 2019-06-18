@@ -1,9 +1,9 @@
 import React from "react";
-import { Stage, Layer, Rect, Transformer } from "react-konva";
-import konva from 'react-konva'
+import { Stage, Layer, Rect, Image, Transformer } from "react-konva";
 
-
-const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
+class Rectangle extends Component{
+  constructor({ shapeProps, isSelected, onSelect, onChange })
+ 
   const shapeRef = React.useRef();
   const trRef = React.useRef();
 
@@ -17,7 +17,7 @@ const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
 
   return (
     <React.Fragment>
-      <Rect
+      <Image
         onClick={onSelect}
         ref={shapeRef}
         {...shapeProps}
@@ -109,3 +109,5 @@ export const Rectangulo = () => {
     </Stage>
   );
 };
+
+

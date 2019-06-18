@@ -37,7 +37,7 @@ router.post('/updateuser/:_id', (req, res, next)=>{
 
   const {username, email} = req.body
 
-  User.findByIdAndUpdate(_id, username, email)
+  User.findByIdAndUpdate(_id, {$set: {username, email }})
     .then(userUpdated=> res.json(userUpdated))
     .catch(err=>console.log(err))
 })
