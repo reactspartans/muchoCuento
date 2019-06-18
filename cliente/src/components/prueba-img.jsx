@@ -30,7 +30,17 @@ export class PruebaImg extends Component {
     }
 
 
-  }
+  }    this.state = {
+    image: null,
+    imageURL: '',
+    positionX: 100,
+    positionY: 100,
+    rotation: 0,
+    status: '',
+    image_id: '',
+    width: 100,
+    height: 100,
+  };
   componentWillUnmount() {
     this.image.removeEventListener('load', this.handleLoad);
   }

@@ -1,113 +1,91 @@
 import React from "react";
-import { Stage, Layer, Rect, Image, Transformer } from "react-konva";
+import { Stage, Layer, Rect, Transformer } from "react-konva";
 
-class Rectangle extends Component{
-  constructor({ shapeProps, isSelected, onSelect, onChange })
- 
-  const shapeRef = React.useRef();
-  const trRef = React.useRef();
+const Rect1 = () => (
+  <Rect
+    name="rectange1"
+    x={20}
+    y={20}
+    width={50}
+    height={50}
+    fill="red"
+    draggable
+  />
+);
 
-  React.useEffect(() => {
-    if (isSelected) {
-      // we need to attach transformer manually
-      trRef.current.setNode(shapeRef.current);
-      trRef.current.getLayer().batchDraw();
+const Rect2 = () => (
+  <Rect
+    name="rectange2"
+    x={60}
+    y={120}
+    width={50}
+    height={50}
+    fill="green"
+    draggable
+  />
+);
+
+class TransformerComponent extends React.Component {
+  componentDidMount() {
+    this.checkNode();
+  }
+  componentDidUpdate() {
+    this.checkNode();
+  }
+  checkNode() {
+    const stage = this.transformer.getStage();
+    const { selectedShapeName } = this.props;
+    console.log(this.props)
+    const selectedNode = stage.findOne("." + selectedShapeName);
+    if (selectedNode === this.transformer.node()) {
+      return;
     }
-  }, [isSelected]);
-
-  return (
-    <React.Fragment>
-      <Image
-        onClick={onSelect}
-        ref={shapeRef}
-        {...shapeProps}
-        draggable
-        onDragEnd={e => {
-          onChange({
-            ...shapeProps,
-            x: e.target.x(),
-            y: e.target.y()
-          });
-        }}
-        onTransformEnd={e => {
-          // transformer is changing scale
-          const node = shapeRef.current;
-          const scaleX = node.scaleX();
-          const scaleY = node.scaleY();
-
-          // we will reset it back
-          node.scaleX(1);
-          node.scaleY(1);
-          onChange({
-            ...shapeProps,
-            x: node.x(),
-            y: node.y(),
-            width: node.width() * scaleX,
-            height: node.height() * scaleY
-          });
+    if (selectedNode) {
+      this.transformer.attachTo(selectedNode);
+    } else {
+      this.transformer.detach();
+    }
+    this.transformer.getLayer().batchDraw();
+  }
+  render() {
+    return (
+      <Transformer
+        ref={node => {
+          this.transformer = node;
         }}
       />
-      {isSelected && <Transformer ref={trRef} />}
-    </React.Fragment>
-  );
-};
-
-const initialRectangles = [
-  {
-    x: 10,
-    y: 10,
-    width: 100,
-    height: 100,
-    fill: "red",
-    id: "rect1"
-  },
-  {
-    x: 150,
-    y: 150,
-    width: 100,
-    height: 100,
-    fill: "green",
-    id: "rect2"
+    );
   }
-];
+}
 
-export const Rectangulo = () => {
-  const [rectangles, setRectangles] = React.useState(initialRectangles);
-  const [selectedId, selectShape] = React.useState(null);
+// import konva from 'react-konva'
 
-  return (
-    <Stage
-      width={window.innerWidth}
-      height={window.innerHeight}
-      onMouseDown={e => {
-        // deselect when clicked on empty area
-        const clickedOnEmpty = e.target === e.target.getStage();
-        if (clickedOnEmpty) {
-          selectShape(null);
-        }
-      }}
-    >
-      <Layer>
-        {rectangles.map((rect, i) => {
-          return (
-            <Rectangle
-              key={i}
-              shapeProps={rect}
-              isSelected={rect.id === selectedId}
-              onSelect={() => {
-                selectShape(rect.id);
-              }}
-              onChange={newAttrs => {
-                const rects = rectangles.slice();
-                rects[i] = newAttrs;
-                setRectangles(rects);
-              }}
-            />
-          );
-        })}
-      </Layer>
-    </Stage>
-  );
-};
+export class Rectangulo extends React.Component {
+  state = {
+    selectedShapeName: ""
+  };
 
+  handleStageClick = e => {
+    this.setState({
+      selectedShapeName: e.target.name()
+    });
+  };
 
+  render() {
+    return (
+      <Stage
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onClick={this.handleStageClick}
+      >
+        <Layer>
+          <Rect1 />
+          <Rect2 />
+          <TransformerComponent
+            selectedShapeName={this.state.selectedShapeName}
+          />
+        </Layer>
+      </Stage>
+    )
+  }
+}
