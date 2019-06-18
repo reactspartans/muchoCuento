@@ -32,7 +32,7 @@ export class TaleImage extends Component {
     if (oldProps.src !== this.props.src) {
       this.loadImage();
     }
-
+    this.image.crossOrigin = "Anonymous"
 
   }
   componentWillUnmount() {
@@ -59,6 +59,8 @@ export class TaleImage extends Component {
     // console.log(this.state)
     // you will have to update layer manually:
     // this.imageNode.getLayer().batchDraw();
+    this.image.crossOrigin = "Anonymous"
+
   };
   handleDragStart = e => {
     e.target.setAttrs({

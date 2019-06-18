@@ -16,7 +16,7 @@
     "use-image": "^1.0.3"
   },
   "scripts": {
-    "start": "dotenv -e .env.dev react-scripts start",
+    "start": "PORT=5000 dotenv -e .env.dev react-scripts start",
     "build-dev": "dotenv -e .env.dev react-scripts build",
     "build-prod": "dotenv -e .env.prod react-scripts build",
     "build": "react-scripts build",

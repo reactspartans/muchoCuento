@@ -127,7 +127,6 @@ export class TalesEditor extends Component {
       // console.log("salvado de pagina", this.state.pageToSave)
       const _pageToSave = { ...this.state.pageToSave };
       _pageToSave.bookId = this.props.getTheBookId
-
       this.savePageImage()
 
       // console.log(_pageToSave)
@@ -202,15 +201,15 @@ export class TalesEditor extends Component {
     const stage = this.refs.stage.getStage()
     const test = stage.toDataURL({ pixelRatio: 2 })
     // LLAMADA FUNCIÓN DESCARGAR: downloadURI(test, 'stage.png');
-    console.log(this.state.data)
-    this.servicesBook.handleFileUpload(this.state.data, "character")
-      .then(response => {
-        console.log(response, 'estoy en el then de services')
-        console.log(test)
-          //setstate
 
-          .catch(err => console.log('Error', err))
+    const uploadPageData = new FormData();
+    uploadPageData.append("imageUrl", test);
+
+    this.servicesBook.UploadPage(uploadPageData, this.props.getTheBookId)
+      .then(response => {
+        console.log(response)
       })
+      .catch(err => console.log('Error', err))
     // NOTA SUBIR ESTO A CLOUDINARY Y GUARDAR LA URL DE LA IMAGEN RESULTANTE EN EL ARRAY 
     // DE IMÁGENES DE PÁGINAS DEL MODELO DE BOOK 
 
@@ -236,8 +235,6 @@ export class TalesEditor extends Component {
           {/* ref={node => this.stage = node} */}
           <Layer  >
             <Group ref="grupito" >
-
-              <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
 
               {this.state.page.imageBackground ?
                 <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
