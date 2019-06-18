@@ -41,7 +41,15 @@ export default class services {
       .then(res => res.data)
       .catch(err => console.log('Error', err))
   }
+
+
+  UploadPage = (theFile, id) => {
+    return this.service.post(`/upload/page/${id}`, theFile)
+      .then(res => res.data)
+      .catch(err => console.log(err));
+  }
 }
+
 
 
 

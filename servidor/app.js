@@ -97,7 +97,7 @@ app.use('/api/galeria', galleryRoutes)
 
 
 const fileRoutes = require('./routes/file-upload.routes')
-app.use('/api/galeria', fileRoutes);
+app.use('/api', fileRoutes);
 
 
 

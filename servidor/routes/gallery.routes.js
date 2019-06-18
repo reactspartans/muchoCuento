@@ -19,6 +19,8 @@ router.get('/:_id', (req, res) => {
     .catch(err => console.log('Error:', err))
 })
 
+
+
 router.get('/addImageGallery', (req, res) => {
   GalleryImage.create(req.body)
     .then(data => res.json(data))

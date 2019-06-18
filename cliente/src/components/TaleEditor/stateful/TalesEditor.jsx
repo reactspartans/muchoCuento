@@ -7,6 +7,7 @@ import TaleText from './TaleText'
 import GalleryServices from '../../../services/galeria-service'
 import BookServices from '../../../services/book-service'
 import Konva from 'konva';
+import TransformerComponent from '../stateless/TransformerComp'
 
 
 
@@ -33,11 +34,20 @@ export class TalesEditor extends Component {
         pagesToView: []
       },
       go: false,
+      selectedShapeName: ""
 
     }
     this.services = new GalleryServices()
     this.servicesBook = new BookServices()
   }
+
+  handleStageClick = e => {
+    console.log(e.target)
+    console.log(e.target._id)
+    this.setState({
+      selectedShapeName: e.target.name()
+    });
+  };
 
 
   addNewImg = (image, status) => {
@@ -143,7 +153,7 @@ export class TalesEditor extends Component {
           })
 
         })
-    }, 4000)
+    }, 3000)
 
   }
 
@@ -154,12 +164,26 @@ export class TalesEditor extends Component {
     this.setState({ go: res })
   }
 
-  meteLaimg = (img) => {
+  // PageImageToBook = (img) => {
+  //   this.setState({
+  //     ...this.state.book.pagesToView.push(img),
+
+  //   })
+  //console.log(img, this.state.book)
+  // }
+
+  handleFileUpload = (e) => {
+
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", e.target.files[0]);
+
     this.setState({
-      ...this.state.book.pagesToView.push(img),
+      data: uploadData,
 
     })
-    //console.log(img, this.state.book)
+    console.log(this.props.status)
+
+    // console.log(this.state)
   }
 
   savePageImage() {
@@ -178,29 +202,37 @@ export class TalesEditor extends Component {
     const stage = this.refs.stage.getStage()
     const test = stage.toDataURL({ pixelRatio: 2 })
     // LLAMADA FUNCIÓN DESCARGAR: downloadURI(test, 'stage.png');
+    console.log(this.state.data)
+    this.servicesBook.handleFileUpload(this.state.data, "character")
+      .then(response => {
+        console.log(response, 'estoy en el then de services')
+        console.log(test)
+          //setstate
 
-    console.log(test)
-    // NOTA PARA LA LUCÍA DEL FUTURO :-) QUEREMOS SUBIR ESTO A CLOUDINARY Y GUARDAR LA URL DE LA IMAGEN RESULTANTE EN EL ARRAY 
+          .catch(err => console.log('Error', err))
+      })
+    // NOTA SUBIR ESTO A CLOUDINARY Y GUARDAR LA URL DE LA IMAGEN RESULTANTE EN EL ARRAY 
     // DE IMÁGENES DE PÁGINAS DEL MODELO DE BOOK 
 
-    // NOTA 2 PARA LUCÍA DESPIERTA :-D ÉCHALE UN OJO A LO DE LAS IMÁGENES DE BACKGROUND QUE SE SUBEN DOBLES
+    // NOTA 2 IMÁGENES DE BACKGROUND QUE SE SUBEN DOBLES
 
-    //NOTA 3 PARA LA PRECIOSA LUCÍA :-* MIRAR CÓMO BORRAR IMÁGENES Y TEXTOS CUANDO TE ARREPIENTES
-
-    //NOTA 4 PARA LA LUCÍA DE MAÑANA --- ESTÁS MUY GUAPA
-
+    //NOTA 3  MIRAR CÓMO BORRAR IMÁGENES Y TEXTOS CUANDO TE ARREPIENTES
   }
+
+
+
+
 
 
 
   render() {
     return (
-      <div className="flex-editor">
+      <div className="flex-editor" >
         {/* {console.log(this.state.page, "statepage")} */}
-        <FormDesign nuevaImg={this.addNewImg} />
+        < FormDesign nuevaImg={this.addNewImg} />
         <FormSave go={this.go} savePage={this.savePage} saveToBook={this.savePageImage} />
 
-        <Stage width={window.innerWidth / 1.2} height={window.innerHeight / 1.2} ref="stage">
+        <Stage width={window.innerWidth / 1.2} height={window.innerHeight / 1.2} ref="stage" onClick={this.handleStageClick}>
           {/* ref={node => this.stage = node} */}
           <Layer  >
             <Group ref="grupito" >
@@ -217,6 +249,9 @@ export class TalesEditor extends Component {
               })}
 
               {this.state.page.texts.map((text, i) => <TaleText key={i} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)}
+
+              <TransformerComponent
+                selectedShapeName={this.state.selectedShapeName} />
             </Group>
           </Layer>
         </Stage>
