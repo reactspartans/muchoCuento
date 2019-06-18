@@ -46,6 +46,7 @@ router.post('/cuentos/upload/page/:id', uploaderPage.single('imageUrl'), (req, r
 
   Book.findByIdAndUpdate(bookId, { $push: { pagesToView: secure_url } }, { new: true })
     .then(book => {
+      console.log(book)
       res.status(200).json(book);
     })
     .catch(err => {

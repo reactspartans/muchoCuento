@@ -5,7 +5,7 @@ export default class services {
   constructor() {
 
     this.service = axios.create({
-      baseURL: 'http://localhost:3000/api/cuentos',
+      baseURL: `${process.env.REACT_APP_URL}api/cuentos`,
       withCredentials: true
     })
   }
@@ -44,6 +44,8 @@ export default class services {
 
 
   UploadPage = (theFile, id) => {
+    console.log(theFile)
+    console.log(id)
     return this.service.post(`/upload/page/${id}`, theFile)
       .then(res => res.data)
       .catch(err => console.log(err));

@@ -29,7 +29,7 @@ router.get('/addImageGallery', (req, res) => {
 
 router.post('/addImagePage', (req, res) => {
   const { _id } = req.params;
-  const newImage = { positionX, positionY } = req.body;
+  const newImage = { positionX, positionY, scaleX, scaleY, rotation } = req.body;
   newImage.name = _id;
 
   ImagePage.create(newImage)
