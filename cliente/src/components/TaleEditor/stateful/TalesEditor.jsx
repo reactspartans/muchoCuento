@@ -42,7 +42,7 @@ export class TalesEditor extends Component {
   }
 
   handleStageClick = e => {
-    console.log(e.target)
+    console.log('las props', this.props)
     console.log(e.target._id)
     this.setState({
       selectedShapeName: e.target.name()
@@ -67,13 +67,6 @@ export class TalesEditor extends Component {
       page: _page
     })
   }
-
-  componentDidMount() {
-
-  }
-
-
-
   //asignar el id del libro a la pagina
 
   /* addBookId = book_id => {
@@ -219,10 +212,12 @@ export class TalesEditor extends Component {
     //NOTA 3  MIRAR CÓMO BORRAR IMÁGENES Y TEXTOS CUANDO TE ARREPIENTES
   }
 
+  
 
 
 
 
+  
 
 
   render() {
@@ -237,10 +232,9 @@ export class TalesEditor extends Component {
           <Layer  >
             <Group ref="grupito" >
 
-              <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
 
               {this.state.page.imageBackground ?
-                <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
+                <TaleImage name='pepita' src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
                 :
                 null
               }
@@ -250,8 +244,7 @@ export class TalesEditor extends Component {
 
               {this.state.page.texts.map((text, i) => <TaleText key={i} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)}
 
-              <TransformerComponent
-                selectedShapeName={this.state.selectedShapeName} />
+              <TransformerComponent selectedShapeName={this.state.selectedShapeName} />
             </Group>
           </Layer>
         </Stage>

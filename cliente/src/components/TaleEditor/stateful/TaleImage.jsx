@@ -20,9 +20,11 @@ export class TaleImage extends Component {
       positionY: 100,
       rotation: 0,
       status: '',
-      image_id: ''
+      image_id: '',
+      width:100,
+      height:100
     };
-
+    console.log(this.props, 'img props')
   }
   componentDidMount() {
     this.loadImage();
@@ -65,34 +67,32 @@ export class TaleImage extends Component {
       shadowOffset: {
         x: 15,
         y: 15
-      },
-      scaleX: 1.1,
-      scaleY: 1.1
+      }
     });
   };
   handleDragEnd = e => {
-
     e.target.to({
       duration: 0.5,
       easing: Konva.Easings.ElasticEaseOut,
-      scaleX: 1,
-      scaleY: 1,
       shadowOffsetX: 5,
       shadowOffsetY: 5
     });
+    console.log(e.target.attrs, 'attrs de imagen')
     this.setState({
       positionX: e.target.attrs.x,
-      positionY: e.target.attrs.y
-
+      positionY: e.target.attrs.y,
+      
     })
 
 
-
-    // console.log(e.target)
-    // console.log(e.target.attrs.x + ' pos X')
-    // console.log(e.target.attrs.y + ' pos Y')
-
   };
+
+    alSoltar=(e)=>{
+      this.setState({
+        scaleX: e.target.attrs.scaleX,
+        scaleY: e.target.attrs.scaleY
+      })
+    }
 
 
 
@@ -102,7 +102,7 @@ export class TaleImage extends Component {
       // console.log(this.state, 'estoy en taleImage mandando state')
       this.props.goFunction(false)
     }
-    const { positionX, positionY, rotation, image } = this.state
+    const { positionX, positionY, image } = this.state
 
 
     return (
@@ -110,16 +110,18 @@ export class TaleImage extends Component {
         // key={image._id}
         x={positionX}
         y={positionY}
-
+        // width={width}
+        // height={height}
+        name={this.props.name}
         //Para mover la imagen
         draggable
-        rotation={rotation}
+        // rotation={rotation}
 
         shadowBlur={10}
         shadowOpacity={0.6}
         onDragStart={this.handleDragStart}
         onDragEnd={this.handleDragEnd}
-
+        onMouseOut={this.alSoltar}
         image={image}
         ref={node => {
           this.imageNode = node;

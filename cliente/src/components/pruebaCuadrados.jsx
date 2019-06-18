@@ -39,6 +39,7 @@ class TransformerComponent extends React.Component {
     const selectedNode = stage.findOne("." + selectedShapeName);
     if (selectedNode === this.transformer.node()) {
       return;
+      
     }
     if (selectedNode) {
       this.transformer.attachTo(selectedNode);
@@ -46,18 +47,21 @@ class TransformerComponent extends React.Component {
       this.transformer.detach();
     }
     this.transformer.getLayer().batchDraw();
+    // console.log(this.transformer.getLayer().batchDraw())
+    console.log(this.transformer.getLayer().children[0])
   }
   render() {
     return (
       <Transformer
-        ref={node => {
-          this.transformer = node;
-        }}
+      
+      ref={node => {
+        this.transformer = node;
+      }}
       />
-    );
+      );
+    }
   }
-}
-
+  
 // import konva from 'react-konva'
 
 export class Rectangulo extends React.Component {
@@ -82,6 +86,7 @@ export class Rectangulo extends React.Component {
           <Rect1 />
           <Rect2 />
           <TransformerComponent
+          
             selectedShapeName={this.state.selectedShapeName}
           />
         </Layer>
