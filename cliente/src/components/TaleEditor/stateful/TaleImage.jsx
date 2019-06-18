@@ -42,6 +42,7 @@ export class TaleImage extends Component {
     // save to "this" to remove "load" handler on unmount
     this.image = new window.Image();
     this.image.src = this.props.src;
+    this.image.crossOrigin = "Anonymous"
     this.image.addEventListener('load', this.handleLoad);
   }
   handleLoad = () => {
@@ -109,8 +110,6 @@ export class TaleImage extends Component {
         // key={image._id}
         x={positionX}
         y={positionY}
-
-
 
         //Para mover la imagen
         draggable

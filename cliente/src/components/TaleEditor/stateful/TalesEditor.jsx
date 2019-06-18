@@ -59,7 +59,9 @@ export class TalesEditor extends Component {
   }
 
   componentDidMount() {
+
   }
+
 
 
   //asignar el id del libro a la pagina
@@ -115,6 +117,9 @@ export class TalesEditor extends Component {
       // console.log("salvado de pagina", this.state.pageToSave)
       const _pageToSave = { ...this.state.pageToSave };
       _pageToSave.bookId = this.props.getTheBookId
+
+      this.savePageImage()
+
       // console.log(_pageToSave)
       // console.log("===================================================================================")
       this.servicesBook.postNewPage(_pageToSave)
@@ -157,24 +162,34 @@ export class TalesEditor extends Component {
     //console.log(img, this.state.book)
   }
 
+  savePageImage() {
 
-  /* saveImagesToBook = () => {
-    this.group.toImage = (img) => {
-      this.meteLaimg(img)
-    }
+    //FUNCIÓN POR SI QUEREMOS DESCARGAR LAS IMÄGENES AL ORDENADOR
+    // function downloadURI(uri, name) {
+    //   var link = document.createElement('a');
+    //   link.download = name;
+    //   link.href = uri;
+    //   document.body.appendChild(link);
+    //   link.click();
+    //   document.body.removeChild(link);
+    // }
 
-  } */
 
-  /*   savePageImage() {
-  
-      let image = Stage.toImage((img) => {
-  
-        const newArr = [...this.state.book.pagesToView]
-        newArr.push(img)
-        return image
-      }
-      )
-    } */
+    const stage = this.refs.stage.getStage()
+    const test = stage.toDataURL({ pixelRatio: 2 })
+    // LLAMADA FUNCIÓN DESCARGAR: downloadURI(test, 'stage.png');
+
+    console.log(test)
+    // NOTA PARA LA LUCÍA DEL FUTURO :-) QUEREMOS SUBIR ESTO A CLOUDINARY Y GUARDAR LA URL DE LA IMAGEN RESULTANTE EN EL ARRAY 
+    // DE IMÁGENES DE PÁGINAS DEL MODELO DE BOOK 
+
+    // NOTA 2 PARA LUCÍA DESPIERTA :-D ÉCHALE UN OJO A LO DE LAS IMÁGENES DE BACKGROUND QUE SE SUBEN DOBLES
+
+    //NOTA 3 PARA LA PRECIOSA LUCÍA :-* MIRAR CÓMO BORRAR IMÁGENES Y TEXTOS CUANDO TE ARREPIENTES
+
+    //NOTA 4 PARA LA LUCÍA DE MAÑANA --- ESTÁS MUY GUAPA
+
+  }
 
 
 
@@ -185,9 +200,12 @@ export class TalesEditor extends Component {
         <FormDesign nuevaImg={this.addNewImg} />
         <FormSave go={this.go} savePage={this.savePage} saveToBook={this.savePageImage} />
 
-        <Stage width={window.innerWidth / 1.2} height={window.innerHeight / 1.2} ref={node => this.stage = node}>
+        <Stage width={window.innerWidth / 1.2} height={window.innerHeight / 1.2} ref="stage">
+          {/* ref={node => this.stage = node} */}
           <Layer  >
-            <Group ref={node => this.group = node} >
+            <Group ref="grupito" >
+
+              <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
 
               {this.state.page.imageBackground ?
                 <TaleImage src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
@@ -202,7 +220,7 @@ export class TalesEditor extends Component {
             </Group>
           </Layer>
         </Stage>
-              <button type='submit' onClick={this.saveImagesToBook}>Push img</button>
+        <button type='submit' onClick={this.saveImagesToBook}>Push img</button>
       </div>
 
     );
