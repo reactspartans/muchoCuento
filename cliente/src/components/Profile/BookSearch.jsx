@@ -56,11 +56,7 @@ export class SearchBooks extends Component {
   }
 
 
-  // setRedirect = () => {
-  //   this.setState({
-  //     redirect: true
-  //   })
-  // }
+
   getRed=(thing)=>{
     this.setState({
       redirect: thing
@@ -69,7 +65,7 @@ export class SearchBooks extends Component {
   }
 
   renderRedirect = () => {
-      return <Redirect to={`/tales-viewer/${this.state.redirect}`} />
+      return <Redirect to={`/tales-viewer/${this.state.redirect}`} id={this.state.redirect} />
   }
 
   render() {
