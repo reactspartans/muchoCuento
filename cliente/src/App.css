@@ -23,13 +23,22 @@ nav ul{
 
 
 /* INDEX */
-.explain-book{
+.flex-container-index{
    display: flex;
    justify-content: center;
    align-items: center;
 }
 .flex-editor{
     display: flex;
+}
+.txt-index {
+    flex-direction: row;
+    width: 300px;
+    font-size: 1.4em;
+    diplay: inline-block
+}
+.img-index {
+    width: 600px
 }
 
 
