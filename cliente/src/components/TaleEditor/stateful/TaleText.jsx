@@ -33,6 +33,18 @@ class TaleText extends Component {
   }) */
 
 
+  componentDidUpdate(oldProps) {
+    if (oldProps.text !== this.props.text) {
+      this.setState({
+        content: this.props.text
+      })
+    }
+  }  
+
+ 
+
+
+  
   handleDragStart = e => {
     e.target.setAttrs({
       shadowOffset: {
@@ -42,7 +54,7 @@ class TaleText extends Component {
     });
   };
   handleDragEnd = e => {
-
+    
     e.target.to({
       duration: 0.5,
       easing: Konva.Easings.ElasticEaseOut,
@@ -52,23 +64,29 @@ class TaleText extends Component {
     this.setState({
       positionX: e.target.attrs.x,
       positionY: e.target.attrs.y
-
+      
     })
     // console.log(e.target.attrs.x, this.state.positionX)
     // console.log(e.target.attrs.y, this.state.positionY)
-
+    
   }
-
-
+  remove=(e)=>{
+    if(this.props.selected==this.props.name){
+        this.setState({
+          content: ''
+        })      
+      }
+    }  
+  
   alSoltar=(e)=>{
     this.setState({
       scaleX: e.target.attrs.scaleX,
       scaleY: e.target.attrs.scaleY
     })
   }
-
+  
   render() {
-
+    
     if (this.props.go) {
       // console.log('entro en taleText para salvar texto')
       this.props.saveText(this.state)
@@ -76,7 +94,8 @@ class TaleText extends Component {
       this.props.goFunction(false)
     }
     const { content, positionX, positionY } = this.state
-
+    
+    // console.log(this.props)
     return (
       <React.Fragment>
 
@@ -84,11 +103,11 @@ class TaleText extends Component {
           
           name={this.props.name}
           onMouseOut={this.alSoltar}
-
+          onDblClick={this.remove}
           text={content}
           x={positionX}
           y={positionY}
-          fontSize={this.props.fontSize}
+          fontSize={40}
           onDragStart={this.handleDragStart}
           onDragEnd={this.handleDragEnd}
           draggable

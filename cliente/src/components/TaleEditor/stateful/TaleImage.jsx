@@ -24,7 +24,7 @@ export class TaleImage extends Component {
       width: 100,
       height: 100
     };
-    console.log(this.props, 'img props')
+    // console.log(this.props, 'img props')
   }
   componentDidMount() {
     this.loadImage();
@@ -79,7 +79,7 @@ export class TaleImage extends Component {
       shadowOffsetX: 5,
       shadowOffsetY: 5
     });
-    console.log(e.target.attrs, 'attrs de imagen')
+    // console.log(e.target.attrs, 'attrs de imagen')
     this.setState({
       positionX: e.target.attrs.x,
       positionY: e.target.attrs.y,
@@ -88,25 +88,23 @@ export class TaleImage extends Component {
 
 
   };
-  removeImage(event) {
-    console.log("entra porque molo")
-    console.log(window.event)
-
-    alSoltar = (e) => {
-      this.setState({
-        scaleX: e.target.attrs.scaleX,
-        scaleY: e.target.attrs.scaleY
-      })
-    }
 
 
-    if (window.event.keycode === 8) {
-      console.log("si esto funciona es un milagro, se que parezco convencido, no te lo creas. :)")
-    }
-    if (this.props.selectedShapeName) {
-
-    }
+  alSoltar = (e) => {
+    this.setState({
+      scaleX: e.target.attrs.scaleX,
+      scaleY: e.target.attrs.scaleY
+    })
   }
+
+  remove=(e)=>{
+  if(this.props.selected==this.props.name){
+      this.setState({
+        image: ''
+      })      
+    }
+  }  
+  
 
 
   render() {
@@ -135,8 +133,8 @@ export class TaleImage extends Component {
         onDragStart={this.handleDragStart}
         onDragEnd={this.handleDragEnd}
         onMouseOut={this.alSoltar}
-
-        onKeyDown={this.removeImage()}
+        
+        onDblClick={this.remove}
 
         image={image}
         ref={node => {
