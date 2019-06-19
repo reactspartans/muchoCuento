@@ -11,6 +11,7 @@ export default class services {
   }
 
   postNewBook = book => {
+    console.log(book)
     return this.service.post('/newBook', book)
       .then(res => {
         console.log(res.data)

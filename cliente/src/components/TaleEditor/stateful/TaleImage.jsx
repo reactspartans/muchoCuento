@@ -33,6 +33,7 @@ export class TaleImage extends Component {
   componentDidUpdate(oldProps) {
     if (oldProps.src !== this.props.src) {
       this.loadImage();
+
     }
     this.image.crossOrigin = "Anonymous"
 
@@ -101,10 +102,10 @@ export class TaleImage extends Component {
   if(this.props.selected===this.props.name){
       this.setState({
         image: ''
-      })      
+      })
     }
-  }  
-  
+  }
+
 
 
 
@@ -143,7 +144,7 @@ export class TaleImage extends Component {
         onDragStart={this.handleDragStart}
         onDragEnd={this.handleDragEnd}
         onMouseOut={this.alSoltar}
-        
+
         onDblClick={this.remove}
 
         image={image}

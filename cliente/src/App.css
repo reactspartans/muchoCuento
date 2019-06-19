@@ -1,18 +1,20 @@
 /* LI LISTAS */
 .lis{
     list-style: none;
+    font-family: "apple Chancery"
 }
 .links{
-    color: black;
+    color: rgb(20, 20, 41);
 }
 
 
 /* NAVBAR */
 nav{
-    background-color: rgba(226, 110, 43, 0.479);
+    /* background-color: rgba(226, 110, 43, 0.479); */
     padding: 10px 10px;
 }
 nav ul{
+    margin-top: 30px;
     display: flex;
     justify-content: space-around;
 }
@@ -69,3 +71,6 @@ nav ul{
 
  
  
+ .stage {
+     background-color: white;
+ }

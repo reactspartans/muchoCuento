@@ -42,8 +42,8 @@ export class TalesEditor extends Component {
   }
 
   handleStageClick = e => {
-    console.log('las props', this.props)
-    console.log(e.target._id)
+    // console.log('las props', this.props)
+    // console.log(e.target._id)
     this.setState({
       selectedShapeName: e.target.name()
     });
@@ -78,7 +78,7 @@ export class TalesEditor extends Component {
     })
   } */
 
-
+  //SALVAR IMAGENES A SU MODELO DE IMAGEPAGE PARA PODER LUEGO EDITARLAS
   saveImageToPage = (ImageState, status) => {
     // console.log(ImageState, 'guardando imagen de la pagina con su posicion')
     this.services.postImagePage(ImageState)
@@ -87,11 +87,11 @@ export class TalesEditor extends Component {
           this.setState({ pageToSave: { ...this.state.pageToSave, imageBackground: imageCreated._id } })
         } else {
           const newArr = [...this.state.pageToSave.imageCharacters]
-          console.log(imageCreated._id, '-------------personajes id----------')
+          // console.log(imageCreated._id, '-------------personajes id----------')
           newArr.push(imageCreated._id)
-          console.log(newArr, '-------------------array id personajes---------')
-          console.log(this.state.pageToSave)
-          console.log(this.props.bookId)
+          // console.log(newArr, '-------------------array id personajes---------')
+          // console.log(this.state.pageToSave)
+          // console.log(this.props.bookId)
           this.setState({ pageToSave: { ...this.state.pageToSave, imageCharacters: newArr } })
 
         }
@@ -100,10 +100,10 @@ export class TalesEditor extends Component {
 
   }
 
-
+  //SALVAR LOS TEXTOS EN EL MODELO TEXTPAGE PARA PODER EDITARLOS
   saveTextToPage = TextState => {
     // console.log(TextState, 'entro en services')
-
+    // console.log(this.props)
     this.servicesBook.postNewText(TextState)
       .then(textCreated => {
         const newArr = [...this.state.pageToSave.texts]
@@ -115,11 +115,11 @@ export class TalesEditor extends Component {
 
 
   }
-
+  //SALVAR PAGINA CON LOS IDS DE LOS COMPONENTES (PARA EDITAR CUENTO)
   savePage = () => {
 
     setTimeout(() => {
-      console.log(this.state)
+      // console.log(this.state)
 
       // console.log("salvado de pagina", this.state.pageToSave)
       const _pageToSave = { ...this.state.pageToSave };
@@ -160,14 +160,17 @@ export class TalesEditor extends Component {
     this.setState({ go: res })
   }
 
-  // PageImageToBook = (img) => {
-  //   this.setState({
-  //     ...this.state.book.pagesToView.push(img),
 
-  //   })
-  //console.log(img, this.state.book)
-  // }
+  //FUNCION PARA PUSHEAR LAS IMAGENES COMPUESTAS DE LA PAGINA EN EL MODELO LIBRO
+  PageImageToBook = (img) => {
+    this.setState({
+      ...this.state.book.pagesToView.push(img),
 
+    })
+    // console.log(img, this.state.book)
+  }
+
+  //GUARDAR IMAGEN EN CLOUDINARY
   handleFileUpload = (e) => {
 
     const uploadData = new FormData();
@@ -177,12 +180,13 @@ export class TalesEditor extends Component {
       data: uploadData,
 
     })
-    console.log(uploadData, '========handleUpload')
-    console.log(this.props.status, 'status=============')
+    // console.log(uploadData, '========handleUpload')
+    // console.log(this.props.status, 'status=============')
 
     // console.log(this.state)
   }
 
+  //SALVAR LA COMPOSICION DE LA PAGINA EN UNA IMAGEN, SUBIRLA A CLOUDINARY Y GUARDARLA EN MODELO BOOK
   savePageImage() {
 
     //FUNCIÓN POR SI QUEREMOS DESCARGAR LAS IMÄGENES AL ORDENADOR
@@ -206,48 +210,48 @@ export class TalesEditor extends Component {
 
 
     const stage = this.refs.stage.getStage()
-    console.log(stage);
+    // console.log(stage);
     const test = stage.toDataURL({ pixelRatio: 2 })
 
     //Usage example:
     var file = dataURLtoFile(test, 'hello.png');
-    console.log(file);
+    // console.log(file);
     // LLAMADA FUNCIÓN DESCARGAR: downloadURI(test, 'stage.png');
 
     const uploadPageData = new FormData();
     uploadPageData.append("imageUrl", file)
-    console.log(file);
+    // console.log(file);
     this.servicesBook.UploadPage(uploadPageData, this.props.getTheBookId)
       .then(response => {
-        console.log(response)
+        // console.log(response)
       })
       .catch(err => console.log('Error', err))
     // NOTA SUBIR ESTO A CLOUDINARY Y GUARDAR LA URL DE LA IMAGEN RESULTANTE EN EL ARRAY 
     // DE IMÁGENES DE PÁGINAS DEL MODELO DE BOOK 
-
+    this.PageImageToBook()
 
 
     //NOTA 3  MIRAR CÓMO BORRAR IMÁGENES Y TEXTOS CUANDO TE ARREPIENTES
   }
 
-  
-  random(){Math.random().toString()}
-  randomBis=(Math.random() * (900 - 200) + 200).toString()
-  
+
+  random() { Math.random().toString() }
+  randomBis = (Math.random() * (900 - 200) + 200).toString()
+
   textStyle() {
     const zRand = Math.floor((Math.random() * (900 - 200) + 200)).toString()
 
     return `z-index: ${zRand}`
   }
 
-  
-  
+
+
 
 
 
   render() {
-    
 
+    console.log(this.state.page.imageCharacter.length === 1 ? this.state.page.imageCharacter[0]: "")
 
     return (
       <div className="flex-editor" >
@@ -255,7 +259,7 @@ export class TalesEditor extends Component {
         < FormDesign nuevaImg={this.addNewImg} />
         <FormSave go={this.go} savePage={this.savePage} saveToBook={this.savePageImage} />
 
-        <Stage width={window.innerWidth / 1.2} height={window.innerHeight / 1.2} ref="stage" onClick={this.handleStageClick}>
+        <Stage className="stage" width={window.innerWidth / 1.2} height={window.innerHeight / 1.2} ref="stage" onClick={this.handleStageClick}>
           {/* ref={node => this.stage = node} */}
           <Layer  >
             <Group ref="grupito" >
@@ -269,15 +273,10 @@ export class TalesEditor extends Component {
                 return <TaleImage name={this.random} key={idx} src={img} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
               })} */}
 
-              <TaleImage selected={this.state.selectedShapeName} name={'pipa'} src={this.state.page.imageCharacter[0]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-              <TaleImage selected={this.state.selectedShapeName} name={'pepe'} src={this.state.page.imageCharacter[1]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-              <TaleImage selected={this.state.selectedShapeName} name={'popino'} src={this.state.page.imageCharacter[2]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-              <TaleImage selected={this.state.selectedShapeName} name={'cris'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-              <TaleImage selected={this.state.selectedShapeName} name={'teo'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-              <TaleImage selected={this.state.selectedShapeName} name={'lu'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-              <TaleImage selected={this.state.selectedShapeName} name={'lucia'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-              <TaleImage selected={this.state.selectedShapeName} name={'teodoro'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-              <TaleImage selected={this.state.selectedShapeName} name={'crispy'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+              {this.state.page.imageCharacter[0] && <TaleImage selected={this.state.selectedShapeName} name={'pipa'} src={this.state.page.imageCharacter[0]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
+              {this.state.page.imageCharacter[1] && <TaleImage selected={this.state.selectedShapeName} name={'pepe'} src={this.state.page.imageCharacter[1]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
+              {this.state.page.imageCharacter[2] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[2]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
+              {this.state.page.imageCharacter[3] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
 
               {/* {this.state.page.texts.map((text, i) => <TaleText style={this.textStyle()} name={this.random+2} key={i+4} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)} */}
 
@@ -293,11 +292,11 @@ export class TalesEditor extends Component {
 
 
               <TransformerComponent selectedShapeName={this.state.selectedShapeName} />
-              
+
             </Group>
           </Layer>
         </Stage>
-        <button type='submit' onClick={this.saveImagesToBook}>Push img</button>
+     
       </div>
 
     );
