@@ -87,9 +87,13 @@ export class TalesEditor extends Component {
           this.setState({ pageToSave: { ...this.state.pageToSave, imageBackground: imageCreated._id } })
         } else {
           const newArr = [...this.state.pageToSave.imageCharacters]
+          console.log(imageCreated._id, '-------------personajes id----------')
           newArr.push(imageCreated._id)
-          // console.log(newArr)
+          console.log(newArr, '-------------------array id personajes---------')
+          console.log(this.state.pageToSave)
+          console.log(this.props.bookId)
           this.setState({ pageToSave: { ...this.state.pageToSave, imageCharacters: newArr } })
+
         }
         // console.log(imageCreated)
       })

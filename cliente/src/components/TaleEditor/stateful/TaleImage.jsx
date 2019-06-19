@@ -21,8 +21,8 @@ export class TaleImage extends Component {
       rotation: 0,
       status: '',
       image_id: '',
-      width:100,
-      height:100
+      width: 100,
+      height: 100
     };
     console.log(this.props, 'img props')
   }
@@ -83,19 +83,30 @@ export class TaleImage extends Component {
     this.setState({
       positionX: e.target.attrs.x,
       positionY: e.target.attrs.y,
-      
+
     })
 
 
   };
+  removeImage(event) {
+    console.log("entra porque molo")
+    console.log(window.event)
 
-    alSoltar=(e)=>{
+    alSoltar = (e) => {
       this.setState({
         scaleX: e.target.attrs.scaleX,
         scaleY: e.target.attrs.scaleY
       })
     }
 
+
+    if (window.event.keycode === 8) {
+      console.log("si esto funciona es un milagro, se que parezco convencido, no te lo creas. :)")
+    }
+    if (this.props.selectedShapeName) {
+
+    }
+  }
 
 
   render() {
@@ -124,6 +135,9 @@ export class TaleImage extends Component {
         onDragStart={this.handleDragStart}
         onDragEnd={this.handleDragEnd}
         onMouseOut={this.alSoltar}
+
+        onKeyDown={this.removeImage()}
+
         image={image}
         ref={node => {
           this.imageNode = node;
