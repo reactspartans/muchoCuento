@@ -26,8 +26,8 @@ class TransformerComponent extends React.Component {
       this.transformer.detach();
     }
     this.transformer.getLayer().batchDraw();
-    console.log(this.transformer.getWidth())
-    console.log(this.transformer.getHeight())
+
+    
   }
 
 

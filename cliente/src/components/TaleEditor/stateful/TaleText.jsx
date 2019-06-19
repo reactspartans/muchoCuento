@@ -38,9 +38,7 @@ class TaleText extends Component {
       shadowOffset: {
         x: 0,
         y: 0
-      },
-      scaleX: 1.1,
-      scaleY: 1.1
+      }
     });
   };
   handleDragEnd = e => {
@@ -48,8 +46,6 @@ class TaleText extends Component {
     e.target.to({
       duration: 0.5,
       easing: Konva.Easings.ElasticEaseOut,
-      scaleX: 1,
-      scaleY: 1,
       shadowOffsetX: 0,
       shadowOffsetY: 0
     });
@@ -63,6 +59,13 @@ class TaleText extends Component {
 
   }
 
+
+  alSoltar=(e)=>{
+    this.setState({
+      scaleX: e.target.attrs.scaleX,
+      scaleY: e.target.attrs.scaleY
+    })
+  }
 
   render() {
 
@@ -78,10 +81,14 @@ class TaleText extends Component {
       <React.Fragment>
 
         <Text
+          
+          name={this.props.name}
+          onMouseOut={this.alSoltar}
+
           text={content}
           x={positionX}
           y={positionY}
-          fontSize={20}
+          fontSize={this.props.fontSize}
           onDragStart={this.handleDragStart}
           onDragEnd={this.handleDragEnd}
           draggable
