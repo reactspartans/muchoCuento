@@ -177,7 +177,8 @@ export class TalesEditor extends Component {
       data: uploadData,
 
     })
-    console.log(this.props.status)
+    console.log(uploadData, '========handleUpload')
+    console.log(this.props.status, 'status=============')
 
     // console.log(this.state)
   }
@@ -194,14 +195,28 @@ export class TalesEditor extends Component {
     //   document.body.removeChild(link);
     // }
 
+    function dataURLtoFile(dataurl, filename) {
+      var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, { type: mime });
+    }
+
 
     const stage = this.refs.stage.getStage()
+    console.log(stage);
     const test = stage.toDataURL({ pixelRatio: 2 })
+
+    //Usage example:
+    var file = dataURLtoFile(test, 'hello.png');
+    console.log(file);
     // LLAMADA FUNCIÓN DESCARGAR: downloadURI(test, 'stage.png');
 
     const uploadPageData = new FormData();
-    uploadPageData.append("imageUrl", test);
-
+    uploadPageData.append("imageUrl", file)
+    console.log(file);
     this.servicesBook.UploadPage(uploadPageData, this.props.getTheBookId)
       .then(response => {
         console.log(response)
@@ -210,22 +225,22 @@ export class TalesEditor extends Component {
     // NOTA SUBIR ESTO A CLOUDINARY Y GUARDAR LA URL DE LA IMAGEN RESULTANTE EN EL ARRAY 
     // DE IMÁGENES DE PÁGINAS DEL MODELO DE BOOK 
 
-    // NOTA 2 IMÁGENES DE BACKGROUND QUE SE SUBEN DOBLES
+
 
     //NOTA 3  MIRAR CÓMO BORRAR IMÁGENES Y TEXTOS CUANDO TE ARREPIENTES
   }
 
-  
-  random=Math.random().toString()
-  randomBis=(Math.random() * (900 - 200) + 200).toString()
-  
+
+  random = Math.random().toString()
+  randomBis = (Math.random() * (900 - 200) + 200).toString()
+
   textStyle() {
     const zRand = Math.floor((Math.random() * (900 - 200) + 200)).toString()
-  
+
     return `z-index: ${zRand}`
   }
 
-  
+
 
 
   render() {

@@ -37,7 +37,7 @@ export class FormDesign extends Component {
             data: uploadData,
 
         })
-        console.log(this.props.status)
+        console.log(this.props.status, '=======fileUpload Gallery==========')
 
         // console.log(this.state)
 
@@ -138,6 +138,7 @@ export class FormDesign extends Component {
                 <form onSubmit={(e) => this.handleSubmit(e)} className='toolbar'>
                     <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} status='background' /> <br />
                     <button>Añadir fondo</button><br />
+
                     <ModalGallery nuevaImg={this.props.nuevaImg} status="background" go={this.state.go} goFunction={this.go} />
 
                 </form>
@@ -147,6 +148,7 @@ export class FormDesign extends Component {
 
                     <input type="file" name="imageURLChar" id="imageURLChar" placeholder='Pega la URL' value={this.state.imageURLChar} onChange={this.handleFileUpload} status='character' /><br />
                     <button>Añadir personaje</button><br />
+
                     <ModalGallery nuevaImg={this.props.nuevaImg} go={this.state.go} goFunction={this.go} status='character' />
                 </form>
 

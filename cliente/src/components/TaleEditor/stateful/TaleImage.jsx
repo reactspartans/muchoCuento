@@ -92,14 +92,6 @@ export class TaleImage extends Component {
     console.log("entra porque molo")
     console.log(window.event)
 
-    alSoltar = (e) => {
-      this.setState({
-        scaleX: e.target.attrs.scaleX,
-        scaleY: e.target.attrs.scaleY
-      })
-    }
-
-
     if (window.event.keycode === 8) {
       console.log("si esto funciona es un milagro, se que parezco convencido, no te lo creas. :)")
     }
@@ -107,6 +99,16 @@ export class TaleImage extends Component {
 
     }
   }
+
+
+
+  alSoltar = (e) => {
+    this.setState({
+      scaleX: e.target.attrs.scaleX,
+      scaleY: e.target.attrs.scaleY
+    })
+  }
+
 
 
   render() {

@@ -14,6 +14,7 @@ var storage = cloudinaryStorage({
   folder: 'Paginas completas libros',
   allowedFormats: ['jpg', 'png'],
   filename: function (req, file, cb) {
+    console.log(file)
     cb(null, file.originalname);
   }
 })
