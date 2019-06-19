@@ -51,6 +51,7 @@ export default class App extends Component {
 
         <Switch>
           <Route path="/" exact component={Index} />
+
           <Route path="/tales-editor" exact render={() => <TalesEditor user={this.state.loggedInUser} getTheBookId={this.state.bookId} />} />
           <ProtectedRoute path={`/prof/private/profile/:_id`} exact component={Profile} user={this.state.loggedInUser} setTheUser={this.setUser} />
         </Switch>

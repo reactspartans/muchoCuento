@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Rectangulo } from '../pruebaCuadrados'
+
 export class Index extends Component {
 
     render() {
@@ -11,7 +11,7 @@ export class Index extends Component {
                     </figure>
 
                 </div>
-                <Rectangulo />
+
             </div>
 
         )

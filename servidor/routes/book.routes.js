@@ -7,7 +7,10 @@ const Page = require('../models/Book/Page.models')
 //Crear un cuento nuevo
 router.post('/newBook', (req, res) => {
   // console.log(req.body, 'back')
-  Book.create(req.body)
+
+  const newBook = { name, pagesToView } = req.body
+  newBook.creatorID = req.user._id;
+  Book.create(newBook)
     .then(data => {
       // console.log(data)
       res.json(data)
@@ -85,7 +88,7 @@ router.get('/edit/:book_id', (req, res) => {
 //añadir un texto al modelo texto
 router.post('/addText', (req, res) => {
   // console.log('entro en la ruta de addText')
-  const newText = { content, positionX, positionY } = req.body;
+  const newText = { name, content, positionX, positionY, scaleX, scaleY, rotation, color } = req.body;
   // console.log(req.body, 'ruta addText')
   TextPage.create(newText)
     .then(data => {
