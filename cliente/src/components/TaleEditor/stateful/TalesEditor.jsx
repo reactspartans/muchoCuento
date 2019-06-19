@@ -6,7 +6,7 @@ import { FormDesign, FormSave } from '../stateful/form'
 import TaleText from './TaleText'
 import GalleryServices from '../../../services/galeria-service'
 import BookServices from '../../../services/book-service'
-import Konva from 'konva';
+// import Konva from 'konva';
 import TransformerComponent from '../stateless/TransformerComp'
 
 
@@ -261,7 +261,7 @@ export class TalesEditor extends Component {
             <Group ref="grupito" >
 
               {this.state.page.imageBackground ?
-                <TaleImage ref='imagencita' selected={this.state.selectedShapeName} name='pepita' src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
+                <TaleImage ref='imagencita' selected={this.state.selectedShapeName} name='gaby' src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
                 :
                 null
               }
@@ -271,16 +271,24 @@ export class TalesEditor extends Component {
 
               <TaleImage selected={this.state.selectedShapeName} name={'pipa'} src={this.state.page.imageCharacter[0]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
               <TaleImage selected={this.state.selectedShapeName} name={'pepe'} src={this.state.page.imageCharacter[1]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-              <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[2]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
-              <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+              <TaleImage selected={this.state.selectedShapeName} name={'popino'} src={this.state.page.imageCharacter[2]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+              <TaleImage selected={this.state.selectedShapeName} name={'cris'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+              <TaleImage selected={this.state.selectedShapeName} name={'teo'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+              <TaleImage selected={this.state.selectedShapeName} name={'lu'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+              <TaleImage selected={this.state.selectedShapeName} name={'lucia'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+              <TaleImage selected={this.state.selectedShapeName} name={'teodoro'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+              <TaleImage selected={this.state.selectedShapeName} name={'crispy'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
 
               {/* {this.state.page.texts.map((text, i) => <TaleText style={this.textStyle()} name={this.random+2} key={i+4} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)} */}
 
-              <TaleText selected={this.state.selectedShapeName} name={'holiiiiii'} text={this.state.page.texts[0]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
+              <TaleText selected={this.state.selectedShapeName} name={'ger'} text={this.state.page.texts[0]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
               <TaleText selected={this.state.selectedShapeName} name={'pepito'} text={this.state.page.texts[1]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
-              <TaleText selected={this.state.selectedShapeName} name={'jyfkjuyfvuyjv'} text={this.state.page.texts[2]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
-              <TaleText selected={this.state.selectedShapeName} name={'sware'} text={this.state.page.texts[3]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
-              <TaleText selected={this.state.selectedShapeName} name={'nbhb'} text={this.state.page.texts[4]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
+              <TaleText selected={this.state.selectedShapeName} name={'david'} text={this.state.page.texts[2]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
+              <TaleText selected={this.state.selectedShapeName} name={'manu'} text={this.state.page.texts[3]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
+              <TaleText selected={this.state.selectedShapeName} name={'noah'} text={this.state.page.texts[4]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
+              <TaleText selected={this.state.selectedShapeName} name={'guille'} text={this.state.page.texts[4]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
+              <TaleText selected={this.state.selectedShapeName} name={'oli'} text={this.state.page.texts[4]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
+              <TaleText selected={this.state.selectedShapeName} name={'olivia'} text={this.state.page.texts[4]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
 
 
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
-import { Redirect } from 'react-router-dom'
 
 
 export class BookCard extends Component {
@@ -15,27 +14,21 @@ export class BookCard extends Component {
     this.setState({
       redirect: true
     })
-
-    setTimeout(() => {
-
-      this.renderRedirect()
-    }, 1000);
-    // console.log('setRedirect')
-
   }
 
 
-  renderRedirect = () => {
-    // console.log('redireccionando')
+  // renderRedirect = () => {
 
-    if (this.state.redirect) {
-      // console.log("entro el redirect")
-      return <Redirect to='/' />
-    }
-  }
+  //   if (this.state.redirect) {
+  //     return <Redirect to='/tales-viewer' />
+  //   }
+  // }
 
 
   render() {
+    if(this.state.redirect===true){
+      this.props.redir(this.props._id)
+    }
     return (
       <div className="card-image">
         <article className="card">

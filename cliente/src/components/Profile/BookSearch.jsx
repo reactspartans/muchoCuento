@@ -5,6 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import BookServices from '../../services/book-service'
 import { BookCard } from './Book-card'
+import {Redirect} from 'react-router-dom'
 
 
 export class SearchBooks extends Component {
@@ -17,20 +18,25 @@ export class SearchBooks extends Component {
 
 
     this.state = {
+      bookId:'',
       books: [],
       searchBook: [],
       search: "",
-
       show: false,
       query: "",
+      redirect: false
     }
     this.services = new BookServices()
   }
+
+  
 
   componentDidMount() {
     this.services.booksList()
       .then(allBooks => this.setState({ books: allBooks }))
   }
+
+
 
   searchBook(e) {
     // console.log(this.state.books)
@@ -49,8 +55,28 @@ export class SearchBooks extends Component {
     this.setState({ show: true });
   }
 
+
+  // setRedirect = () => {
+  //   this.setState({
+  //     redirect: true
+  //   })
+  // }
+  getRed=(thing)=>{
+    this.setState({
+      redirect: thing
+    })
+    
+  }
+
+  renderRedirect = () => {
+      return <Redirect to={`/tales-viewer/${this.state.redirect}`} />
+  }
+
   render() {
-    // console.log(this.state)
+    if(this.state.redirect){
+       this.renderRedirect()
+    }
+    else 
     return (
       <>
         <Button className='horror-button' variant="light" onClick={this.handleShow}>
@@ -79,11 +105,11 @@ export class SearchBooks extends Component {
 
               {this.state.query.length ?
 
-                this.state.searchBook.map((book, idx) => <BookCard key={idx} {...book} />)
+                this.state.searchBook.map((book, idx) => <BookCard redir={this.getRed} key={idx} {...book} />)
 
                 :
 
-                this.state.books.map((book, idx) => <BookCard key={idx} {...book} />)
+                this.state.books.map((book, idx) => <BookCard redir={this.getRed} key={idx} {...book} />)
 
               }
 

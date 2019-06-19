@@ -98,7 +98,7 @@ export class TaleImage extends Component {
   }
 
   remove=(e)=>{
-  if(this.props.selected==this.props.name){
+  if(this.props.selected===this.props.name){
       this.setState({
         image: ''
       })      

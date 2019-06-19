@@ -1,27 +1,67 @@
-import React, {Component} from 'react'
-import {Stage, Layer, Image, Text} from 'react-konva'
+import React, {Component} from "react";
+import { Carousel } from "react-responsive-carousel";
+
 
 export class TaleViewer extends Component{
     constructor(props){
         super(props)
         this.state={
             bookID:'',
-            book:[]
+            pages:[]
         }
         
-    }
-    componentDidMount(){
-        //rellenar el state con las páginas q pertenecen al book
+        console.log(this.props)
     }
 
 
     render(){
         return(
-            <Stage width={window.innerWidth} height={window.innerHeight}>
-                <Layer>
-                    {/* {this.state.map(elm =>)} */}
-                </Layer>
-            </Stage>
+            <div className='paco'>
+            <Carousel autoPlay>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-1.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-2.jpg" alt='bookimg' />
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-3.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-4.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-5.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-6.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-7.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-8.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-9.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-10.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-11.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-12.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-13.jpg" alt='bookimg'/>
+              </div>
+              <div>
+                <img src="http://lorempixel.com/output/cats-q-c-640-480-14.jpg" alt='bookimg'/>
+              </div>
+            </Carousel>
+            </div>
         )
     }
-} 
+}

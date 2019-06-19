@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import GalleryServices from '../../services/profile-services'
 import { SearchBooks } from './BookSearch';
 import { UserInfo } from './User-info'
-import { Button } from 'react-bootstrap'
 
 export class Profile extends Component {
     constructor(props) {
@@ -13,7 +12,9 @@ export class Profile extends Component {
             username: this.props.loggedInUser.username,
             email: this.props.loggedInUser.email,
             password: this.props.loggedInUser.password,
-            show: false
+            show: false,
+            redirect: false,
+            theBookId: ''
         }
         this.services = new GalleryServices()
     }
@@ -70,18 +71,21 @@ export class Profile extends Component {
         })
     }
 
+    getBookId=(bookId)=>{
+        this.setState({
+            theBookId: bookId
+        })
+    }
+
     render() {
         // console.log(this.props.loggedInUser.profilePhoto)
         return (
             <div>
             <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
-            <div className='user-info'>
-                
-                <Button className='horror-button'onClick={this.handleShow}>Información de usuario</Button>
-                {this.state.show ? <UserInfo user={this.state} close={this.handleClose}/> : null}
-              
-                <SearchBooks />
+            <div className='user-info'>    
+                <UserInfo user={this.state} close={this.handleClose}/>                
             </div>
+                <SearchBooks getId={this.getBookId}/>
             </div>
 
         )
