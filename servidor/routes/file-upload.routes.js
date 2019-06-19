@@ -36,6 +36,8 @@ router.post('/galeria/upload', uploader.single("imageUrl"), (req, res, next) => 
 
 router.post('/cuentos/upload/page/:id', uploaderPage.single('imageUrl'), (req, res, next) => {
 
+
+
   if (!req.file) {
     res.status(500).json({ msg: 'No file uploaded!' })
     return;

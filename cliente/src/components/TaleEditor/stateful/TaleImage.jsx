@@ -107,6 +107,16 @@ export class TaleImage extends Component {
   
 
 
+
+  alSoltar = (e) => {
+    this.setState({
+      scaleX: e.target.attrs.scaleX,
+      scaleY: e.target.attrs.scaleY
+    })
+  }
+
+
+
   render() {
     if (this.props.go) {
       this.props.salvarImagen(this.state, this.props.status)

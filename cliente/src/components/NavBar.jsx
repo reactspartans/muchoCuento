@@ -7,6 +7,7 @@ import AuthServices from '../services/auth-services'
 
 
 
+
 export class NavBar extends Component {
 
     constructor(props) {
@@ -29,8 +30,9 @@ export class NavBar extends Component {
                 <ul>
                     <li className='lis'><Link className='links' to='/'><h3>MuchoCuento</h3></Link></li>
                     <li className='lis' ><Link className='links' to='/'><Button>Home</Button></Link></li>
-                    <li className='lis'><BookForm setTheBookId={this.props.setTheBookId} /></li>
 
+                    {this.props.user ?
+                        <li className='lis'><BookForm setTheBookId={this.props.setTheBookId} /></li> : null}
 
 
                     {this.props.user ? <li className='lis'><Button onClick={this.logout}>Logout </Button></li> :
