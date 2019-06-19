@@ -47,6 +47,11 @@ class TransformerComponent extends React.Component {
     }
     this.transformer.getLayer().batchDraw();
   }
+
+
+
+
+
   render() {
     return (
       <Transformer

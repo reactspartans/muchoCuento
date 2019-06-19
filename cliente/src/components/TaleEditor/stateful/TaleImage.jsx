@@ -95,7 +95,18 @@ export class TaleImage extends Component {
     // console.log(e.target.attrs.y + ' pos Y')
 
   };
+  removeImage(event) {
+    console.log("entra porque molo")
+    console.log(window.event)
 
+
+    if (window.event.keycode === 8) {
+      console.log("si esto funciona es un milagro, se que parezco convencido, no te lo creas. :)")
+    }
+    if (this.props.selectedShapeName) {
+
+    }
+  }
 
 
   render() {
@@ -121,6 +132,8 @@ export class TaleImage extends Component {
         shadowOpacity={0.6}
         onDragStart={this.handleDragStart}
         onDragEnd={this.handleDragEnd}
+
+        onKeyDown={this.removeImage()}
 
         image={image}
         ref={node => {

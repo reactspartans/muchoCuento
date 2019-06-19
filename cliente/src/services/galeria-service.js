@@ -9,7 +9,7 @@ export default class services {
       withCredentials: true
     })
   }
-
+  //galeria de imagenes
   getGallery = () => {
 
     return this.service.get('/')
