@@ -7,6 +7,9 @@ import { NavBar } from './components/NavBar';
 import AuthServices from './services/auth-services'
 import { Profile } from './components/Profile/Profile';
 import ProtectedRoute from './components/protected-route'
+import {TaleViewer} from './components/TaleViewer/Tale-viewer'
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 
 
 export default class App extends Component {
@@ -53,6 +56,7 @@ export default class App extends Component {
           <Route path="/" exact component={Index} />
 
           <Route path="/tales-editor" exact render={() => <TalesEditor user={this.state.loggedInUser} getTheBookId={this.state.bookId} />} />
+          <Route path="/tales-viewer/:_id" exact render={() => <TaleViewer user={this.state.loggedInUser} getTheBookId={this.state.bookId} />} />          
           <ProtectedRoute path={`/prof/private/profile/:_id`} exact component={Profile} user={this.state.loggedInUser} setTheUser={this.setUser} />
         </Switch>
 

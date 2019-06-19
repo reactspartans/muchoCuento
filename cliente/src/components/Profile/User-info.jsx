@@ -81,7 +81,7 @@ export class UserInfo extends Component {
                 </form>
 
 
-                <form onSubmit={this.handleUser}>
+                {/* <form onSubmit={this.handleUser}>
                     <label> Cambiar nombre de usuario <br/>
                         <input type="text" name='username' value={this.state.username} placeholder={this.state.username} onChange={this.handleChange}/>
                     </label><br/>
@@ -89,8 +89,8 @@ export class UserInfo extends Component {
                         <input type="text" name='email' value={this.state.email} placeholder={this.state.email} onChange={this.handleChange}/>
                     </label><br/>
                     <button>Guardar cambios</button>
-                </form>
-                <Button onClick={this.props.close}>Cerrar</Button>
+                </form> */}
+                {/* <Button onClick={this.props.close}>Cerrar</Button> */}
             </div>
         )
     }
