@@ -212,9 +212,14 @@ export class TalesEditor extends Component {
   }
 
   
-
-
-
+  random=Math.random().toString()
+  randomBis=(Math.random() * (900 - 200) + 200).toString()
+  
+  textStyle() {
+    const zRand = Math.floor((Math.random() * (900 - 200) + 200)).toString()
+  
+    return `z-index: ${zRand}`
+  }
 
   
 
@@ -237,10 +242,10 @@ export class TalesEditor extends Component {
                 null
               }
               {this.state.page.imageCharacter.map((img, idx) => {
-                return <TaleImage key={idx} src={img} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
+                return <TaleImage name={this.random} key={idx} src={img} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
               })}
 
-              {this.state.page.texts.map((text, i) => <TaleText key={i} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)}
+              {this.state.page.texts.map((text, i) => <TaleText style={this.textStyle()} name={this.random} key={i} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)}
 
               <TransformerComponent selectedShapeName={this.state.selectedShapeName} />
             </Group>
