@@ -27,44 +27,32 @@ export class TaleImage extends Component {
     // console.log(this.props, 'img props')
   }
   componentDidMount() {
-    this.loadImage();
+    const { src, status } = this.props;
+    this.loadImage(src, status);
     this.imageNode.getLayer().batchDraw();
   }
   componentDidUpdate(oldProps) {
     if (oldProps.src !== this.props.src) {
-      this.loadImage();
-
+      const { src, status } = this.props;
+      this.loadImage(src, status);
     }
-    this.image.crossOrigin = "Anonymous"
+  }
 
-  }
-  componentWillUnmount() {
-    this.image.removeEventListener('load', this.handleLoad);
-  }
-  loadImage() {
-    // save to "this" to remove "load" handler on unmount
-    this.image = new window.Image();
-    this.image.src = this.props.src;
-    this.image.crossOrigin = "Anonymous"
-    this.image.addEventListener('load', this.handleLoad);
-  }
-  handleLoad = () => {
-    // after setState react-konva will update canvas and redraw the layer
-    // because "image" property is changed
-    // console.log(this.image, 'soy this.image')
-    this.setState({
-      // ...this.state,
-      image: this.image,
-      imageURL: this.image.src,
-      status: this.props.status
+  loadImage(src, status) {
+    const image = new window.Image();
+    image.src = src+'?'+Math.floor(Math.random()*1000000);
+    image.crossOrigin = "Anonymous";
+    console.log(image);
+    image.addEventListener('load', () => {
+      image.crossOrigin = "Anonymous";
+      this.setState({
+        image,
+        imageURL: image.src,
+        status
+      });
     });
-    // if you keep same image object during source updates
-    // console.log(this.state)
-    // you will have to update layer manually:
-    // this.imageNode.getLayer().batchDraw();
-    this.image.crossOrigin = "Anonymous"
+  }
 
-  };
   handleDragStart = e => {
     e.target.setAttrs({
       shadowOffset: {
@@ -98,8 +86,8 @@ export class TaleImage extends Component {
     })
   }
 
-  remove=(e)=>{
-  if(this.props.selected===this.props.name){
+  remove = (e) => {
+    if (this.props.selected === this.props.name) {
       this.setState({
         image: ''
       })
@@ -138,7 +126,6 @@ export class TaleImage extends Component {
         //Para mover la imagen
         draggable
         // rotation={rotation}
-
         shadowBlur={10}
         shadowOpacity={0.6}
         onDragStart={this.handleDragStart}

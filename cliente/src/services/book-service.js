@@ -10,7 +10,7 @@ export default class services {
     })
   }
 
-  getUserBook = id =>{
+  getUserBook = id => {
     return this.service.get(`/mybooks/${id}`)
       .then(res => res.data)
       .catch(err => console.log(err))
@@ -37,7 +37,7 @@ export default class services {
   postNewText = (text) => {
     return this.service.post('/addText', text)
       .then(res => {
-        // console.log("el texto que vuelve de la BBDD", res.data)
+        console.log("el texto que vuelve de la BBDD", res.data)
         return res.data
       })
       .catch(err => console.log(err))
@@ -69,6 +69,18 @@ export default class services {
       .then(res => res.data)
       .catch(err => console.log(err));
   }
+
+  bookEdit = (id) => {
+    return this.service.get(`/tales-edit/${id}`)
+      .then(res => res.data)
+      .catch(err => console.log(err))
+
+
+  }
+
+
+
+
 }
 
 

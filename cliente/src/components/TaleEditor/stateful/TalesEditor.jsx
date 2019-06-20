@@ -36,7 +36,7 @@ export class TalesEditor extends Component {
         pageNumber: ''
       },
       pageToSave: {
-        bookId: "5d0b55a76bd0b17cff4fab2e",
+        bookId: "",
         texts: [],
         imageBackground: undefined,
         imageCharacters: [],
@@ -63,6 +63,8 @@ export class TalesEditor extends Component {
 
   addNewImg = (image, status) => {
     let _page = { ...this.state.page }
+    console.log("LA IMAGEN");
+    console.log(image);
     if (status === 'background') {
       _page.imageBackground = image
     } else if (status === 'character') {
@@ -94,6 +96,7 @@ export class TalesEditor extends Component {
     // console.log(ImageState, 'guardando imagen de la pagina con su posicion')
     this.services.postImagePage(ImageState)
       .then(imageCreated => {
+        imageCreated.crossOrigin = "anonymous"
         if (imageCreated.status === "background") {
           this.setState({ pageToSave: { ...this.state.pageToSave, imageBackground: imageCreated._id } })
         } else {
@@ -113,7 +116,7 @@ export class TalesEditor extends Component {
 
   //SALVAR LOS TEXTOS EN EL MODELO TEXTPAGE PARA PODER EDITARLOS
   saveTextToPage = TextState => {
-    // console.log(TextState, 'entro en services')
+    console.log(TextState, 'entro en services')
     // console.log(this.props)
     this.servicesBook.postNewText(TextState)
       .then(textCreated => {
@@ -134,7 +137,7 @@ export class TalesEditor extends Component {
 
       // console.log("salvado de pagina", this.state.pageToSave)
       const _pageToSave = { ...this.state.pageToSave };
-      _pageToSave.bookId = "5d0b55a76bd0b17cff4fab2e"
+      _pageToSave.bookId = this.props.getTheBookId
       this.savePageImage()
         .then(() => {
           this.servicesBook.postNewPage(_pageToSave)
@@ -225,6 +228,7 @@ export class TalesEditor extends Component {
     // }
 
     function dataURLtoFile(dataurl, filename) {
+      console.log(dataurl, filename)
       var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
         bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
       while (n--) {
@@ -233,9 +237,9 @@ export class TalesEditor extends Component {
       return new File([u8arr], filename, { type: mime });
     }
 
-
     const stage = this.refs.stage.getStage()
     // console.log(stage);
+    console.log(stage.toDataURL())
     const test = stage.toDataURL({ pixelRatio: 2 })
 
     //Usage example:
@@ -274,7 +278,7 @@ export class TalesEditor extends Component {
 
 
 
-        return this.servicesBook.UpdateBook(response, "5d0b55a76bd0b17cff4fab2e")
+        return this.servicesBook.UpdateBook(response, this.props.getTheBookId)
           .then(updatedBook => console.log(updatedBook, '-----------------respuesta back updateBook'))
           .catch(err => console.log(err))
         // })
@@ -321,21 +325,29 @@ export class TalesEditor extends Component {
             <Group ref="grupito" >
 
               {this.state.page.imageBackground ?
-                <TaleImage ref='imagencita' selected={this.state.selectedShapeName} name='gaby' src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
+                <TaleImage key={this.state.page.imageBackground} selected={this.state.selectedShapeName} name='gaby' src={this.state.page.imageBackground} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"background"} />
                 :
                 null
               }
               {/* {this.state.page.imageCharacter.map((img, idx) => {
                 return <TaleImage name={this.random} key={idx} src={img} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />
               })} */}
-
-              {this.state.page.imageCharacter[0] && <TaleImage selected={this.state.selectedShapeName} name={'pipa'} src={this.state.page.imageCharacter[0]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
-              {this.state.page.imageCharacter[1] && <TaleImage selected={this.state.selectedShapeName} name={'pepe'} src={this.state.page.imageCharacter[1]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
-              {this.state.page.imageCharacter[2] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[2]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
-              {this.state.page.imageCharacter[3] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
-              {this.state.page.imageCharacter[4] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
-              {this.state.page.imageCharacter[5] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
-              {this.state.page.imageCharacter[6] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
+              {
+                this.state.page.imageCharacter.map((e,i) => (
+                  <TaleImage 
+                  key={e} 
+                  selected={this.state.selectedShapeName} 
+                  name={e} 
+                  src={e} 
+                  go={this.state.go} 
+                  goFunction={this.go} 
+                  salvarImagen={this.saveImageToPage} status={"character"} />
+                ))
+              }
+              {/* {this.state.page.imageCharacter[0] && <TaleImage key="img1" selected={this.state.selectedShapeName} name={'pipa'} src={this.state.page.imageCharacter[0]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
+              {this.state.page.imageCharacter[1] && <TaleImage key="img2" selected={this.state.selectedShapeName} name={'pepe'} src={this.state.page.imageCharacter[1]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
+              {this.state.page.imageCharacter[2] && <TaleImage key="img3" selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[2]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
+              {this.state.page.imageCharacter[3] && <TaleImage key="img4" selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />} */}
 
               {/* {this.state.page.texts.map((text, i) => <TaleText style={this.textStyle()} name={this.random+2} key={i+4} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)} */}
 

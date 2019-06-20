@@ -35,7 +35,6 @@ export class FormDesign extends Component {
 
         this.setState({
             data: uploadData,
-
         })
         // console.log(this.props.status, '=======fileUpload Gallery==========')
 
@@ -69,7 +68,6 @@ export class FormDesign extends Component {
         this.services.handleUpload(this.state.data, "background")
             .then(response => {
                 // console.log(response, 'estoy en el then de services')
-
                 this.props.nuevaImg(response.imageURL, 'background')
 
                 // console.log(status, 'soy el status')
@@ -139,8 +137,8 @@ export class FormDesign extends Component {
                     <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} status='background' /> <br />
                     <button>Añadir fondo</button><br />
 
-                    <ModalGallery nuevaImg={this.props.nuevaImg} status="background" go={this.state.go} goFunction={this.go} />
 
+                    <ModalGallery nuevaImg={this.props.nuevaImg} status="background" go={this.state.go} goFunction={this.go} />
                 </form>
 
 

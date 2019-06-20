@@ -45,16 +45,38 @@ router.get('/tales-viewer/:_id', (req, res) => {
 
 
 //cuentos del user
-router.get('/mybooks/:_id',  (req, res) => {
-  const id= req.params._id
+router.get('/mybooks/:_id', (req, res) => {
+  const id = req.params._id
   console.log(req.params._id, 'the id')
-  Book.find({creatorID: id})
+  Book.find({ creatorID: id })
     .then(data => {
       console.log(data)
-      return res.json(data)})
+      return res.json(data)
+    })
     .catch(err => console.log('Error:', err))
 })
 
+
+//editar un cuento
+router.get('/tales-edit/:book_id', (req, res) => {
+  const book_id = req.params.book_id
+  Book.findOne({ _id: req.params.trip_id })
+    .then(book => {
+      return res.jason(data)
+    })
+    .catch(error => console.log(error))
+})
+
+
+// Book.findByIdAndUpdate(bookId, { $push: { pagesToView: pagesToView } }, { new: true })
+//   .then(book => {
+//     console.log(book, '================respuesta update book del back===========================')
+//     res.status(200).json(book);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//     res.status(403).json(err)
+//   })
 
 
 
