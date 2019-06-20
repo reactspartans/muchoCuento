@@ -31,14 +31,31 @@ nav ul{
 .flex-editor{
     display: flex;
 }
+
+.container-left-text{
+    flex-direction: column;
+    align-items: center
+
+
+}
 .txt-index {
     flex-direction: row;
-    width: 300px;
-    font-size: 1.4em;
-    diplay: inline-block
+    width: 500px;
+    font-size: 1.6em;
+    margin-left: 50px;
+    line-height: 50px;  
+   
 }
+
+.button-demo {
+    color-background: rgb(20, 20, 41);
+    border-radius: 8px;
+    text-align: center
+
+}
+
 .img-index {
-    width: 600px
+    width: 900px
 }
 
 
@@ -74,4 +91,29 @@ nav ul{
  
  .stage {
      background-color: white;
+ }
+
+
+
+
+
+
+
+ @media (max-width:320px) {
+
+
+    /*NavBar*/
+    nav{
+    /* background-color: rgba(226, 110, 43, 0.479); */
+    padding: 10px 10px;
+}
+
+
+nav ul{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+
  }

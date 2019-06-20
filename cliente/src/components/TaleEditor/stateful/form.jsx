@@ -37,7 +37,7 @@ export class FormDesign extends Component {
             data: uploadData,
 
         })
-        console.log(this.props.status, '=======fileUpload Gallery==========')
+        // console.log(this.props.status, '=======fileUpload Gallery==========')
 
         // console.log(this.state)
 
@@ -63,9 +63,9 @@ export class FormDesign extends Component {
 
 
     handleSubmit = (e) => {
-        console.log('yo soy el primero de handleSubmit  ' + this.state.data[0] + 'en medio data')
+        // console.log('yo soy el primero de handleSubmit  ' + this.state.data[0] + 'en medio data')
         e.preventDefault()
-        console.log("===========================")
+        // console.log("===========================")
         this.services.handleUpload(this.state.data, "background")
             .then(response => {
                 // console.log(response, 'estoy en el then de services')
@@ -90,18 +90,18 @@ export class FormDesign extends Component {
 
         this.services.handleUpload(this.state.data, "character")
             .then(response => {
-                console.log(response, 'estoy en el then de services')
+                // console.log(response, 'estoy en el then de services')
 
                 this.props.nuevaImg(response.imageURL, 'character')
 
-                console.log(response.imageURL, 'yo tb estoy en el then, pero despues')
+                // console.log(response.imageURL, 'yo tb estoy en el then, pero despues')
                 this.setState({
                     imageURLCharDos: response.imageURL
                 })
             })
             .catch(err => console.log(err))
 
-        console.log(this.state, this.state.imageURLCharDos, "soy el de teo 2")
+        // console.log(this.state, this.state.imageURLCharDos, "soy el de teo 2")
 
     }
 

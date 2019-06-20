@@ -130,6 +130,7 @@ export class TalesEditor extends Component {
       // console.log("===================================================================================")
       this.servicesBook.postNewPage(_pageToSave)
         .then(res => {
+
           //console.log("--------------SAVE PAGE----------------")
           //console.log(res)
           this.setState({
@@ -163,10 +164,20 @@ export class TalesEditor extends Component {
 
   //FUNCION PARA PUSHEAR LAS IMAGENES COMPUESTAS DE LA PAGINA EN EL MODELO LIBRO
   PageImageToBook = (img) => {
-    this.setState({
-      ...this.state.book.pagesToView.push(img),
+    let initialLength = this.state.book.pagesToView.length
+    console.log("ENTROOOOOOOOOOOOOOOOOOOOOOOOO")
 
+    let pages = [...this.state.book.pagesToView]
+    // console.log(img, pages[pages.length - 1])
+    // console.log(img === pages[pages.length - 1])
+    pages.push(img)
+    this.setState({
+      book: {
+        ...this.state.book,
+        pagesToView: pages
+      }
     })
+    return initialLength
     // console.log(img, this.state.book)
   }
 
@@ -214,21 +225,37 @@ export class TalesEditor extends Component {
     const test = stage.toDataURL({ pixelRatio: 2 })
 
     //Usage example:
-    var file = dataURLtoFile(test, 'hello.png');
+    var file = dataURLtoFile(test, 'crisylu');
     // console.log(file);
     // LLAMADA FUNCIÓN DESCARGAR: downloadURI(test, 'stage.png');
 
     const uploadPageData = new FormData();
     uploadPageData.append("imageUrl", file)
     // console.log(file);
-    this.servicesBook.UploadPage(uploadPageData, this.props.getTheBookId)
+    this.servicesBook.UploadPage(uploadPageData)
       .then(response => {
-        // console.log(response)
+
+        console.log(response)
+
+        let promise = new Promise((resolve, reject) => {
+          while (this.PageImageToBook(response) === this.state.book.pagesToView.length) {
+            console.log("Waiting")
+          }
+          resolve("ha acabado")
+        })
+
+        promise.then(res => {
+          console.log(res)
+          console.log(this.props.getTheBookId)
+          this.servicesBook.UpdateBook(this.state.book.pagesToView, this.props.getTheBookId)
+            .then(updatedBook => console.log(updatedBook))
+            .catch(err => console.log(err))
+        })
+
       })
       .catch(err => console.log('Error', err))
     // NOTA SUBIR ESTO A CLOUDINARY Y GUARDAR LA URL DE LA IMAGEN RESULTANTE EN EL ARRAY 
     // DE IMÁGENES DE PÁGINAS DEL MODELO DE BOOK 
-    this.PageImageToBook()
 
 
     //NOTA 3  MIRAR CÓMO BORRAR IMÁGENES Y TEXTOS CUANDO TE ARREPIENTES
@@ -251,7 +278,7 @@ export class TalesEditor extends Component {
 
   render() {
 
-    console.log(this.state.page.imageCharacter.length === 1 ? this.state.page.imageCharacter[0]: "")
+    console.log(this.state.page.imageCharacter.length === 1 ? this.state.page.imageCharacter[0] : "")
 
     return (
       <div className="flex-editor" >
@@ -296,7 +323,7 @@ export class TalesEditor extends Component {
             </Group>
           </Layer>
         </Stage>
-     
+
       </div>
 
     );

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 
 export class Index extends Component {
 
@@ -6,14 +7,19 @@ export class Index extends Component {
         return (
             <div>
                 <div className='flex-container-index'>
-                    <figure >
-                        <p className="txt-index">
+                    <div className="container-left-text">
+                    <p className="txt-index">
                         Mucho Cuento te permite crear
                         tu propio cuento desde cero.
-                        elige tu imagen de fondo, tus 
+                        elige tu imagen de fondo, tus
                         personajes y empieza a escribir
                         tu historia
-                        </p>        
+                        </p>
+
+                      <Link to={'/demo'} className="button-demo">Ver Demo</Link>
+   
+                    </div>
+                    <figure >
                         <img className="img-index" src="https://res.cloudinary.com/lulas/image/upload/v1560959810/Galeria-cuentos/nin%CC%83a-en-libro.png.png" alt="imagen niña escribiendo dentro de un libro" />
                     </figure>
 

@@ -39,7 +39,7 @@ export default class services {
   }
 
   handleUpload = (theFile, status) => {
-    console.log(theFile, '----------------------gallery con status--------------')
+    // console.log(theFile, '----------------------gallery con status--------------')
     theFile.append("status", status);
     return this.service.post('/upload', theFile)
       .then(res => res.data)
