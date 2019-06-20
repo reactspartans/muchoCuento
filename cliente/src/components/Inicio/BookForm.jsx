@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import BookServices from '../../services/book-service'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 
 export default class BookForm extends Component {
@@ -23,7 +23,7 @@ export default class BookForm extends Component {
     this.services = new BookServices()
   }
 
-  
+
   setRedirect = () => {
     this.setState({
       redirect: true
@@ -31,7 +31,7 @@ export default class BookForm extends Component {
     this.handleClose()
   }
 
-  
+
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to='/tales-editor' />
@@ -60,13 +60,13 @@ export default class BookForm extends Component {
 
 
   handleSubmit = e => {
-    console.log('submit')
+    // console.log('submit')
     const theName = this.state.name
     e.preventDefault()
     this.services.postNewBook({ name: theName })
       // .then(res=>console.log(res))
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.props.setTheBookId(res._id)
         this.setState({
           book_id: res._id

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TaleImage } from './TaleImage'
-import { Stage, Layer, Group } from 'react-konva';
+import { Stage, Rect, Layer, Group } from 'react-konva';
 
 import { FormDesign, FormSave } from '../stateful/form'
 import TaleText from './TaleText'
@@ -11,6 +11,17 @@ import TransformerComponent from '../stateless/TransformerComp'
 
 
 
+const RectBackgroundStage = () => (
+  <Rect
+
+    // x={60}
+    // y={120}
+    width={window.innerWidth / 1.2}
+    height={window.innerHeight / 1.2}
+    fill="white"
+  // draggable
+  />
+);
 
 
 export class TalesEditor extends Component {
@@ -25,7 +36,7 @@ export class TalesEditor extends Component {
         pageNumber: ''
       },
       pageToSave: {
-        bookId: "",
+        bookId: "5d0b55a76bd0b17cff4fab2e",
         texts: [],
         imageBackground: undefined,
         imageCharacters: [],
@@ -123,33 +134,36 @@ export class TalesEditor extends Component {
 
       // console.log("salvado de pagina", this.state.pageToSave)
       const _pageToSave = { ...this.state.pageToSave };
-      _pageToSave.bookId = this.props.getTheBookId
+      _pageToSave.bookId = "5d0b55a76bd0b17cff4fab2e"
       this.savePageImage()
+        .then(() => {
+          this.servicesBook.postNewPage(_pageToSave)
+            .then(res => {
+
+              //console.log("--------------SAVE PAGE----------------")
+              //console.log(res)
+              this.setState({
+                page: {
+                  book: '',
+                  texts: [],
+                  imageBackground: "",
+                  imageCharacter: [],
+                  pageNumber: ''
+                },
+                pageToSave: {
+                  bookId: "",
+                  texts: [],
+                  imageBackground: undefined,
+                  imageCharacters: [],
+                },
+              })
+
+            })
+
+        })
 
       // console.log(_pageToSave)
       // console.log("===================================================================================")
-      this.servicesBook.postNewPage(_pageToSave)
-        .then(res => {
-
-          //console.log("--------------SAVE PAGE----------------")
-          //console.log(res)
-          this.setState({
-            page: {
-              book: '',
-              texts: [],
-              imageBackground: "",
-              imageCharacter: [],
-              pageNumber: ''
-            },
-            pageToSave: {
-              bookId: "",
-              texts: [],
-              imageBackground: undefined,
-              imageCharacters: [],
-            },
-          })
-
-        })
     }, 3000)
 
   }
@@ -165,7 +179,7 @@ export class TalesEditor extends Component {
   //FUNCION PARA PUSHEAR LAS IMAGENES COMPUESTAS DE LA PAGINA EN EL MODELO LIBRO
   PageImageToBook = (img) => {
     let initialLength = this.state.book.pagesToView.length
-    console.log("ENTROOOOOOOOOOOOOOOOOOOOOOOOO")
+    // console.log("ENTROOOOOOOOOOOOOOOOOOOOOOOOO")
 
     let pages = [...this.state.book.pagesToView]
     // console.log(img, pages[pages.length - 1])
@@ -198,7 +212,7 @@ export class TalesEditor extends Component {
   }
 
   //SALVAR LA COMPOSICION DE LA PAGINA EN UNA IMAGEN, SUBIRLA A CLOUDINARY Y GUARDARLA EN MODELO BOOK
-  savePageImage() {
+  savePageImage = () => {
 
     //FUNCIÓN POR SI QUEREMOS DESCARGAR LAS IMÄGENES AL ORDENADOR
     // function downloadURI(uri, name) {
@@ -232,25 +246,38 @@ export class TalesEditor extends Component {
     const uploadPageData = new FormData();
     uploadPageData.append("imageUrl", file)
     // console.log(file);
-    this.servicesBook.UploadPage(uploadPageData)
+    return this.servicesBook.UploadPage(uploadPageData)
       .then(response => {
 
-        console.log(response)
+        console.log(response, 'upload imagen composicion editor ================')
 
-        let promise = new Promise((resolve, reject) => {
-          while (this.PageImageToBook(response) === this.state.book.pagesToView.length) {
-            console.log("Waiting")
-          }
-          resolve("ha acabado")
-        })
 
-        promise.then(res => {
-          console.log(res)
-          console.log(this.props.getTheBookId)
-          this.servicesBook.UpdateBook(this.state.book.pagesToView, this.props.getTheBookId)
-            .then(updatedBook => console.log(updatedBook))
-            .catch(err => console.log(err))
-        })
+
+        // this.PageImageToBook(response)
+
+
+
+
+        // let promise = new Promise((resolve, reject) => {
+        //   console.log(response, 'en promesa---------------------')
+        //   while (this.PageImageToBook(response) === this.state.book.pagesToView.length) {
+        //     console.log(this.PageImageToBook(response) === this.state.book.pagesToView.length)
+        //     console.log("Waiting")
+        //   }
+        //   resolve("ha acabado")
+        // })
+
+        // promise.then(res => {
+        //   console.log(res, 'respuesta promesa************************')
+        //   console.log(this.props.getTheBookId, 'book id')
+        //   console.log(this.state.book.pagesToView, 'para mandar a updateBook^^^^^^^^^^^^^^^^^^^^')
+
+
+
+        return this.servicesBook.UpdateBook(response, "5d0b55a76bd0b17cff4fab2e")
+          .then(updatedBook => console.log(updatedBook, '-----------------respuesta back updateBook'))
+          .catch(err => console.log(err))
+        // })
 
       })
       .catch(err => console.log('Error', err))
@@ -278,7 +305,7 @@ export class TalesEditor extends Component {
 
   render() {
 
-    console.log(this.state.page.imageCharacter.length === 1 ? this.state.page.imageCharacter[0] : "")
+    // console.log(this.state.page.imageCharacter.length === 1 ? this.state.page.imageCharacter[0] : "")
 
     return (
       <div className="flex-editor" >
@@ -289,6 +316,7 @@ export class TalesEditor extends Component {
         <Stage className="stage" width={window.innerWidth / 1.2} height={window.innerHeight / 1.2} ref="stage" onClick={this.handleStageClick}>
           {/* ref={node => this.stage = node} */}
           <Layer  >
+            <RectBackgroundStage />
             <Group ref="grupito" >
 
               {this.state.page.imageBackground ?

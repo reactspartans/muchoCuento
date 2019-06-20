@@ -5,7 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import BookServices from '../../services/book-service'
 import { BookCard } from './Book-card'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 
 export class SearchBooks extends Component {
@@ -18,7 +18,7 @@ export class SearchBooks extends Component {
 
 
     this.state = {
-      bookId:'',
+      bookId: '',
       books: [],
       searchBook: [],
       search: "",
@@ -29,10 +29,10 @@ export class SearchBooks extends Component {
     this.services = new BookServices()
   }
 
-  
-  componentDidMount(){
+
+  componentDidMount() {
     this.services.booksList()
-      .then(book=> this.setState({
+      .then(book => this.setState({
         books: book
       }))
   }
@@ -57,23 +57,23 @@ export class SearchBooks extends Component {
 
 
 
-  getRed=(thing)=>{
+  getRed = (thing) => {
     this.setState({
       redirect: thing
     })
-    
+
   }
 
   render() {
-    console.log(this.state.redirect)
+    // console.log(this.state.redirect)
     return (
       <>
-      {this.state.redirect && 
-      <Redirect to={`/cuentos/tales-viewer/${this.state.redirect}`} />
-      }
-        <nutton className='search-book-btn' onClick={this.handleShow}>
+        {this.state.redirect &&
+          <Redirect to={`/cuentos/tales-viewer/${this.state.redirect}`} />
+        }
+        <button className='search-book-btn' onClick={this.handleShow}>
           Buscar cuentos
-        </nutton>
+        </button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
 

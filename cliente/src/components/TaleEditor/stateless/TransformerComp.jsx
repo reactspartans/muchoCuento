@@ -21,13 +21,13 @@ class TransformerComponent extends React.Component {
     }
     if (selectedNode) {
       this.transformer.attachTo(selectedNode);
-    } 
+    }
     else {
       this.transformer.detach();
     }
     this.transformer.getLayer().batchDraw();
 
-    
+
   }
 
 
@@ -41,7 +41,7 @@ class TransformerComponent extends React.Component {
       <Transformer
         ref={node => {
           this.transformer = node;
-          console.log(node)
+          // console.log(node)
         }}
       />
     );

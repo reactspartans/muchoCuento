@@ -30,12 +30,13 @@ router.get('/', (req, res) => {
 
 //detalles cuento
 router.get('/tales-viewer/:_id', (req, res) => {
-  const id= req.params._id
-  
+  const id = req.params._id
+
   Book.findById(id)
     .then(data => {
       console.log(data)
-      return res.json(data)})
+      return res.json(data)
+    })
     .catch(err => console.log('Error:', err))
 })
 
@@ -89,11 +90,11 @@ router.get('/edit/:book_id', (req, res) => {
 router.put("/update/:id", (req, res) => {
   const bookId = req.params.id
   const pagesToView = req.body
-  console.log(pagesToView)
+  console.log(pagesToView, 'back updateBook, pagesToView')
 
-  Book.findByIdAndUpdate(bookId, { $set: { pagesToView: pagesToView } }, { new: true })
+  Book.findByIdAndUpdate(bookId, { $push: { pagesToView: pagesToView } }, { new: true })
     .then(book => {
-      console.log(book)
+      console.log(book, '================respuesta update book del back===========================')
       res.status(200).json(book);
     })
     .catch(err => {
