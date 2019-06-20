@@ -310,13 +310,14 @@ export class TalesEditor extends Component {
     return (
       <div className="flex-editor" >
         {/* {console.log(this.state.page, "statepage")} */}
-        < FormDesign nuevaImg={this.addNewImg} />
-        <FormSave go={this.go} savePage={this.savePage} saveToBook={this.savePageImage} />
-
+        <div>
+          < FormDesign nuevaImg={this.addNewImg} />
+          <FormSave go={this.go} savePage={this.savePage} saveToBook={this.savePageImage} />
+        </div>
         <Stage className="stage" width={window.innerWidth / 1.2} height={window.innerHeight / 1.2} ref="stage" onClick={this.handleStageClick}>
           {/* ref={node => this.stage = node} */}
           <Layer  >
-            <RectBackgroundStage />
+            {/* <RectBackgroundStage /> */}
             <Group ref="grupito" >
 
               {this.state.page.imageBackground ?
@@ -332,6 +333,9 @@ export class TalesEditor extends Component {
               {this.state.page.imageCharacter[1] && <TaleImage selected={this.state.selectedShapeName} name={'pepe'} src={this.state.page.imageCharacter[1]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
               {this.state.page.imageCharacter[2] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[2]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
               {this.state.page.imageCharacter[3] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
+              {this.state.page.imageCharacter[4] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
+              {this.state.page.imageCharacter[5] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
+              {this.state.page.imageCharacter[6] && <TaleImage selected={this.state.selectedShapeName} name={'pepona'} src={this.state.page.imageCharacter[3]} go={this.state.go} goFunction={this.go} salvarImagen={this.saveImageToPage} status={"character"} />}
 
               {/* {this.state.page.texts.map((text, i) => <TaleText style={this.textStyle()} name={this.random+2} key={i+4} text={text} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />)} */}
 

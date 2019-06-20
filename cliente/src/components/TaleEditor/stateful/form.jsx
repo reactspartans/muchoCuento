@@ -118,7 +118,7 @@ export class FormDesign extends Component {
 
         // console.log(status, 'soy el status')
         this.setState({
-            taleText: this.state.taleText
+            taleText: ''
         })
         // })
         // .catch(err => console.log(err))
@@ -133,7 +133,7 @@ export class FormDesign extends Component {
     render() {
         return (
 
-            <div>
+            <div className='toolvar-div'>
 
                 <form onSubmit={(e) => this.handleSubmit(e)} className='toolbar'>
                     <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} status='background' /> <br />
@@ -158,12 +158,12 @@ export class FormDesign extends Component {
                     <button>Escribe tu cuento</button><br />
 
                 </form>
-
+{/* 
                 <form className='toolbar'>
 
                     <input type="color" name="taleTextColor" id="taleTextColor" value={this.state.taleTextColor} onChange={this.handleChange} /><br />
                     <button>Elige color del texto</button><br />
-                </form>
+                </form> */}
 
             </div>
         )

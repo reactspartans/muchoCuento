@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import './Editor.css'
 import { TalesEditor } from './components/TaleEditor/stateful/TalesEditor';
 import { Switch, Route } from 'react-router-dom'
 import { Index } from './components/Inicio/Index';

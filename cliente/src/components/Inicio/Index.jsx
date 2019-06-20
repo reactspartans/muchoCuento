@@ -11,7 +11,7 @@ export class Index extends Component {
                     <p className="txt-index">
                         Mucho Cuento te permite crear
                         tu propio cuento desde cero.
-                        elige tu imagen de fondo, tus
+                        Elige tu imagen de fondo, tus
                         personajes y empieza a escribir
                         tu historia
                         </p>

@@ -81,9 +81,9 @@ export default class BookForm extends Component {
   render() {
     return (
       <>
-        <Button variant="light" onClick={this.handleShow}>
+        <button className='bookform-button' onClick={this.handleShow}>
           Crear cuento
-          </Button>
+          </button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>

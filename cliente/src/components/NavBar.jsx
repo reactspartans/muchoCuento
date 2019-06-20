@@ -28,23 +28,19 @@ export class NavBar extends Component {
 
             <nav>
                 <ul>
-                    <li className='lis'><Link className='links' to='/'><h3>MuchoCuento</h3></Link></li>
-                    <li className='lis' ><Link className='links' to='/'><Button>Home</Button></Link></li>
+                    <li className='lis'><Link className='links logo' to='/'><h3>MuchoCuento</h3></Link></li>
+                    <li className='lis' ><Link className='links li-size' to='/'>Home</Link></li>
 
                     {this.props.user ?
-                        <li className='lis'><BookForm setTheBookId={this.props.setTheBookId} /></li> : null}
+                        <li className='lis li-size'><BookForm setTheBookId={this.props.setTheBookId} /></li> : null}
 
 
-                    {this.props.user ? <li className='lis'><Button onClick={this.logout}>Logout </Button></li> :
+                    {this.props.user ? <li className='lis'><Button className='li-size' onClick={this.logout}>Logout </Button></li> :
 
                         <li className='lis'><SingUp setTheUser={this.props.setTheUser} /> <Login setTheUser={this.props.setTheUser} /> </li>
                     }
 
-                    {this.props.user ? <li> <Link to={`/prof/private/profile/${this.props.user._id}`} className='links'> Perfil</Link> </li> : null}
-
-
-
-
+                    {this.props.user ? <li className="lis"> <Link to={`/prof/private/profile/${this.props.user._id}`} className='links li-size'> Perfil</Link> </li> : null}
 
                 </ul>
             </nav>
