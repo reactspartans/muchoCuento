@@ -134,8 +134,10 @@ export class FormDesign extends Component {
             <div className='toolvar-div'>
 
                 <form onSubmit={(e) => this.handleSubmit(e)} className='toolbar'>
+                    {/* <label for="imageURL" className="toolbar-file"> */}
                     <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} status='background' /> <br />
-                     {this.state.data && <button>Añadir fondo</button>}
+                     {this.state.data && <button className="button-add-image">Añadir fondo</button>}
+                     {/* </label> */}
 
 
                     <ModalGallery nuevaImg={this.props.nuevaImg} status="background" go={this.state.go} goFunction={this.go} />
@@ -143,10 +145,10 @@ export class FormDesign extends Component {
 
 
                 <form onSubmit={(e) => this.handleSubmitChar(e)} className='toolbar'>
-
+                     {/* <label for="imageURLChar" className="toolbar-file"> */}
                     <input type="file" name="imageURLChar" id="imageURLChar" placeholder='Pega la URL' value={this.state.imageURLChar} onChange={this.handleFileUpload} status='character' /><br />
-                     {this.state.data && <button>Añadir personaje</button>}
-
+                     {this.state.data && <button className="button-add-image">Añadir personaje</button>}
+                    {/* </label> */}
                     <ModalGallery nuevaImg={this.props.nuevaImg} go={this.state.go} goFunction={this.go} status='character' />
                 </form>
 
@@ -198,8 +200,8 @@ export class FormSave extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <button>Guarda tu cuento</button>
+            <form onSubmit={this.handleSubmit} className='toolbar'>
+                <button  className="button-save">Guarda tu cuento</button>
             </form>
         )
     }

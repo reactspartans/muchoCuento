@@ -104,11 +104,32 @@ nav ul{
     width: 1000px
 }
 
+.toolbar-file {
+    border-radius: 10px;
+    padding: 10px
+} 
 
+.toolbar input {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px grey;
+    
+}
 
- .horror-button{
+.button-add-image {
+    margin-bottom: 20px
+}
+
+.button-save {
+   border-radius: 20px;
+   padding: 10px; 
+   background-color: rgb(7, 113, 161);
+   color: white
+
+}
+ /* .horror-button{
      height: 4vh;
- }
+ } */
 
 
 
@@ -130,7 +151,7 @@ nav ul{
 
 
 
- @media (max-width:320px) {
+
 
 
     /*NavBar*/
@@ -146,8 +167,16 @@ nav ul{
     justify-content: space-around;
 }
 
+.logout {
+     background-color: unset;
+    border: none;
+    color: black;
 
- }
+}
+.logout:hover {
+    text-decoration: none;
+    color: white; 
+}
 
 
 .test{
