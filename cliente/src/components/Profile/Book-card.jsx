@@ -18,11 +18,7 @@ export class BookCard extends Component {
     })
   }
 
-  setRedirectEdit = () => {
-    this.setState({
-      redirectEd: true
-    })
-  }
+
 
   // renderRedirect = () => {
 
@@ -43,7 +39,6 @@ export class BookCard extends Component {
           <header className="card-body">
             <h5 className="card-title">{this.props.name}</h5>
             <Button variant="outline-success" onClick={this.setRedirect} >Leer cuento</Button>
-            <Button variant="outline-success" onClick={this.setRedirectEdit} >Editar cuento</Button>
             {/* <Link to={`/cuentos/tales-viewer/${this.props._id}`}></Link> */}
           </header>
         </article>

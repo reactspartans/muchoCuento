@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import BookService from '../../services/book-service'
-import { BookCard } from './Book-card'
+import { YourBookCard } from './YourBookCard'
 
 export class MyBooks extends Component {
     constructor(props) {
@@ -30,9 +30,8 @@ export class MyBooks extends Component {
 
     render() {
         return (
-            <div>
-                <h2>Mis cuentos</h2>
-                {this.state.Books ? this.state.Books.map((elm, idx) => <BookCard redir={this.props.redir} key={idx} {...elm} />) : null}
+            <div className='flex-book-card'>
+                {this.state.Books ? this.state.Books.map((elm, idx) => <YourBookCard redir={this.props.redir} key={idx} {...elm} />) : null}
             </div>
         )
     }

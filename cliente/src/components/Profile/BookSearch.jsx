@@ -71,8 +71,8 @@ export class SearchBooks extends Component {
       {this.state.redirect && 
       <Redirect to={`/cuentos/tales-viewer/${this.state.redirect}`} />
       }
-        <button className='search-book-btn' onClick={this.handleShow}>
-          Buscar cuentos
+        <button className='cardimg-button' onClick={this.handleShow}>
+          <h4>Buscar cuentos</h4>
         </button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>

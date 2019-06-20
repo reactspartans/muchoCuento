@@ -84,13 +84,21 @@ export class Profile extends Component {
         return (
 
             <div>
+                <hr/>
                 {this.state.redirectEdit && <Redirect to={`/cuentos/tales-editor/${this.state.redirect}`} />}
                 {this.state.redirect && <Redirect to={`/cuentos/tales-viewer/${this.state.redirect}`} />}
-                <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
+               <div className='top-profile'> 
+                <h3>Bienvenido, {this.props.loggedInUser.username}</h3>
+                <SearchBooks />
+                </div>
                 <div className='user-info profile'>
                     <UserInfo user={this.state} close={this.handleClose} />
-                    <SearchBooks />
-                    <MyBooks user={this.props.loggedInUser._id} redir={this.getRed} />
+                    <div className='mybooks-cards'>
+                        <h4>Mis cuentos</h4>
+                        
+                            <MyBooks user={this.props.loggedInUser._id} redir={this.getRed} />
+
+                    </div>         
                 </div>
             </div>
 

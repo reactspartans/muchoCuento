@@ -77,7 +77,7 @@ export class UserInfo extends Component {
 
                 <form onSubmit={(e) => this.handleSubmit(e, "imageURL")} className='toolbar'>
                     <input className='upload-img' onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Elige imagen' /> <br />
-                    {this.state.data && <Button type='submit'>Cambiar imagen de perfil</Button>}<br />
+                    {this.state.data && <button className='cardimg-button' type='submit'>Cambiar imagen de perfil</button>}<br />
                 </form>
 
 

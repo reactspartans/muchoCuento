@@ -62,12 +62,12 @@ export class ModalGallery extends Component {
           Galería imagenes
             </Button>
 
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal  size='lg' show={this.state.show} onHide={this.handleClose}>
 
           <Modal.Header closeButton>
             <Modal.Title>Galeria de imagenes</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body >
             <form>
               <InputGroup className="mb-3">
                 <InputGroup.Prepend>

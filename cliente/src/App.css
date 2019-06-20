@@ -5,11 +5,7 @@ body{
 
 
 
-/* NAVBAR */
-nav{
-    /* background-color: rgba(226, 110, 43, 0.479); */
-    padding: 10px 10px;
-}
+
 nav ul{
     margin-top: 30px;
     display: flex;
@@ -22,6 +18,7 @@ nav ul{
 }
 .logo h3{
     font-size: 2.5em;
+    margin-top: -5px;
 }
 
 
@@ -166,21 +163,14 @@ nav ul{
 
 
 .profile-photo img{
-    width: 80%;
-    height: 80%;
+    width: 66%;
+    height: 66%;
     border-radius: 50%;
     object-fit: fill; 
     display: flex;
 
 }
 
-.search-book-btn{
-    height: fit-content;
-    padding: 10px;
-    border-style: solid;
-    border-color: black;
-    border-width: 4px;
-}
 
 .upload-img{
     width: fit-content;
@@ -193,3 +183,72 @@ nav ul{
     border: none;
 }
 
+.mybook-card-img{
+    width: 300px;
+    height: 200px;
+    object-fit: cover; 
+}
+
+.flex-book-card{
+    /* width: 50vh; */
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+}
+
+.carditas{
+    width: 400px;
+    /* padding-right: 50px; */
+}
+
+.mybooks-card h4{
+    margin-left: 99px;
+    width: 800px;
+}
+
+.cardimg-button{
+    background-color: rgb(248, 240, 232);
+    border: none;
+    transition: 800ms;
+    width: 240px;
+    height: 50px;
+    border-radius: 40px;
+}
+.cardimg-button:hover{
+    background-color:  rgb(231, 210, 189);
+    transition: 800ms;
+}
+
+.top-profile{
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 190px;
+}
+
+.card-button{
+    background-color: rgb(248, 240, 232);
+    border: none;
+    transition: 800ms;
+    width: 130px;
+    height: 50px;
+    border-radius: 40px;
+    display: block;
+    margin: 0 auto;
+}
+.card-button:hover{
+    background-color:  rgb(231, 210, 189);
+    transition: 800ms;
+}
+
+.card-container{
+    width: 330px;
+}
+
+.card-container img{
+    display: block;
+    margin: 0 auto;
+}
+.card-container h5{
+    text-align: center;
+}
