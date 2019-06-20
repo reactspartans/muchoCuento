@@ -19,6 +19,7 @@ export class Profile extends Component {
             email: this.props.loggedInUser.email,
             password: this.props.loggedInUser.password,
             redirect: false,
+            redirectEdit: false,
             theBookId: ''
         }
         this.services = new GalleryServices()
@@ -78,14 +79,19 @@ export class Profile extends Component {
 
     }
 
+     getRedEdit = (thing) => {
+        this.setState({
+            redirectEdit: thing
+        })
+
+    }
 
     render() {
 
         return (
 
             <div>
-                <hr/>
-                {this.state.redirectEdit && <Redirect to={`/cuentos/tales-editor/${this.state.redirect}`} />}
+                {this.state.redirectEdit && <Redirect to={`/tales-editor/${this.state.redirectEdit}`} />}
                 {this.state.redirect && <Redirect to={`/cuentos/tales-viewer/${this.state.redirect}`} />}
                <div className='top-profile'> 
                 <h3>Bienvenido, {this.props.loggedInUser.username}</h3>
@@ -96,7 +102,7 @@ export class Profile extends Component {
                     <div className='mybooks-cards'>
                         <h4>Mis cuentos</h4>
                         
-                            <MyBooks user={this.props.loggedInUser._id} redir={this.getRed} />
+                            <MyBooks  user={this.props.loggedInUser._id} redir={this.getRed} getRedEdit={this.getRedEdit} />
 
                     </div>         
                 </div>

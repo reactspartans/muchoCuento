@@ -31,7 +31,7 @@ export class MyBooks extends Component {
     render() {
         return (
             <div className='flex-book-card'>
-                {this.state.Books ? this.state.Books.map((elm, idx) => <YourBookCard redir={this.props.redir} key={idx} {...elm} />) : null}
+                {this.state.Books ? this.state.Books.map((elm, idx) => <YourBookCard getRedEdit={this.props.getRedEdit} redir={this.props.redir} key={idx} {...elm} />) : null}
             </div>
         )
     }

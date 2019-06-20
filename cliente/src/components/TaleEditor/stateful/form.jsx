@@ -135,7 +135,7 @@ export class FormDesign extends Component {
 
                 <form onSubmit={(e) => this.handleSubmit(e)} className='toolbar'>
                     <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} status='background' /> <br />
-                    <button>Añadir fondo</button><br />
+                     {this.state.data && <button>Añadir fondo</button>}
 
 
                     <ModalGallery nuevaImg={this.props.nuevaImg} status="background" go={this.state.go} goFunction={this.go} />
@@ -145,7 +145,7 @@ export class FormDesign extends Component {
                 <form onSubmit={(e) => this.handleSubmitChar(e)} className='toolbar'>
 
                     <input type="file" name="imageURLChar" id="imageURLChar" placeholder='Pega la URL' value={this.state.imageURLChar} onChange={this.handleFileUpload} status='character' /><br />
-                    <button>Añadir personaje</button><br />
+                     {this.state.data && <button>Añadir personaje</button>}
 
                     <ModalGallery nuevaImg={this.props.nuevaImg} go={this.state.go} goFunction={this.go} status='character' />
                 </form>
@@ -153,7 +153,7 @@ export class FormDesign extends Component {
                 <form onSubmit={(e) => this.handleSubmitText(e, "taleText")} className='toolbar'>
 
                     <input type="text" name="taleText" id="taleText" placeholder='Escribe tu cuento' value={this.state.taleText} onChange={this.handleChange} /><br />
-                    <button>Escribe tu cuento</button><br />
+                   {this.state.data && <button>Escribe tu cuento</button>}
 
                 </form>
 {/* 
