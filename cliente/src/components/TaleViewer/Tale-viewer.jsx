@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import { Carousel } from "react-responsive-carousel";
 import BookServices from '../../services/book-service'
-import { URLSearchParams } from "url";
 
 export class TaleViewer extends Component{
     constructor(props){

@@ -40,6 +40,40 @@ router.get('/tales-viewer/:_id', (req, res) => {
 })
 
 
+
+
+
+//cuentos del user
+router.get('/mybooks/:_id',  (req, res) => {
+  const id= req.params._id
+  console.log(req.params._id, 'the id')
+  Book.find({creatorID: id})
+    .then(data => {
+      console.log(data)
+      return res.json(data)})
+    .catch(err => console.log('Error:', err))
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //añadir una pagina al cuento
 router.post('/addPage', (req, res) => {
   // console.log('----------entro ruta salvar page------------', req.body)

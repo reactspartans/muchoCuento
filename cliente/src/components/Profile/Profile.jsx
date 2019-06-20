@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import GalleryServices from '../../services/profile-services'
 import { SearchBooks } from './BookSearch';
 import { UserInfo } from './User-info'
+import {MyBooks} from './MyBooks'
+import BookServices from '../../services/book-service'
+import {Redirect} from 'react-router-dom'
+
+
+
 
 export class Profile extends Component {
     constructor(props) {
@@ -12,13 +18,20 @@ export class Profile extends Component {
             username: this.props.loggedInUser.username,
             email: this.props.loggedInUser.email,
             password: this.props.loggedInUser.password,
-            show: false,
             redirect: false,
             theBookId: ''
         }
         this.services = new GalleryServices()
+        this.services = new BookServices()
+        console.log(this.props.match.params._id)    
     }
 
+    
+    // componentDidMount(){
+        
+    //     this.services.getUserBook(this.props.loggedInUser._id)
+    //         .then(theBooks=>this.setState({ Books: theBooks}))
+    // }
 
     handleChange = (e) => {
         const { name, value } = e.target
@@ -58,32 +71,29 @@ export class Profile extends Component {
             })
     }
 
-    handleShow = () => {
+    getRed=(thing)=>{
         this.setState({
-            show: true
+          redirect: thing
         })
-    }
-
-
-    handleClose = () => {
-        this.setState({
-            show: false
-        })
-    }
-
+        
+      }
   
 
     render() {
-        // console.log(this.props.loggedInUser.profilePhoto)
+        
         return (
+            
             <div>
+                {this.state.redirect && <Redirect to={`/cuentos/tales-viewer/${this.state.redirect}`} />}
             <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
             <div className='user-info profile'>    
                 <UserInfo user={this.state} close={this.handleClose}/>                
                 <SearchBooks/>
+                <MyBooks user={this.props.loggedInUser._id} redir={this.getRed}/>
             </div>
             </div>
 
         )
     }
+
 }

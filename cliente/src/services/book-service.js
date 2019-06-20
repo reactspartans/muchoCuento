@@ -10,6 +10,12 @@ export default class services {
     })
   }
 
+  getUserBook = id =>{
+    return this.service.get(`/mybooks/${id}`)
+      .then(res => res.data)
+      .catch(err => console.log(err))
+  }
+
   postNewBook = book => {
     console.log(book)
     return this.service.post('/newBook', book)
@@ -60,9 +66,8 @@ export default class services {
 
   bookDetail =(id)=>{
     return this.service.get(`/tales-viewer/${id}`)
-                .then(res => res.data
-    )
-    .catch(err => console.log(err));
+      .then(res => res.data)
+      .catch(err => console.log(err));
   }
 }
 
