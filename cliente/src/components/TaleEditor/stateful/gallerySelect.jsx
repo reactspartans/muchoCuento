@@ -28,7 +28,13 @@ export class ModalGallery extends Component {
 
   componentDidMount() {
     this.services.getGallery()
-      .then(allImages => this.setState({ gallery: allImages }))
+      .then(allImages => {
+        allImages = allImages.map(img => {
+          img.crossOrigin = "anonymous"
+          return img
+        })
+        this.setState({ gallery: allImages })
+      })
   }
 
   searchImage(e) {

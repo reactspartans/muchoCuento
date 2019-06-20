@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import GalleryServices from '../../services/profile-services'
 import { SearchBooks } from './BookSearch';
 import { UserInfo } from './User-info'
-import {MyBooks} from './MyBooks'
+import { MyBooks } from './MyBooks'
 import BookServices from '../../services/book-service'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 
 
@@ -23,12 +23,12 @@ export class Profile extends Component {
         }
         this.services = new GalleryServices()
         this.services = new BookServices()
-        console.log(this.props.match.params._id)    
+        console.log(this.props.match.params._id)
     }
 
-    
+
     // componentDidMount(){
-        
+
     //     this.services.getUserBook(this.props.loggedInUser._id)
     //         .then(theBooks=>this.setState({ Books: theBooks}))
     // }
@@ -71,26 +71,27 @@ export class Profile extends Component {
             })
     }
 
-    getRed=(thing)=>{
+    getRed = (thing) => {
         this.setState({
-          redirect: thing
+            redirect: thing
         })
-        
-      }
-  
+
+    }
+
 
     render() {
-        
+
         return (
-            
+
             <div>
+                {this.state.redirectEdit && <Redirect to={`/cuentos/tales-editor/${this.state.redirect}`} />}
                 {this.state.redirect && <Redirect to={`/cuentos/tales-viewer/${this.state.redirect}`} />}
-            <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
-            <div className='user-info profile'>    
-                <UserInfo user={this.state} close={this.handleClose}/>                
-                <SearchBooks/>
-                <MyBooks user={this.props.loggedInUser._id} redir={this.getRed}/>
-            </div>
+                <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
+                <div className='user-info profile'>
+                    <UserInfo user={this.state} close={this.handleClose} />
+                    <SearchBooks />
+                    <MyBooks user={this.props.loggedInUser._id} redir={this.getRed} />
+                </div>
             </div>
 
         )
