@@ -44,6 +44,8 @@ router.post('/cuentos/upload/page', uploaderPage.single('imageUrl'), (req, res, 
   }
 
   const { secure_url } = { ...req.file }
+  console.log(req.file, 'back upload a cloudinary composicion')
+
 
   res.status(200).json(secure_url)
 

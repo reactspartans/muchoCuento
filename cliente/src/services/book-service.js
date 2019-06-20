@@ -51,20 +51,20 @@ export default class services {
 
 
   UploadPage = (theFile) => {
-    console.log(theFile)
+    console.log(theFile, '===================axios cloudinary composicion imagen')
     return this.service.post(`/upload/page`, theFile)
       .then(res => res.data)
       .catch(err => console.log(err));
   }
 
   UpdateBook = (pagesToView, id) => {
-    console.log(pagesToView)
-    return this.service.put(`/update/${id}`, pagesToView)
+    console.log(pagesToView, '**************pagesToView Axios')
+    return this.service.put(`/update/${id}`, { pagesToView })
       .then(res => res.data)
       .catch(err => console.log(err));
   }
 
-  bookDetail =(id)=>{
+  bookDetail = (id) => {
     return this.service.get(`/tales-viewer/${id}`)
       .then(res => res.data)
       .catch(err => console.log(err));
@@ -79,38 +79,3 @@ export default class services {
 
 
 
-
-/* getGallery = () => {
-
- return this.service.get('/')
-   .then(res => res.data)
-   .catch(err => console.log('Error', err))
-}
-
-
-getImageGallery = id => {
- return this.service.get(`/${id}`)
-   .then(res => res.data)
-   .catch(err => console.log('Error', err))
-}
-
-
-postImageGallery = image => {
- return this.service.post('/addImage/', image)
-   .then(res => res.data)
-   .catch(err => console.log(err))
-}
-
-postImagePage = image => {
- return this.service.post('/addImagePage', image)
-   .then(res => res.data)
-   .catch(err => console.log(err))
-}
-
-handleUpload = theFile => {
-
- return this.service.post('/upload', theFile)
-   .then(res => res.data)
-   .catch(err => console.log(err));
-}
-} */

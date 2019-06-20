@@ -14,7 +14,7 @@ var storage = cloudinaryStorage({
   folder: 'Profile-photos',
   allowedFormats: ['jpg', 'png'],
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    cb(null, file.originalname + new Date());
   }
 })
 
