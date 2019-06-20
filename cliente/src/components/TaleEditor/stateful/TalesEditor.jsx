@@ -285,9 +285,9 @@ export class TalesEditor extends Component {
               <TaleText selected={this.state.selectedShapeName} name={'david'} text={this.state.page.texts[2]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
               <TaleText selected={this.state.selectedShapeName} name={'manu'} text={this.state.page.texts[3]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
               <TaleText selected={this.state.selectedShapeName} name={'noah'} text={this.state.page.texts[4]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
-              <TaleText selected={this.state.selectedShapeName} name={'guille'} text={this.state.page.texts[4]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
-              <TaleText selected={this.state.selectedShapeName} name={'oli'} text={this.state.page.texts[4]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
-              <TaleText selected={this.state.selectedShapeName} name={'olivia'} text={this.state.page.texts[4]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
+              <TaleText selected={this.state.selectedShapeName} name={'guille'} text={this.state.page.texts[5]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
+              <TaleText selected={this.state.selectedShapeName} name={'oli'} text={this.state.page.texts[6]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
+              <TaleText selected={this.state.selectedShapeName} name={'olivia'} text={this.state.page.texts[7]} go={this.state.go} color={this.state.page.taleTextColor} goFunction={this.go} saveText={this.saveTextToPage} />
 
 
 

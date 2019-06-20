@@ -51,7 +51,17 @@ export default class services {
       .then(res => res.data)
       .catch(err => console.log(err));
   }
+
+  bookDetail =(id)=>{
+    return this.service.get(`/tales-viewer/${id}`)
+                .then(res => res.data
+    )
+    .catch(err => console.log(err));
+  }
 }
+
+
+
 
 
 

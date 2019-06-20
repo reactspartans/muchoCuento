@@ -71,21 +71,17 @@ export class Profile extends Component {
         })
     }
 
-    getBookId=(bookId)=>{
-        this.setState({
-            theBookId: bookId
-        })
-    }
+  
 
     render() {
         // console.log(this.props.loggedInUser.profilePhoto)
         return (
             <div>
             <h1>Bienvenido, {this.props.loggedInUser.username}</h1>
-            <div className='user-info'>    
+            <div className='user-info profile'>    
                 <UserInfo user={this.state} close={this.handleClose}/>                
+                <SearchBooks/>
             </div>
-                <SearchBooks getId={this.getBookId}/>
             </div>
 
         )

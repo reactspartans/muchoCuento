@@ -29,10 +29,13 @@ router.get('/', (req, res) => {
 
 
 //detalles cuento
-router.get('/:id', (req, res) => {
-  const id = req.params.id
+router.get('/tales-viewer/:_id', (req, res) => {
+  const id= req.params._id
+  
   Book.findById(id)
-    .then(data => res.json(data))
+    .then(data => {
+      console.log(data)
+      return res.json(data)})
     .catch(err => console.log('Error:', err))
 })
 

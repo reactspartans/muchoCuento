@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './Editor.css'
 import { TalesEditor } from './components/TaleEditor/stateful/TalesEditor';
 import { Switch, Route } from 'react-router-dom'
 import { Index } from './components/Inicio/Index';
@@ -56,8 +57,8 @@ export default class App extends Component {
           <Route path="/" exact component={Index} />
 
           <Route path="/tales-editor" exact render={() => <TalesEditor user={this.state.loggedInUser} getTheBookId={this.state.bookId} />} />
-          <Route path="/tales-viewer/:_id" exact render={() => <TaleViewer user={this.state.loggedInUser} getTheBookId={this.state.bookId} />} />          
-          <ProtectedRoute path={`/prof/private/profile/:_id`} exact component={Profile} user={this.state.loggedInUser} setTheUser={this.setUser} />
+          <Route path="/cuentos/tales-viewer/:_id" exact render={(p) => <TaleViewer {...p} user={this.state.loggedInUser} bookId={this.getTheBookId} />} />          
+          <ProtectedRoute path='/prof/private/profile/:_id' exact component={Profile} user={this.state.loggedInUser} setTheUser={this.setUser} />
         </Switch>
 
       </main>

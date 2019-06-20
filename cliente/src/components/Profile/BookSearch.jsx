@@ -30,12 +30,12 @@ export class SearchBooks extends Component {
   }
 
   
-
-  componentDidMount() {
+  componentDidMount(){
     this.services.booksList()
-      .then(allBooks => this.setState({ books: allBooks }))
+      .then(book=> this.setState({
+        books: book
+      }))
   }
-
 
 
   searchBook(e) {
@@ -64,20 +64,16 @@ export class SearchBooks extends Component {
     
   }
 
-  renderRedirect = () => {
-      return <Redirect to={`/tales-viewer/${this.state.redirect}`} id={this.state.redirect} />
-  }
-
   render() {
-    if(this.state.redirect){
-       this.renderRedirect()
-    }
-    else 
+    console.log(this.state.redirect)
     return (
       <>
-        <Button className='horror-button' variant="light" onClick={this.handleShow}>
+      {this.state.redirect && 
+      <Redirect to={`/cuentos/tales-viewer/${this.state.redirect}`} />
+      }
+        <nutton className='search-book-btn' onClick={this.handleShow}>
           Buscar cuentos
-        </Button>
+        </nutton>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
 

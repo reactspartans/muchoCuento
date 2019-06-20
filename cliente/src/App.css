@@ -56,16 +56,8 @@ nav ul{
     width: 1000px
 }
 
-.profile-photo img{
-    width: 50%;
-    height: 85%;
-    border-radius: 50%;
-    object-fit: fill; 
-}
 
-.user-info{
-    display: flex;
-}
+
  .horror-button{
      height: 4vh;
  }
