@@ -58,7 +58,7 @@ router.get('/mybooks/:_id', (req, res) => {
 
 
 //editar un cuento
-router.get('/tales-edit/:book_id', (req, res) => {
+router.get('/tales-edititor/:book_id', (req, res) => {
   const book_id = req.params.book_id
   Book.findOne({ _id: req.params.trip_id })
     .then(book => {

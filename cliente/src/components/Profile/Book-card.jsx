@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-
+import {Redirect} from 'react-router-dom'
 
 export class BookCard extends Component {
   constructor(props) {
@@ -21,6 +21,7 @@ export class BookCard extends Component {
   setRedirectEdit = () => {
     this.setState({
       redirectEd: true
+
     })
   }
 
@@ -30,15 +31,23 @@ export class BookCard extends Component {
   //     return <Redirect to='/tales-viewer' />
   //   } 
   // }
+ 
+
 
 
   render() {
     if (this.state.redirect === true) {
       this.props.redir(this.props._id)
     }
+    
+    if (this.state.redirectEd === true) {
+      this.props.getRedEdit(this.props._id)
+    }
 
     return (
+
       <div className="card-image">
+
         <article className="card">
           <header className="card-body">
             <h5 className="card-title">{this.props.name}</h5>
@@ -49,6 +58,6 @@ export class BookCard extends Component {
         </article>
       </div>
     )
-  }
+    }
 }
 // onClick={this.handleView}

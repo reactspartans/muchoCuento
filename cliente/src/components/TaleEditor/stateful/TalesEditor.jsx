@@ -137,7 +137,7 @@ export class TalesEditor extends Component {
 
       // console.log("salvado de pagina", this.state.pageToSave)
       const _pageToSave = { ...this.state.pageToSave };
-      _pageToSave.bookId = this.props.getTheBookId
+      _pageToSave.bookId = this.props.getTheBookId|| this.props.match.params.id 
       this.savePageImage()
         .then(() => {
           this.servicesBook.postNewPage(_pageToSave)
@@ -273,12 +273,12 @@ export class TalesEditor extends Component {
 
         // promise.then(res => {
         //   console.log(res, 'respuesta promesa************************')
-        //   console.log(this.props.getTheBookId, 'book id')
+        //   console.log(this.props.getTheBookId|| this.props.match.params.id, 'book id')
         //   console.log(this.state.book.pagesToView, 'para mandar a updateBook^^^^^^^^^^^^^^^^^^^^')
 
 
 
-        return this.servicesBook.UpdateBook(response, this.props.getTheBookId)
+        return this.servicesBook.UpdateBook(response, this.props.getTheBookId|| this.props.match.params.id)
           .then(updatedBook => console.log(updatedBook, '-----------------respuesta back updateBook'))
           .catch(err => console.log(err))
         // })
@@ -321,7 +321,7 @@ export class TalesEditor extends Component {
         <Stage className="stage" width={window.innerWidth / 1.2} height={window.innerHeight / 1.2} ref="stage" onClick={this.handleStageClick}>
           {/* ref={node => this.stage = node} */}
           <Layer  >
-            {/* <RectBackgroundStage /> */}
+            <RectBackgroundStage />
             <Group ref="grupito" >
 
               {this.state.page.imageBackground ?

@@ -71,7 +71,7 @@ export default class services {
   }
 
   bookEdit = (id) => {
-    return this.service.get(`/tales-edit/${id}`)
+    return this.service.get(`/tales-edititor/${id}`)
       .then(res => res.data)
       .catch(err => console.log(err))
 

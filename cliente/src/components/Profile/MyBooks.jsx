@@ -32,7 +32,7 @@ export class MyBooks extends Component {
         return (
             <div>
                 <h2>Mis cuentos</h2>
-                {this.state.Books ? this.state.Books.map((elm, idx) => <BookCard redir={this.props.redir} key={idx} {...elm} />) : null}
+                {this.state.Books ? this.state.Books.map((elm, idx) => <BookCard getRedEdit={this.props.getRedEdit} redir={this.props.redir} key={idx} {...elm} />) : null}
             </div>
         )
     }
