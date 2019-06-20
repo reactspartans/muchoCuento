@@ -44,10 +44,16 @@ export default class services {
   }
 
 
-  UploadPage = (theFile, id) => {
+  UploadPage = (theFile) => {
     console.log(theFile)
-    console.log(id)
-    return this.service.post(`/upload/page/${id}`, theFile)
+    return this.service.post(`/upload/page`, theFile)
+      .then(res => res.data)
+      .catch(err => console.log(err));
+  }
+
+  UpdateBook = (pagesToView, id) => {
+    console.log(pagesToView)
+    return this.service.put(`/update/${id}`, pagesToView)
       .then(res => res.data)
       .catch(err => console.log(err));
   }

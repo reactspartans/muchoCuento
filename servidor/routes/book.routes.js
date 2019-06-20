@@ -83,7 +83,21 @@ router.get('/edit/:book_id', (req, res) => {
 })
  */
 
+router.put("/update/:id", (req, res) => {
+  const bookId = req.params.id
+  const pagesToView = req.body
+  console.log(pagesToView)
 
+  Book.findByIdAndUpdate(bookId, { $set: { pagesToView: pagesToView } }, { new: true })
+    .then(book => {
+      console.log(book)
+      res.status(200).json(book);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(403).json(err)
+    })
+})
 
 //añadir un texto al modelo texto
 router.post('/addText', (req, res) => {

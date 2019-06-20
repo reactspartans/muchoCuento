@@ -34,7 +34,7 @@ router.post('/galeria/upload', uploader.single("imageUrl"), (req, res, next) => 
 })
 
 
-router.post('/cuentos/upload/page/:id', uploaderPage.single('imageUrl'), (req, res, next) => {
+router.post('/cuentos/upload/page', uploaderPage.single('imageUrl'), (req, res, next) => {
 
 
 
@@ -44,17 +44,9 @@ router.post('/cuentos/upload/page/:id', uploaderPage.single('imageUrl'), (req, r
   }
 
   const { secure_url } = { ...req.file }
-  const bookId = req.params.id
 
-  Book.findByIdAndUpdate(bookId, { $push: { pagesToView: secure_url } }, { new: true })
-    .then(book => {
-      console.log(book)
-      res.status(200).json(book);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(403).json(err)
-    })
+  res.status(200).json(secure_url)
+
 
 })
 
