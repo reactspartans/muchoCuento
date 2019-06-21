@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import GalleryServices from '../../../services/galeria-service'
 import { ModalGallery } from './gallerySelect'
 import BookServices from '../../../services/book-service'
+import { Link } from 'react-router-dom'
+
 
 export class FormDesign extends Component {
     constructor(props) {
@@ -136,8 +138,8 @@ export class FormDesign extends Component {
                 <form onSubmit={(e) => this.handleSubmit(e)} className='toolbar'>
                     {/* <label for="imageURL" className="toolbar-file"> */}
                     <input onChange={this.handleFileUpload} type="file" name="imageURL" id="imageURL" placeholder='Pega la URL' value={this.state.imageURL} status='background' /> <br />
-                     {this.state.data && <button className="button-add-image">Añadir fondo</button>}
-                     {/* </label> */}
+                    {this.state.data && <button className="button-add-image">Añadir fondo</button>}
+                    {/* </label> */}
 
 
                     <ModalGallery nuevaImg={this.props.nuevaImg} status="background" go={this.state.go} goFunction={this.go} />
@@ -145,9 +147,9 @@ export class FormDesign extends Component {
 
 
                 <form onSubmit={(e) => this.handleSubmitChar(e)} className='toolbar'>
-                     {/* <label for="imageURLChar" className="toolbar-file"> */}
+                    {/* <label for="imageURLChar" className="toolbar-file"> */}
                     <input type="file" name="imageURLChar" id="imageURLChar" placeholder='Pega la URL' value={this.state.imageURLChar} onChange={this.handleFileUpload} status='character' /><br />
-                     {this.state.data && <button className="button-add-image">Añadir personaje</button>}
+                    {this.state.data && <button className="button-add-image">Añadir personaje</button>}
                     {/* </label> */}
                     <ModalGallery nuevaImg={this.props.nuevaImg} go={this.state.go} goFunction={this.go} status='character' />
                 </form>
@@ -155,10 +157,10 @@ export class FormDesign extends Component {
                 <form onSubmit={(e) => this.handleSubmitText(e, "taleText")} className='toolbar'>
 
                     <input type="text" name="taleText" id="taleText" placeholder='Escribe tu cuento' value={this.state.taleText} onChange={this.handleChange} /><br />
-                   {this.state.data && <button>Escribe tu cuento</button>}
+                    {this.state.data && <button>Escribe tu cuento</button>}
 
                 </form>
-{/* 
+                {/* 
                 <form className='toolbar'>
 
                     <input type="color" name="taleTextColor" id="taleTextColor" value={this.state.taleTextColor} onChange={this.handleChange} /><br />
@@ -200,9 +202,12 @@ export class FormSave extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className='toolbar'>
-                <button  className="button-save">Guarda tu cuento</button>
-            </form>
+            <div>
+                <form onSubmit={this.handleSubmit} className='toolbar'>
+                    <button className="button-save">Salvar</button>
+                </form>
+                <Link className="button-save ver-cuentos" to='/prof/private/profile/:_id'>Ver tus cuentos</Link>
+            </div>
         )
     }
 }

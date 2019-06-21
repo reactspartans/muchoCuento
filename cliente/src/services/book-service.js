@@ -78,6 +78,13 @@ export default class services {
 
   }
 
+  bookDelete = (id) => {
+    return this.service.post(`/delete/${id}`)
+      .then(res => res.data)
+      .catch(err => console.log(err))
+
+  }
+
 
 
 

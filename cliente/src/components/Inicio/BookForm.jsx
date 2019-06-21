@@ -69,7 +69,7 @@ export default class BookForm extends Component {
         // console.log(res)
         this.props.setTheBookId(res._id)
         this.setState({
-          book_id: res._id, red:true
+          book_id: res._id, red: true
         })
 
         //Función desde tales editor para liftUp state
@@ -79,8 +79,8 @@ export default class BookForm extends Component {
 
 
   render() {
-    if(this.state.red){
-      return <Redirect to={`/tales-editor/${this.state.book_id}`}/>
+    if (this.state.red) {
+      return <Redirect to={`/tales-editor/${this.state.book_id}`} />
     }
     return (
       <>

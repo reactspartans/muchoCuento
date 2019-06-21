@@ -35,7 +35,7 @@ export class NavBar extends Component {
                         <li className='lis li-size'><BookForm setTheBookId={this.props.setTheBookId} /></li> : null}
 
 
-                    {this.props.user ? <li className='lis'><Button className='li-size logout' onClick={this.logout}>Logout </Button></li> :
+                    {this.props.user ? <li className='lis'><button className='li-size logout' onClick={this.logout}>Logout </button></li> :
 
                         <li className='lis'><SingUp setTheUser={this.props.setTheUser} /> <Login setTheUser={this.props.setTheUser} /> </li>
                     }

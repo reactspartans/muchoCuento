@@ -173,4 +173,19 @@ router.post('/addText', (req, res) => {
 })
 
 
+//borrar cuento
+
+router.post('/delete/:_id', (req, res) => {
+  const book_id = req.params._id
+  Book.findByIdAndRemove(book_id)
+    .then(theBook => {
+      Book.find({ creatorID: req.user._id })
+        .then(books => {
+          res.json(books)
+        })
+    })
+    .catch(error => console.log(error))
+})
+
+
 module.exports = router;

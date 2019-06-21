@@ -55,7 +55,6 @@ export class Profile extends Component {
 
     }
 
-
     handleSubmit = (e) => {
         e.preventDefault()
         // console.log('handleSubmit', e.target)
@@ -79,7 +78,7 @@ export class Profile extends Component {
 
     }
 
-     getRedEdit = (thing) => {
+    getRedEdit = (thing) => {
         this.setState({
             redirectEdit: thing
         })
@@ -93,18 +92,17 @@ export class Profile extends Component {
             <div>
                 {this.state.redirectEdit && <Redirect to={`/tales-editor/${this.state.redirectEdit}`} />}
                 {this.state.redirect && <Redirect to={`/cuentos/tales-viewer/${this.state.redirect}`} />}
-               <div className='top-profile'> 
-                <h3>Bienvenido, {this.props.loggedInUser.username}</h3>
-                <SearchBooks />
+                <div className='top-profile'>
+                    <h3>Bienvenido, {this.props.loggedInUser.username}</h3>
+                    <SearchBooks />
                 </div>
                 <div className='user-info profile'>
                     <UserInfo user={this.state} close={this.handleClose} />
                     <div className='mybooks-cards'>
                         <h4>Mis cuentos</h4>
-                        
-                            <MyBooks  user={this.props.loggedInUser._id} redir={this.getRed} getRedEdit={this.getRedEdit} />
+                        <MyBooks user={this.props.loggedInUser._id} redir={this.getRed} getRedEdit={this.getRedEdit} />
 
-                    </div>         
+                    </div>
                 </div>
             </div>
 

@@ -6,12 +6,16 @@ export class MyBooks extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            deleted: false,
             myBooks: ''
         }
         this.services = new BookService()
         console.log(this.props.user)
     }
 
+    isDeleted = (books) => {
+        this.setState({ Books: books })
+    }
 
     componentDidMount() {
         const id = this.props.user
@@ -31,7 +35,9 @@ export class MyBooks extends Component {
     render() {
         return (
             <div className='flex-book-card'>
-                {this.state.Books ? this.state.Books.map((elm, idx) => <YourBookCard getRedEdit={this.props.getRedEdit} redir={this.props.redir} key={idx} {...elm} />) : null}
+                {(this.state.deleted || !this.state.deleted) &&
+                    this.state.Books ? this.state.Books.map((elm, idx) => <YourBookCard isDeleted={this.isDeleted} getRedEdit={this.props.getRedEdit} redir={this.props.redir} key={idx} {...elm} />) : null
+                }
             </div>
         )
     }

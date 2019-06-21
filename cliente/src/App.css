@@ -123,10 +123,25 @@ nav ul{
 .button-save {
    border-radius: 20px;
    padding: 10px; 
-   background-color: rgb(7, 113, 161);
-   color: white
+   background-color: rgb(66, 137, 170);
+   color: white;
+   font-size: 1.2em
+   
 
 }
+.ver-cuentos {
+    margin-left: 24px;
+    padding: 10px 18px;
+    text-decoration: none;
+
+}
+.ver-cuentos:hover {
+    text-decoration: none;
+    color: white
+
+}
+
+
  /* .horror-button{
      height: 4vh;
  } */
@@ -175,7 +190,7 @@ nav ul{
 }
 .logout:hover {
     text-decoration: none;
-    color: white; 
+    /* color: white;  */
 }
 
 
